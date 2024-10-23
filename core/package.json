@@ -6,7 +6,12 @@
   "scripts": {
     "build": "tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
     "watch": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")",
-    "start": "nodemon ./dist/app.js"
+    "start": "nodemon ./dist/app.js",
+    
+    "pg:init": "pg_ctl init -D data",
+    "pg:start": "pg_ctl -D data start",
+    "pg:createdb": "createdb -h 127.0.0.1 app",
+    "pg:stop": "pg_ctl -D data stop"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +21,7 @@
     "concurrently": "^9.0.1",
     "express": "^4.21.1",
     "nodemon": "^3.1.7",
+    "pg": "^8.13.0",
     "ts-node": "^10.9.2",
     "tsc-alias": "^1.8.10"
   },
