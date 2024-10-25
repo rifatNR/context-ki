@@ -1,24 +1,21 @@
 {
-  "name": "backend",
+  "name": "core",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "build": "tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
     "watch": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")",
-    "start": "nodemon ./dist/app.js",
-    
-    "pg:init": "pg_ctl init -D data",
-    "pg:start": "pg_ctl -D data start",
-    "pg:createdb": "createdb -h 127.0.0.1 app",
-    "pg:stop": "pg_ctl -D data stop"
+    "start": "nodemon ./dist/app.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@types/express": "^5.0.0",
+    "@types/pg": "^8.11.10",
     "concurrently": "^9.0.1",
+    "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "nodemon": "^3.1.7",
     "pg": "^8.13.0",
