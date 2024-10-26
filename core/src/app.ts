@@ -1,5 +1,4 @@
 import express, { Request, Response } from "express";
-import { test } from "@/folder/test.js";
 import { connectDB, pool } from "@/database/db";
 
 const app = express();
@@ -23,6 +22,5 @@ app.get("/select", async (req: Request, res: Response) => {
 
 // Start the server
 app.listen(port, () => {
-    console.log(test());
     console.log(`Server is running at http://localhost:${port}`);
 });
