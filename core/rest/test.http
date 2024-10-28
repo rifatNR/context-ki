@@ -1,6 +1,13 @@
 
 ### 
-GET http://localhost:3000/connect
+GET http://localhost:3000/test 
 
 ### 
-GET http://localhost:3000/select
+POST http://localhost:3000/admin/context/create HTTP/1.1
+content-type: application/json
+
+{
+    "title": "Royal Enfield",
+    "context": "Royal Enfield this Royal Enfield that...",
+    "details": "Elit mollit elit pariatur elit nostrud exercitation esse dolore dolore mollit."
+}
