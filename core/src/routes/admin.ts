@@ -3,6 +3,20 @@ import { Router } from "express";
 
 const router = Router();
 
+router.get("/context", async (req, res) => {
+    try {
+        const result = await pool.query("SELECT * FROM contexts");
+        console.log("Fetched:", result.rows);
+        res.status(200).json(result.rows);
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        res.status(500).json({
+            error,
+            msg: "An error occurred while getting the context.",
+        });
+    }
+});
+
 router.post("/context/create", async (req, res) => {
     const { title, context, details, image } = req.body || {};
 
