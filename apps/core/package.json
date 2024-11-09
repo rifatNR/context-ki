@@ -6,9 +6,8 @@
   "scripts": {
     "build": "tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
     "watch": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")",
-    "dev": "nodemon ./dist/app.js",
-    "watch:dev": "concurrently \"pnpm watch\" \"pnpm dev\"",
-    "start": "nodemon ./dist/app.js"
+    "start": "nodemon ./dist/app.js",
+    "dev": "concurrently \"pnpm watch\" \"nodemon ./dist/app.js\""
   },
   "keywords": [],
   "author": "",
