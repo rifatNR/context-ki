@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  pi-web:
+    image: pi-web
+    build: .
+    # container_name: pi-web
+    ports:
+      - "4321:4321"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      NODE_ENV: development
+    # stdin_open: true
+    # tty: true

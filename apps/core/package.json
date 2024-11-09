@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
     "watch": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")",
+    "dev": "nodemon ./dist/app.js",
     "start": "nodemon ./dist/app.js"
   },
   "keywords": [],
