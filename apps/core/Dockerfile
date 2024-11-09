@@ -28,8 +28,8 @@ RUN pnpm install --no-frozen-lockfile --prod
 
 COPY --from=build /app/dist ./dist
 
-CMD ["node", "./dist/app.js"]
-# CMD ["pnpm", "start"]
+# CMD ["node", "./dist/app.js"]
+CMD ["pnpm", "dev"]
 
 # ! docker build -t patent-ideas-core .
 # ! docker run -p 3000:3000 patent-ideas-core

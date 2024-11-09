@@ -10,7 +10,7 @@ app.use(express.json());
 app.use("/admin", adminRoutes);
 
 app.get("/", async (req: Request, res: Response) => {
-    res.json({ msg: "I Thought of it First..." });
+    res.json({ msg: "I Thought of it First..............." });
 });
 
 app.get("/connect", async (req: Request, res: Response) => {
