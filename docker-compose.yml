@@ -2,9 +2,12 @@ version: '3.8'
 
 services:
   mono:
+    container_name: patent-ideas-mono
     build:
       context: .
       dockerfile: Dockerfile
+
+    restart: unless-stopped
     working_dir: /app
     volumes:
       - .:/app
@@ -12,9 +15,11 @@ services:
     ports:
       - target: 3000
         published: 3000
+        
       - target: 4321
         published: 4321
+
     environment:
       NODE_ENV: development
-    command: sh -c "pnpm install && pnpm run dev"
+    command: sh -c "pnpm install && pnpm dev"
     
