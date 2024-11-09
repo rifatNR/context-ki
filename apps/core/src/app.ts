@@ -1,6 +1,8 @@
 import express, { Request, Response } from "express";
-import { connectDB, pool } from "@/database/db";
 import adminRoutes from "@/routes/admin";
+import { appRouter } from "@/router/router";
+
+export type appRouter = typeof appRouter;
 
 const app = express();
 const port = 3000;
