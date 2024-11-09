@@ -6,7 +6,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-
     restart: unless-stopped
     working_dir: /app
     volumes:
@@ -18,8 +17,23 @@ services:
         
       - target: 4321
         published: 4321
-
     environment:
       NODE_ENV: development
     command: sh -c "pnpm install && pnpm dev"
-    
+    depends_on:
+      - postgres
+
+  postgres:
+        container_name: patent-ideas-postgres
+        restart: unless-stopped
+        image: postgres
+        ports:
+            - target: 5432
+              published: 5432
+        env_file:
+          - .env
+        healthcheck:
+          test: ["CMD-SHELL", "pg_isready -U postgres"]
+          interval: 5s
+          retries: 5
+          timeout: 5s
