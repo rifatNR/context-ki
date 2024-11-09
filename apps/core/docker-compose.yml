@@ -4,10 +4,11 @@ services:
   image: patent-ideas-core
   build:
    context: .
-   target: build
   volumes:
    - ./:/app
    - /app/node_modules
   ports:
    - 3000:3000
   command: pnpm dev
+  environment:
+    NODE_ENV: development
