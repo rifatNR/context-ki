@@ -2,13 +2,14 @@
 ### 
 GET http://localhost:3000/ 
 ### 
-GET http://localhost:3000/admin/ideas 
+GET http://localhost:3000/admin/idea 
 
 ### 
-POST http://localhost:3000/admin/ideas/create HTTP/1.1
+POST http://localhost:3000/admin/idea/create HTTP/1.1
 content-type: application/json
 
 {
-    "title": "Random Potato",
+    "title": "Who the fuck is?",
+    "subtitle": "Nisi occaecat adipisicing.",
     "details": "Aliquip elit excepteur laborum minim dolore fugiat mollit cillum sit pariatur nisi occaecat adipisicing."
 }
