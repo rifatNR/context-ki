@@ -3,9 +3,12 @@ import Image from "next/image";
 export default function Home() {
     return (
         <main className="">
-            <h1 className="text-custom-orange-200">Hello</h1>
+            <h1 className="text-custom-orange-200 text-xl underline">
+                Hola, Amigos
+            </h1>
 
-            <article className="line-clamp-2 max-w-2xl text-red-500">
+            <article className="max-w-2xl text-red-400">
+                <strong className="text-red-700">Lorem Ipsum: </strong>
                 Dolor dolore consectetur exercitation dolor duis ea. Laboris ut
                 aliqua Lorem occaecat dolore dolore officia ad anim
                 reprehenderit voluptate nulla ullamco. Aute anim sunt voluptate

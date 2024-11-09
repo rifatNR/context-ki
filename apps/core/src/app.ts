@@ -10,12 +10,12 @@ app.use(express.json());
 app.use("/admin", adminRoutes);
 
 app.get("/", async (req: Request, res: Response) => {
-    res.json({ msg: "Hello, Context lagbe!!" });
+    res.json({ msg: "I Thought of it First!!" });
 });
 
 app.get("/connect", async (req: Request, res: Response) => {
     await connectDB();
-    res.send("Hello, Context lagbe!!");
+    res.send("Connected");
 });
 
 app.get("/test", async (req: Request, res: Response) => {
@@ -26,7 +26,7 @@ app.get("/test", async (req: Request, res: Response) => {
     } catch (err) {
         console.error("Error fetching data:", err);
     }
-    res.json("Hello, Context lagbe!!");
+    res.json("Test");
 });
 
 app.listen(port, () => {

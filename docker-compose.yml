@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  mono:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /app
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - target: 3000
+        published: 3000
+      - target: 4321
+        published: 4321
+    environment:
+      NODE_ENV: development
+    command: sh -c "pnpm install && pnpm run dev"
+    

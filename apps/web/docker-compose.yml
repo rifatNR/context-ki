@@ -1,10 +1,10 @@
 version: '3.8'
 
 services:
-  pi-web:
-    image: pi-web
+  patent-ideas-web:
+    image: patent-ideas-web
     build: .
-    # container_name: pi-web
+    # container_name: patent-ideas-web
     ports:
       - "4321:4321"
     volumes:

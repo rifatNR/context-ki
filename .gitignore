@@ -40,3 +40,16 @@ next-env.d.ts
 .dev.vars
 
 .turbo
+.pnpm-store
+.turbo
+.pnp*
+/_DATA
+/.orc.lock
+/.env
+/_ENV
+.turbo
+.pnpm-store
+/yarn.lock
+/out
+chromadb
+apps/web/src/functions/cachedGet.ts
