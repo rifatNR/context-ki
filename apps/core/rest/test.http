@@ -2,14 +2,13 @@
 ### 
 GET http://localhost:3000/ 
 ### 
-GET http://localhost:3000/admin/context 
+GET http://localhost:3000/admin/ideas 
 
 ### 
-POST http://localhost:3000/admin/context/create HTTP/1.1
+POST http://localhost:3000/admin/ideas/create HTTP/1.1
 content-type: application/json
 
 {
     "title": "Random Potato",
-    "context": "Potato this Potato that...",
     "details": "Aliquip elit excepteur laborum minim dolore fugiat mollit cillum sit pariatur nisi occaecat adipisicing."
 }
