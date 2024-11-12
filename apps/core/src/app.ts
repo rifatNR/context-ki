@@ -7,7 +7,7 @@ import { expressHandler } from "trpc-playground/handlers/express";
 export type appRouter = typeof appRouter;
 
 const app = express();
-const port = 3000;
+const port = 3333;
 
 const trpcApiEndpoint = "/api/trpc";
 const playgroundEndpoint = "/api/trpc-playground";

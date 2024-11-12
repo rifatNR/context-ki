@@ -12,8 +12,8 @@ services:
       - .:/app
       - /app/node_modules
     ports:
-      - target: 3000
-        published: 3000
+      - target: 3333
+        published: 3333
         
       - target: 4321
         published: 4321
