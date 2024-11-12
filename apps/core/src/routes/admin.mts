@@ -1,4 +1,4 @@
-import { pool } from "@/database/db.mjs";
+import { pool } from "@/database/postgres.mjs";
 import { Router, type Router as ExpressRouter } from "express";
 
 const router: ExpressRouter = Router();
