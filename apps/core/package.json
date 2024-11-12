@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "migrate:create": "node-pg-migrate create",
+    "migrate": "node-pg-migrate up -f migration-config.js",
     "build": "tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
     "watch": "concurrently \"tsc -w --preserveWatchOutput\" \"tsc-alias -w\"",
     "start": "nodemon ./dist/app.js",
