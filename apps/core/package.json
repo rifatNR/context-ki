@@ -1,8 +1,9 @@
 {
-  "name": "ideas-patent",
+  "name": "@pi/core",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.mjs",
+  "type": "module",
   "scripts": {
     "migrate:create": "node-pg-migrate create",
     "migrate": "node-pg-migrate up -f migration-config.js",

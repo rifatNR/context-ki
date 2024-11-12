@@ -1,5 +1,5 @@
 {
-  "name": "web",
+  "name": "@pi/web",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -14,13 +14,20 @@
     "cf-typegen": "wrangler types --env-interface CloudflareEnv env.d.ts"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.59.20",
+    "@trpc/client": "11.0.0-rc.630",
+    "@trpc/next": "11.0.0-rc.630",
+    "@trpc/react-query": "11.0.0-rc.630",
+    "@trpc/server": "11.0.0-rc.630",
     "next": "14.2.5",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@cloudflare/next-on-pages": "1",
     "@cloudflare/workers-types": "^4.20240821.1",
+    "@pi/core": "workspace:*",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

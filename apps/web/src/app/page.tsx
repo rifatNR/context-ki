@@ -1,6 +1,7 @@
+import { trpc } from "@/utils/trpc";
 import Image from "next/image";
 
-export default function Home() {
+const Home = () => {
     return (
         <main className="">
             <h1 className="text-custom-orange-200 text-xl underline">
@@ -35,4 +36,6 @@ export default function Home() {
             </article>
         </main>
     );
-}
+};
+
+export default Home;
