@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   mono:
     container_name: patent-ideas-mono
