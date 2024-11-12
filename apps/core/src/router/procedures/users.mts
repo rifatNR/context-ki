@@ -1,4 +1,4 @@
-import { publicProcedure, router } from "@/trpc";
+import { publicProcedure, router } from "@/trpc.mjs";
 import { z } from "zod";
 
 export const userRouter = router({

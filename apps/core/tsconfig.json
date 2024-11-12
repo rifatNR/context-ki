@@ -1,9 +1,11 @@
 {
   "compilerOptions": {
-    "target": "es2016",
-    "module": "commonjs",
+    "target": "ES2022",
+    "module": "es2022",
+    "moduleResolution": "node",
     "rootDir": "./src",
     "baseUrl": ".",
+    "lib": ["ES2021"],
 		"paths": {
 			"@/*": ["src/*"]
 		},

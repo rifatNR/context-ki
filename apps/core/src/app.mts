@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
-import adminRoutes from "@/routes/admin";
-import { appRouter } from "@/router/router";
+import adminRoutes from "@/routes/admin.mjs";
+import { appRouter } from "@/router/router.mjs";
 import * as trpcExpress from "@trpc/server/adapters/express";
 import { expressHandler } from "trpc-playground/handlers/express";
 
@@ -22,22 +22,18 @@ app.use(
     })
 );
 
-const setupPlayground = async () => {
-    app.use(
+app.use(
+    playgroundEndpoint,
+    await expressHandler({
+        trpcApiEndpoint,
         playgroundEndpoint,
-        await expressHandler({
-            trpcApiEndpoint,
-            playgroundEndpoint,
-            router: appRouter,
-            // uncomment this if you're using superjson
-            // request: {
-            //   superjson: true,
-            // },
-        })
-    );
-};
-
-setupPlayground();
+        router: appRouter,
+        // uncomment this if you're using superjson
+        // request: {
+        //   superjson: true,
+        // },
+    })
+);
 
 app.get("/", async (req: Request, res: Response) => {
     res.json({ msg: "I Thought of it First." });
