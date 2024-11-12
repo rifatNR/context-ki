@@ -2,14 +2,14 @@
   "name": "ideas-patent",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.mjs",
   "scripts": {
     "migrate:create": "node-pg-migrate create",
     "migrate": "node-pg-migrate up -f migration-config.js",
     "build": "tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
     "watch": "concurrently \"tsc -w --preserveWatchOutput\" \"tsc-alias -w\"",
-    "start": "nodemon ./dist/app.js",
-    "dev": "concurrently \"pnpm watch\" \"nodemon ./dist/app.js\""
+    "start": "nodemon ./dist/index.mjs",
+    "dev": "concurrently \"pnpm watch\" \"nodemon ./dist/index.mjs\""
   },
   "keywords": [],
   "author": "",

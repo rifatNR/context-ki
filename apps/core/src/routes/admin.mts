@@ -1,7 +1,7 @@
 import { pool } from "@/database/db.mjs";
-import { Router } from "express";
+import { Router, type Router as ExpressRouter } from "express";
 
-const router = Router();
+const router: ExpressRouter = Router();
 
 router.get("/idea", async (req, res) => {
     try {
