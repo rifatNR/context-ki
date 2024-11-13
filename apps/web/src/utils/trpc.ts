@@ -1,9 +1,16 @@
 import type { AppRouter } from "@pi/core/src/index.mjs";
 import { createTRPCReact } from "@trpc/react-query";
-import { httpBatchLink } from "@trpc/client";
+import { createTRPCProxyClient, httpBatchLink } from "@trpc/client";
 import { createTRPCNext } from "@trpc/next";
 
 export const trpc = createTRPCReact<AppRouter>();
+// export const trpcClient = createTRPCProxyClient<AppRouter>({
+//     links: [
+//         httpBatchLink({
+//             url: "http://localhost:3333/trpc",
+//         }),
+//     ],
+// });
 
 // export const trpcClient = trpc.createClient({
 //     links: [
