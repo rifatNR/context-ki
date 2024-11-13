@@ -2,6 +2,8 @@ import { trpc } from "@/utils/trpc";
 import Image from "next/image";
 
 const Home = () => {
+    const data = trpc.users.getUser.useQuery({ username: "SPAWN" });
+
     return (
         <main className="">
             <h1 className="text-custom-orange-200 text-xl underline">

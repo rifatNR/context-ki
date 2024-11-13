@@ -14,12 +14,11 @@ export const trpc = createTRPCReact<AppRouter>();
 // });
 
 // export const trpc = createTRPCNext<AppRouter>({
-//     config(opts) {
+//     config(opts: any) {
 //         return {
 //             links: [
 //                 httpBatchLink({
-//                     url: `http://localhost:3333/trpc`,
-//                     // You can pass any HTTP headers you wish here
+//                     url: `http://localhost:3333/api/trpc`,
 //                     async headers() {
 //                         return {
 //                             // authorization: getAuthCookie(),
@@ -29,8 +28,5 @@ export const trpc = createTRPCReact<AppRouter>();
 //             ],
 //         };
 //     },
-//     /**
-//      * @see https://trpc.io/docs/v11/ssr
-//      **/
 //     ssr: false,
 // });

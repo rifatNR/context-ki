@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/styles/globals.css";
 import MainSpinner from "@/components/misc/MainSpinner";
+import TrpcProvider from "@/app/TrpcProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +25,9 @@ export default function RootLayout({
             <body className={inter.className}>
                 <MainSpinner />
 
-                <main>{children}</main>
+                <TrpcProvider>
+                    <main>{children}</main>
+                </TrpcProvider>
             </body>
         </html>
     );
