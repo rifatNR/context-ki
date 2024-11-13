@@ -4,8 +4,8 @@ import { trpc } from "@/utils/trpc";
 import Image from "next/image";
 
 const Home = () => {
-    const data = trpc.users.getUser.useQuery({ username: "SPAWN" });
-    console.log(data);
+    const user = trpc.users.getUser.useQuery({ username: "SPAWN" });
+    console.log(user.data?.message);
 
     return (
         <main className="">

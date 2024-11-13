@@ -1,4 +1,4 @@
-import type { AppRouter } from "@pi/core/src/index.mjs";
+import type { AppRouter } from "@pi/core";
 import { createTRPCReact } from "@trpc/react-query";
 import { createTRPCProxyClient, httpBatchLink } from "@trpc/client";
 import { createTRPCNext } from "@trpc/next";
