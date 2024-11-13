@@ -1,14 +1,14 @@
 import express, { Request, Response } from "express";
 import adminRoutes from "@/routes/admin.mjs";
 import { createContext } from "@/context.mjs";
-import { appRouter } from "@/router/router.mjs";
+import { appRouter } from "@/router/appRouter.mjs";
 import * as trpcExpress from "@trpc/server/adapters/express";
 import { expressHandler } from "trpc-playground/handlers/express";
 
 export type AppRouter = typeof appRouter;
 
-const app = express();
 const port = 3333;
+const app = express();
 
 const trpcApiEndpoint = "/trpc";
 const playgroundEndpoint = "/trpc-playground";
@@ -18,7 +18,7 @@ app.use("/admin", adminRoutes);
 
 app.use(
     trpcApiEndpoint,
-    trpcExpress.createExpressMiddleware<AppRouter>({
+    trpcExpress.createExpressMiddleware({
         router: appRouter,
         createContext,
     })

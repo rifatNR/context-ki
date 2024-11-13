@@ -9,14 +9,14 @@
     "migrate": "node-pg-migrate up -f migration-config.js",
     "build": "tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
     "watch": "concurrently \"tsc -w --preserveWatchOutput\" \"tsc-alias -w\"",
-    "start": "nodemon ./dist/index.mjs",
-    "dev": "concurrently \"pnpm watch\" \"nodemon ./dist/index.mjs\""
+    "start": "nodemon .",
+    "dev": "concurrently \"pnpm watch\" \"nodemon .\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@trpc/server": "^10.45.2",
+    "@trpc/server": "10.45.2",
     "@types/express": "^5.0.0",
     "@types/pg": "^8.11.10",
     "concurrently": "^9.0.1",

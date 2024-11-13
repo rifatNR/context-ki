@@ -1,4 +1,5 @@
 import { getPostgresPool } from "@/database/postgres.mjs";
+import { inferAsyncReturnType } from "@trpc/server";
 import * as trpcExpress from "@trpc/server/adapters/express";
 
 export const createContext = async ({
@@ -16,4 +17,4 @@ export const createContext = async ({
     };
 };
 
-export type Context = Awaited<ReturnType<typeof createContext>>;
+export type Context = inferAsyncReturnType<typeof createContext>;
