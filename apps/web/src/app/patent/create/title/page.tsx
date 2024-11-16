@@ -1,7 +1,7 @@
 "use client";
 
 import PrevNextButton from "@/app/patent/create/PrevNextButton";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 const Title = () => {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -22,6 +22,12 @@ const Title = () => {
         }
     };
 
+    useEffect(() => {
+        if (textareaRef.current) {
+            textareaRef.current.focus();
+        }
+    }, [textareaRef]);
+
     return (
         <div className="flex-1 flex items-center justify-center w-full -mt-20">
             <div className="flex-1">
@@ -30,11 +36,11 @@ const Title = () => {
                 <textarea
                     ref={textareaRef}
                     onInput={handleInputChange}
-                    className="text-custom-gray-25 bg-transparent w-full text-3xl resize-none focus:outline-none"
+                    className="text-custom-gray-25 bg-transparent w-full text-3xl resize-none overflow-hidden focus:outline-none"
                     rows={1}
                     placeholder="Enter the title of your idea..."
                 ></textarea>
-                <div className="w-full bg-white h-0.5 rounded-full"></div>
+                <div className="w-full bg-white h-0.5 rounded-full motion-scale-x-in-[0] motion"></div>
 
                 <PrevNextButton />
             </div>

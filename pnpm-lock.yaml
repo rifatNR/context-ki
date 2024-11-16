@@ -136,6 +136,9 @@ importers:
       tailwindcss:
         specifier: ^3.4.1
         version: 3.4.14(ts-node@10.9.1(@types/node@20.17.6)(typescript@5.6.3))
+      tailwindcss-motion:
+        specifier: 0.4.3-beta
+        version: 0.4.3-beta(tailwindcss@3.4.14(ts-node@10.9.1(@types/node@20.17.6)(typescript@5.6.3)))
       typescript:
         specifier: ^5
         version: 5.6.3
@@ -3294,6 +3297,11 @@ packages:
   supports-preserve-symlinks-flag@1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
+
+  tailwindcss-motion@0.4.3-beta:
+    resolution: {integrity: sha512-9S4nmSw01m0/z0UxodUNT7U+yUdlZdXnH9RMkb2rXvrUEQQ+rMVPeP9j4pMwJy779LECiSr+IoSTVrGluSfU2w==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0 || insiders'
 
   tailwindcss@3.4.14:
     resolution: {integrity: sha512-IcSvOcTRcUtQQ7ILQL5quRDg7Xs93PdJEk1ZLbhhvJc7uj/OAhYOnruEiwnGgBvUtaUAJ8/mhSw1o8L2jCiENA==}
@@ -6972,6 +6980,10 @@ snapshots:
       has-flag: 4.0.0
 
   supports-preserve-symlinks-flag@1.0.0: {}
+
+  tailwindcss-motion@0.4.3-beta(tailwindcss@3.4.14(ts-node@10.9.1(@types/node@20.17.6)(typescript@5.6.3))):
+    dependencies:
+      tailwindcss: 3.4.14(ts-node@10.9.1(@types/node@20.17.6)(typescript@5.6.3))
 
   tailwindcss@3.4.14(ts-node@10.9.1(@types/node@20.17.6)(typescript@5.6.3)):
     dependencies:
