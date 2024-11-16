@@ -9,9 +9,7 @@ const PrevNextButton = () => {
             </button>
             <button className="flex items-center justify-center space-x-5 px-5 py-3 bg-white text-black text-3xl">
                 <span>Next</span>
-                <div>
-                    <FaArrowRightLong className="motion-preset-slide-right motion-delay-1000" />
-                </div>
+                <FaArrowRightLong className="motion-preset-slide-right motion-delay-1000" />
             </button>
         </div>
     );
