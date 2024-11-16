@@ -29,6 +29,9 @@ module.exports = {
                     black: {
                         10: "#1F1F1F",
                     },
+                    gray: {
+                        25: "#C2C2C2",
+                    },
                 },
             },
             fontFamily: {

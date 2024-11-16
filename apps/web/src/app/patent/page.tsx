@@ -1,7 +1,7 @@
 const PatentList = () => {
     return (
         <div>
-            <div>Patent List!!</div>
+            <div>My Patents</div>
             <div>Patent List</div>
             <div>Patent List</div>
             <div>Patent List</div>
