@@ -12,6 +12,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const Date = () => {
     const currentYear = 2025; // TODO:: Fix Static
@@ -106,6 +107,17 @@ const Date = () => {
                         <div className="mt-2 h-0.5 w-full rounded-full bg-white motion-scale-x-in-[0] motion"></div>
                     </div>
                 </div>
+
+                <label
+                    htmlFor="terms"
+                    className="flex items-center space-x-3 mt-5 font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-2xl cursor-pointer"
+                >
+                    <Checkbox
+                        id="terms"
+                        className="h-6 w-6 rounded-none border-2 border-white data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
+                    />
+                    <div className="select-none">I got this idea today.</div>
+                </label>
 
                 <PrevNextButton />
             </div>
