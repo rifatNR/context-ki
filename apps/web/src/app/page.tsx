@@ -2,6 +2,7 @@
 
 import { trpc } from "@/utils/trpc";
 import Image from "next/image";
+import Link from "next/link";
 
 const Home = () => {
     const user = trpc.users.getUser.useQuery({ username: "SPAWN" });
@@ -9,6 +10,10 @@ const Home = () => {
 
     return (
         <main className="">
+            <Link href={"/patent/create/title"}>
+                <button>Patent your idea</button>
+            </Link>
+
             <h1 className="text-custom-orange-200 text-xl underline">
                 Patent Your Crazy Ideas (Kinda)
                 https://chatgpt.com/c/673732bf-2e60-8012-ab7f-981d5bd5a821

@@ -109,11 +109,11 @@ const Date = () => {
                 </div>
 
                 <label
-                    htmlFor="terms"
+                    htmlFor="isToday"
                     className="flex items-center space-x-3 mt-5 font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-2xl cursor-pointer"
                 >
                     <Checkbox
-                        id="terms"
+                        id="isToday"
                         className="h-6 w-6 rounded-none border-2 border-white data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
                     />
                     <div className="select-none">I got this idea today.</div>

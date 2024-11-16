@@ -1,11 +1,19 @@
 import { redirect, useRouter } from "next/navigation";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
+import { LiaMedalSolid } from "react-icons/lia";
 
 type PropType = {
     prevPath?: string;
     nextPath?: string;
+    isShowConfirmBtn?: boolean;
+    isDisablePublish?: boolean;
 };
-const PrevNextButton = ({ prevPath, nextPath }: PropType) => {
+const PrevNextButton = ({
+    prevPath,
+    nextPath,
+    isShowConfirmBtn,
+    isDisablePublish,
+}: PropType) => {
     const router = useRouter();
 
     const onPrevClick = () => {
@@ -43,6 +51,15 @@ const PrevNextButton = ({ prevPath, nextPath }: PropType) => {
                     </button>
                 )}
             </div>
+            {isShowConfirmBtn && (
+                <button
+                    onClick={onNextClick}
+                    className="flex items-center justify-center space-x-3 px-5 py-3 bg-white text-black text-3xl"
+                >
+                    <LiaMedalSolid className="motion-preset-bounce " />
+                    <span>Publish Your Patent</span>
+                </button>
+            )}
         </div>
     );
 };

@@ -119,8 +119,8 @@ const Participants = () => {
                 </div>
 
                 <PrevNextButton
-                    prevPath="/patent/create/description"
-                    nextPath="/patent/create/preview"
+                    prevPath="/patent/create/participants"
+                    nextPath="/patent/create/confirmation"
                 />
             </div>
         </div>
