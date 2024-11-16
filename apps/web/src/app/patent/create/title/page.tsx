@@ -42,7 +42,7 @@ const Title = () => {
                 ></textarea>
                 <div className="w-full bg-white h-0.5 rounded-full motion-scale-x-in-[0] motion"></div>
 
-                <PrevNextButton />
+                <PrevNextButton nextPath="/patent/create/date" />
             </div>
         </div>
     );

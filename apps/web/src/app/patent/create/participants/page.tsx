@@ -94,7 +94,10 @@ const Participants = () => {
                     </div>
                 </div>
 
-                <PrevNextButton />
+                <PrevNextButton
+                    prevPath="/patent/create/description"
+                    nextPath="/patent/create/preview"
+                />
             </div>
         </div>
     );
