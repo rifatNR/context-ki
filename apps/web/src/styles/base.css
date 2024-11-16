@@ -1,21 +1,23 @@
 /* width */
 ::-webkit-scrollbar {
-    width: 7px;
+    width: 5px;
 }
 /* Track */
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: #f1f1f100;
 }
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #888;
+    background: #ffffff;
+    border-radius: 100px;
+    cursor: pointer;
 }
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
 ::-webkit-scrollbar-thumb:active {
-    background: #4060ee;
+    background: rgb(119, 75, 34);
 }
 
 @media only screen and (max-width: 1023px) {
