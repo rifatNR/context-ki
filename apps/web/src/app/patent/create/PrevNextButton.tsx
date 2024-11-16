@@ -1,4 +1,5 @@
 import { redirect, useRouter } from "next/navigation";
+import { useRef } from "react";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import { LiaMedalSolid } from "react-icons/lia";
 
@@ -15,6 +16,7 @@ const PrevNextButton = ({
     isDisablePublish,
 }: PropType) => {
     const router = useRouter();
+    const publishButtonRef = useRef<HTMLButtonElement>(null);
 
     const onPrevClick = () => {
         if (prevPath) {
@@ -24,6 +26,12 @@ const PrevNextButton = ({
     const onNextClick = () => {
         if (nextPath) {
             router.push(nextPath);
+        }
+    };
+
+    const onPublishClick = () => {
+        if (publishButtonRef.current) {
+            publishButtonRef.current.classList.add("motion-preset-confetti");
         }
     };
 
@@ -53,7 +61,8 @@ const PrevNextButton = ({
             </div>
             {isShowConfirmBtn && (
                 <button
-                    onClick={onNextClick}
+                    ref={publishButtonRef}
+                    onClick={onPublishClick}
                     className="flex items-center justify-center space-x-3 px-5 py-3 bg-white text-black text-3xl"
                 >
                     <LiaMedalSolid className="motion-preset-bounce " />
