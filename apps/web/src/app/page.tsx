@@ -10,7 +10,7 @@ const Home = () => {
     return (
         <main className="">
             <h1 className="text-custom-orange-200 text-xl underline">
-                Hola, Amigos
+                Patent Your Crazy Ideas (Kinda)
             </h1>
 
             <article className="max-w-2xl text-red-400">

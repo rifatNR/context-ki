@@ -15,7 +15,7 @@
     background: #555;
 }
 ::-webkit-scrollbar-thumb:active {
-    background: #fbb11a;
+    background: #4060ee;
 }
 
 @media only screen and (max-width: 1023px) {
@@ -34,7 +34,7 @@
     }
     /* Handle on hover */
     ::-webkit-scrollbar-thumb:hover {
-        background: #fbb11a;
+        background: #4060ee;
     }
 }
 
@@ -60,12 +60,12 @@
 ::-moz-selection {
     /* Code for Firefox */
     color: white;
-    background: #fbb11a;
+    background: #4060ee;
 }
 
 ::selection {
     color: white;
-    background: #fbb11a;
+    background: #4060ee;
 }
 
 .only-print {

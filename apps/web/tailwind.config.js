@@ -34,6 +34,7 @@ module.exports = {
             fontFamily: {
                 roboto: ["Roboto Slab", "sans-serif"],
                 inter: ["Inter", "sans-serif"],
+                merriweather: ["Merriweather", "serif"],
             },
             screens: {
                 print: { raw: "print" },

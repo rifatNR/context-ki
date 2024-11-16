@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/styles/globals.css";
-import MainSpinner from "@/components/misc/MainSpinner";
 import TrpcProvider from "@/app/TrpcProvider";
-
-const inter = Inter({ subsets: ["latin"] });
+import Navbar from "@/components/layouts/Navbar";
 
 export const metadata: Metadata = {
     title: {
@@ -22,11 +20,10 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={inter.className}>
-                <MainSpinner />
-
+            <body className="bg-black text-white font-merriweather">
                 <TrpcProvider>
-                    <main>{children}</main>
+                    <Navbar />
+                    <main className="pt-20">{children}</main>
                 </TrpcProvider>
             </body>
         </html>
