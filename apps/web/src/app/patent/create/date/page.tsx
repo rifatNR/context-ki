@@ -36,7 +36,7 @@ const Date = () => {
         <div className="flex-1 flex items-center justify-center w-full -mt-20">
             <div className="flex-1">
                 <div className="text-4xl mb-10">
-                    When have you thought of the idea?
+                    When did you first come up with the idea?
                 </div>
 
                 <div className="flex items-center justify-stretch w-full space-x-10">
