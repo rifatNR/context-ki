@@ -3,12 +3,17 @@ import { Inter } from "next/font/google";
 import "@/styles/globals.css";
 import TrpcProvider from "@/app/TrpcProvider";
 import Navbar from "@/components/layouts/Navbar";
+import Head from "next/head";
 
 export const metadata: Metadata = {
     title: {
         absolute: "",
         default: "Patent Ideas",
         template: "%s | Patent Ideas",
+    },
+    icons: {
+        icon: "/favicon_io/icon.ico",
+        apple: "/favicon_io/apple-touch-icon.png",
     },
     description: "Description",
 };
@@ -20,7 +25,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <head>
+            <Head>
                 {/* Preconnect for Google Fonts */}
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link
@@ -34,7 +39,7 @@ export default function RootLayout({
                     href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap"
                     rel="stylesheet"
                 />
-            </head>
+            </Head>
             <body className="bg-black text-white font-merriweather">
                 <TrpcProvider>
                     <Navbar />

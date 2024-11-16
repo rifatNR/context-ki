@@ -11,6 +11,7 @@ const Home = () => {
         <main className="">
             <h1 className="text-custom-orange-200 text-xl underline">
                 Patent Your Crazy Ideas (Kinda)
+                https://chatgpt.com/c/673732bf-2e60-8012-ab7f-981d5bd5a821
             </h1>
 
             <article className="max-w-2xl text-red-400">
