@@ -8,11 +8,11 @@ import { LiaMedalSolid } from "react-icons/lia";
 
 const Participants = () => {
     return (
-        <div className="flex-1 flex items-center justify-center w-full mt-10 mb-10">
+        <div className="flex-1 flex items-center justify-center w-full mt-10 mb-20">
             <div className="flex-1">
                 <div className="text-4xl mb-12 font-bold">Preview:</div>
 
-                <div className="text-3xl">
+                <div className="text-3xl font-semibold">
                     Put ads on open-source documentation.
                 </div>
 
@@ -47,6 +47,9 @@ const Participants = () => {
                     <div className="text-custom-gray-25 gradient-animation">
                         ⠀5th November, 2024
                     </div>
+                    <div className="text-base text-custom-gray-25">
+                        03:13 PM
+                    </div>
                 </div>
                 <div className="flex items-center space-x-3 mt-5 text-xl">
                     <IoCalendarNumberOutline />
@@ -57,21 +60,6 @@ const Participants = () => {
                 </div>
 
                 <div className="mt-10">
-                    <div className="text-2xl mb-2 font-bold">
-                        People Invited:
-                    </div>
-                    <div className="space-y-3">
-                        <div className="text-2xl flex items-center space-x-3 ml-8">
-                            <div className="bg-white h-1 w-3 rounded-full"></div>
-                            <div>dannyphantom@gmail.com</div>
-                        </div>
-                        <div className="text-2xl flex items-center space-x-3 ml-8">
-                            <div className="bg-white h-1 w-3 rounded-full"></div>
-                            <div>spawn@gmail.com</div>
-                        </div>
-                    </div>
-                </div>
-                <div className="mt-5">
                     <div className="text-2xl mb-2 font-bold">Participants:</div>
                     <div className="space-y-3">
                         <div className="text-2xl flex items-center space-x-3 ml-8">
@@ -83,7 +71,12 @@ const Participants = () => {
                                     className="object-cover"
                                 />
                             </div>
-                            <div>localghost@gmail.com</div>
+                            <div>
+                                localghost@gmail.com{" "}
+                                <span className="text-custom-gray-25 text-sm">
+                                    (Author)
+                                </span>
+                            </div>
                         </div>
                         <div className="text-2xl flex items-center space-x-3 ml-8">
                             <div className="relative h-8 w-8 aspect-square rounded-full bg-gray-500 overflow-hidden mb-[-5px]">
@@ -106,6 +99,21 @@ const Participants = () => {
                                 />
                             </div>
                             <div>errorist@gmail.com</div>
+                        </div>
+                    </div>
+                </div>
+                <div className="mt-5">
+                    <div className="text-2xl mb-2 font-bold">
+                        People Invited:
+                    </div>
+                    <div className="space-y-3">
+                        <div className="text-2xl flex items-center space-x-3 ml-8">
+                            <div className="bg-white h-1 w-3 rounded-full"></div>
+                            <div>dannyphantom@gmail.com</div>
+                        </div>
+                        <div className="text-2xl flex items-center space-x-3 ml-8">
+                            <div className="bg-white h-1 w-3 rounded-full"></div>
+                            <div>spawn@gmail.com</div>
                         </div>
                     </div>
                 </div>
