@@ -1,5 +1,4 @@
 import express, { Request, Response } from "express";
-import adminRoutes from "@/routes/admin.mjs";
 import { createContext } from "@/context.mjs";
 import { appRouter } from "@/router/appRouter.mjs";
 import * as trpcExpress from "@trpc/server/adapters/express";
@@ -15,7 +14,6 @@ const trpcApiEndpoint = "/trpc";
 const playgroundEndpoint = "/trpc-playground";
 
 app.use(express.json());
-app.use("/admin", adminRoutes);
 app.use(cors());
 app.use(
     trpcApiEndpoint,
@@ -31,10 +29,6 @@ app.use(
         trpcApiEndpoint,
         playgroundEndpoint,
         router: appRouter,
-        // uncomment this if you're using superjson
-        // request: {
-        //   superjson: true,
-        // },
     })
 );
 

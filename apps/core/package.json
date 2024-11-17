@@ -5,8 +5,6 @@
   "main": "dist/index.mjs",
   "type": "module",
   "scripts": {
-    "migrate:create": "node-pg-migrate create",
-    "migrate": "node-pg-migrate up -f migration-config.js",
     "build": "tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
     "watch": "concurrently \"tsc -w --preserveWatchOutput\" \"tsc-alias -w\"",
     "start": "nodemon .",
@@ -23,7 +21,6 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
-    "node-pg-migrate": "^7.7.1",
     "nodemon": "^3.1.7",
     "pg": "^8.13.0",
     "trpc-playground": "^1.0.4",

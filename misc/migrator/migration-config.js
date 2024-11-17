@@ -1,5 +1,7 @@
-const dotenv = require("dotenv");
-dotenv.config();
+// const dotenv = require("dotenv");
+// import * as dotenv from "dotenv";
+
+// dotenv.config();
 
 module.exports = {
     databaseUrl: process.env.DATABASE_URL,

@@ -18,22 +18,12 @@ exports.up = (pgm) => {
             unique: true,
             notNull: true,
         },
-        subtitle: {
-            type: "varchar(255)",
-            unique: false,
-            notNull: false,
-        },
-        details: {
+        description: {
             type: "text",
             unique: false,
             notNull: false,
         },
-        image: {
-            type: "text",
-            unique: false,
-            notNull: false,
-        },
-        claimed_date: {
+        publish_date: {
             type: "timestamp",
             notNull: false,
         },
