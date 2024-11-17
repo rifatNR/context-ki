@@ -1,0 +1,9 @@
+await trpc.ideas.save.mutate({ ideaId: "6739f92cf08a45527845923c", title: "This is my first idea.", description: "xxxxxxxxxxxxxxxxxx" })
+
+
+
+INSERT INTO users (username, email, photo)
+VALUES 
+    ('localghost', 'localghost@example.com', 'https://avatar.iran.liara.run/public/41'),
+    ('spawn', 'spawn@example.com', 'https://avatar.iran.liara.run/public/41'),
+    ('danny', 'dannyphantom@example.com', 'https://avatar.iran.liara.run/public/41');
