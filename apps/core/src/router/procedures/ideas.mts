@@ -7,7 +7,7 @@ const getSingleIdea = async (psql: Pool, id: string) => {};
 
 const itemSchema = z.object({
     id: z.string(),
-    user_id: z.number(),
+    userId: z.number(),
     title: z.string(),
     description: z.string(),
 });
@@ -25,7 +25,7 @@ export const ideaRouter = router({
             try {
                 const result = await ctx.psql.query(
                     `
-                    SELECT id, user_id, title, description
+                    SELECT id, userId, title, description
                     FROM ideas
                     WHERE id = $1;
                     `,
@@ -56,17 +56,17 @@ export const ideaRouter = router({
         .output(z.object({ message: z.string() }))
         .mutation(async ({ ctx, input }) => {
             const { id, title, description } = input;
-            const userID = 1;
+            const userId = 1;
 
             try {
                 await ctx.psql.query(
                     `
-                    INSERT INTO ideas (id, user_id, title, description)
+                    INSERT INTO ideas (id, userId, title, description)
                     VALUES ($1, $2, $3, $4)
                     ON CONFLICT (id)
                     DO UPDATE SET title = $3, description = $4;
                     `,
-                    [id, userID, title, description]
+                    [id, userId, title, description]
                 );
 
                 return {

@@ -19,12 +19,12 @@ exports.up = (pgm) => {
         photo: {
             type: "text",
         },
-        created_at: {
+        createdAt: {
             type: "timestamp",
             notNull: true,
             default: pgm.func("current_timestamp"),
         },
-        updated_at: {
+        updatedAt: {
             type: "timestamp",
             notNull: true,
             default: pgm.func("current_timestamp"),

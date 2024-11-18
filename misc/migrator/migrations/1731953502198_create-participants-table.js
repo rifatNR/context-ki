@@ -1,9 +1,9 @@
 exports.shorthands = undefined;
 
 exports.up = (pgm) => {
-    pgm.createTable("ideas", {
+    pgm.createTable("participants", {
         id: {
-            type: "varchar(255)",
+            type: "serial",
             primaryKey: true,
         },
         userId: {
@@ -13,17 +13,26 @@ exports.up = (pgm) => {
             onUpdate: "CASCADE",
             notNull: true,
         },
-        title: {
-            type: "varchar(255)",
-            unique: true,
+        ideaId: {
+            type: "string",
+            references: "ideas(id)",
+            onDelete: "CASCADE",
+            onUpdate: "CASCADE",
             notNull: true,
         },
-        description: {
-            type: "text",
-            unique: false,
+        isAuthor: {
+            type: "boolean",
+        },
+        state: {
+            type: "varchar(100)",
+            notNull: true,
+            default: "invited",
+        },
+        inviteDate: {
+            type: "timestamp",
             notNull: false,
         },
-        publishDate: {
+        acceptRejectDate: {
             type: "timestamp",
             notNull: false,
         },
