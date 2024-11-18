@@ -1,5 +1,4 @@
-await trpc.ideas.save.mutate({ ideaId: "6739f92cf08a45527845923c", title: "This is my first idea.", description: "xxxxxxxxxxxxxxxxxx" })
-
+await trpc.ideas.save.mutate({ id: "6739f92cf08a45527845923c", title: "This is my first idea.", description: "Minim dolore proident Lorem nostrud dolor laborum." })
 
 
 INSERT INTO users (username, email, photo)
