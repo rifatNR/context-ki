@@ -6,13 +6,6 @@ exports.up = (pgm) => {
             type: "serial",
             primaryKey: true,
         },
-        userId: {
-            type: "integer",
-            references: "users(id)",
-            onDelete: "CASCADE",
-            onUpdate: "CASCADE",
-            notNull: true,
-        },
         ideaId: {
             type: "string",
             references: "ideas(id)",
@@ -20,8 +13,17 @@ exports.up = (pgm) => {
             onUpdate: "CASCADE",
             notNull: true,
         },
+        userId: {
+            type: "integer",
+            references: "users(id)",
+            notNull: false,
+        },
         isAuthor: {
             type: "boolean",
+        },
+        email: {
+            type: "varchar(255)",
+            notNull: true,
         },
         state: {
             type: "varchar(100)",
@@ -48,5 +50,5 @@ exports.up = (pgm) => {
 };
 
 exports.down = (pgm) => {
-    pgm.dropTable("ideas");
+    pgm.dropTable("participants");
 };

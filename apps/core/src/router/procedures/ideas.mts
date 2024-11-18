@@ -3,8 +3,6 @@ import { z } from "zod";
 import { t } from "@/trpc.mjs";
 import { Pool } from "pg";
 
-const getSingleIdea = async (psql: Pool, id: string) => {};
-
 const itemSchema = z.object({
     id: z.string(),
     userId: z.number(),
@@ -19,7 +17,7 @@ export const ideaRouter = router({
             })
         )
         .output(z.object({ message: z.string(), data: itemSchema.optional() }))
-        .mutation(async ({ ctx, input }) => {
+        .query(async ({ ctx, input }) => {
             const { id } = input;
 
             try {
@@ -71,6 +69,35 @@ export const ideaRouter = router({
 
                 return {
                     message: `Saved successfully.`,
+                };
+            } catch (error) {
+                console.error("Error saving idea:", error);
+                throw new Error("Failed to save idea.");
+            }
+        }),
+    invite: t.procedure
+        .input(
+            z.object({
+                id: z.string(),
+                email: z.string().email(),
+            })
+        )
+        .output(z.object({ message: z.string() }))
+        .mutation(async ({ ctx, input }) => {
+            const { id: ideaId, email } = input;
+            const userId = 1;
+
+            try {
+                await ctx.psql.query(
+                    `
+                    INSERT INTO participants (ideaId, userId, email)
+                    VALUES ($1, $2, $3);
+                    `,
+                    [ideaId, userId, email]
+                );
+
+                return {
+                    message: `Invited successfully.`,
                 };
             } catch (error) {
                 console.error("Error saving idea:", error);
