@@ -6,7 +6,7 @@ exports.up = (pgm) => {
             type: "varchar(255)",
             primaryKey: true,
         },
-        userId: {
+        user_id: {
             type: "integer",
             references: "users(id)",
             onDelete: "CASCADE",
@@ -23,15 +23,15 @@ exports.up = (pgm) => {
             unique: false,
             notNull: false,
         },
-        publishDate: {
+        publish_date: {
             type: "timestamp",
             notNull: false,
         },
-        createdAt: {
+        created_at: {
             type: "timestamp",
             default: pgm.func("current_timestamp"),
         },
-        updatedAt: {
+        updated_at: {
             type: "timestamp",
             default: pgm.func("current_timestamp"),
         },

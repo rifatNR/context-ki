@@ -6,19 +6,19 @@ exports.up = (pgm) => {
             type: "serial",
             primaryKey: true,
         },
-        ideaId: {
+        idea_id: {
             type: "string",
             references: "ideas(id)",
             onDelete: "CASCADE",
             onUpdate: "CASCADE",
             notNull: true,
         },
-        userId: {
+        user_id: {
             type: "integer",
             references: "users(id)",
             notNull: false,
         },
-        isAuthor: {
+        is_author: {
             type: "boolean",
         },
         email: {
@@ -30,19 +30,19 @@ exports.up = (pgm) => {
             notNull: true,
             default: "invited",
         },
-        inviteDate: {
+        invite_date: {
             type: "timestamp",
             notNull: false,
         },
-        acceptRejectDate: {
+        accept_reject_date: {
             type: "timestamp",
             notNull: false,
         },
-        createdAt: {
+        created_at: {
             type: "timestamp",
             default: pgm.func("current_timestamp"),
         },
-        updatedAt: {
+        updated_at: {
             type: "timestamp",
             default: pgm.func("current_timestamp"),
         },

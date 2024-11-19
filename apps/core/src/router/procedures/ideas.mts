@@ -23,7 +23,7 @@ export const ideaRouter = router({
             try {
                 const result = await ctx.psql.query(
                     `
-                    SELECT id, userId, title, description
+                    SELECT id, user_id, title, description
                     FROM ideas
                     WHERE id = $1;
                     `,
@@ -59,7 +59,7 @@ export const ideaRouter = router({
             try {
                 await ctx.psql.query(
                     `
-                    INSERT INTO ideas (id, userId, title, description)
+                    INSERT INTO ideas (id, user_id, title, description)
                     VALUES ($1, $2, $3, $4)
                     ON CONFLICT (id)
                     DO UPDATE SET title = $3, description = $4;
@@ -90,7 +90,7 @@ export const ideaRouter = router({
             try {
                 await ctx.psql.query(
                     `
-                    INSERT INTO participants (ideaId, userId, email)
+                    INSERT INTO participants (idea_id, user_id, email)
                     VALUES ($1, $2, $3);
                     `,
                     [ideaId, userId, email]
