@@ -85,15 +85,23 @@ export const ideaRouter = router({
         .output(z.object({ message: z.string() }))
         .mutation(async ({ ctx, input }) => {
             const { id: ideaId, email } = input;
-            const userId = 1;
 
             try {
+                const existingInvite = await ctx.psql.query(
+                    "SELECT * FROM participants WHERE idea_id = $1 AND email = $2",
+                    [ideaId, email]
+                );
+
+                if (existingInvite.rows.length > 0) {
+                    throw new Error("Already sent invitation to this email.");
+                }
+
                 await ctx.psql.query(
                     `
-                    INSERT INTO participants (idea_id, user_id, email)
-                    VALUES ($1, $2, $3);
+                    INSERT INTO participants (idea_id, email)
+                    VALUES ($1, $2);
                     `,
-                    [ideaId, userId, email]
+                    [ideaId, email]
                 );
 
                 return {
@@ -101,7 +109,11 @@ export const ideaRouter = router({
                 };
             } catch (error) {
                 console.error("Error saving idea:", error);
-                throw new Error("Failed to save idea.");
+                if (error instanceof Error) {
+                    throw new Error(error.message);
+                } else {
+                    throw new Error("An unexpected error occurred");
+                }
             }
         }),
 });
