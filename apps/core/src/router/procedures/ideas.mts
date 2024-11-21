@@ -96,6 +96,8 @@ export const ideaRouter = router({
                     throw new Error("Already sent invitation to this email.");
                 }
 
+                // TODO  Email Them
+
                 await ctx.psql.query(
                     `
                     INSERT INTO participants (idea_id, email)
@@ -106,6 +108,51 @@ export const ideaRouter = router({
 
                 return {
                     message: `Invited successfully.`,
+                };
+            } catch (error) {
+                console.error("Error saving idea:", error);
+                if (error instanceof Error) {
+                    throw new Error(error.message);
+                } else {
+                    throw new Error("An unexpected error occurred");
+                }
+            }
+        }),
+    inviteResponse: t.procedure
+        .input(
+            z.object({
+                id: z.string(),
+                email: z.string().email(),
+                state: z.string(), // TODO  Validate State
+            })
+        )
+        .output(z.object({ message: z.string() }))
+        .mutation(async ({ ctx, input }) => {
+            const { id: ideaId, email, state } = input;
+
+            try {
+                const existingInvite = await ctx.psql.query(
+                    "SELECT * FROM participants WHERE idea_id = $1 AND email = $2 AND state != pending",
+                    [ideaId, email]
+                );
+
+                if (existingInvite.rows.length == 0) {
+                    throw new Error("No invitation found.");
+                }
+
+                // TODO  Update response date
+                await ctx.psql.query(
+                    `
+                    UPDATE participants SET state = $1 WHERE id = $2;
+                    `,
+                    [state, ideaId]
+                );
+
+                return {
+                    message:
+                        state == "accepted"
+                            ? `Invited accepted.`
+                            : `Invited rejected.`,
                 };
             } catch (error) {
                 console.error("Error saving idea:", error);

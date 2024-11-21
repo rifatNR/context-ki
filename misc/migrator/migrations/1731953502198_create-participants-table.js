@@ -28,7 +28,7 @@ exports.up = (pgm) => {
         state: {
             type: "varchar(100)",
             notNull: true,
-            default: "invited",
+            default: "pending",
         },
         invite_date: {
             type: "timestamp",
