@@ -23,7 +23,7 @@ const Title = ({ data }: PropType) => {
 
     const [title, setTitle] = useState<string | null>(data?.title ?? null);
 
-    const { mutate: save } = trpc.ideas.save.useMutation({
+    const { mutate: save, isLoading: isSaving } = trpc.ideas.save.useMutation({
         onSuccess: (data) => {
             console.log("SUCCESS", data);
         },
@@ -85,7 +85,10 @@ const Title = ({ data }: PropType) => {
                 ></textarea>
                 <div className="w-full bg-white h-0.5 rounded-full motion-scale-x-in-[0] motion"></div>
 
-                <PrevNextButton onNextClick={onNextClick} />
+                <PrevNextButton
+                    isLoading={isSaving}
+                    onNextClick={onNextClick}
+                />
             </div>
         </div>
     );

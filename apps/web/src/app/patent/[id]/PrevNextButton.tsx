@@ -1,17 +1,20 @@
 import { redirect, useRouter } from "next/navigation";
 import { useRef } from "react";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
+import { CgSpinner } from "react-icons/cg";
 import { LiaMedalSolid } from "react-icons/lia";
 
 type PropType = {
     prevPath?: string;
     onNextClick?: () => void;
+    isLoading?: boolean;
     isShowConfirmBtn?: boolean;
     isDisablePublish?: boolean;
 };
 const PrevNextButton = ({
     prevPath,
     onNextClick,
+    isLoading,
     isShowConfirmBtn,
     isDisablePublish,
 }: PropType) => {
@@ -36,7 +39,7 @@ const PrevNextButton = ({
                 {prevPath && (
                     <button
                         onClick={onPrevClick}
-                        className="flex items-center justify-center space-x-3 text-white text-3xl"
+                        className="w-40 h-14 flex items-center justify-center space-x-3 text-white text-3xl"
                     >
                         <FaArrowLeftLong />
                         <span>Back</span>
@@ -44,13 +47,20 @@ const PrevNextButton = ({
                 )}
             </div>
             <div>
-                {typeof onNextClick == "function" && (
+                {typeof onNextClick == "function" && !isLoading ? (
                     <button
                         onClick={onNextClick}
-                        className="flex items-center justify-center space-x-5 px-5 py-3 bg-white text-black text-3xl"
+                        className="w-40 h-14 flex items-center justify-center space-x-5 px-5 py-3 bg-white text-black text-3xl"
                     >
                         <span>Next</span>
                         <FaArrowRightLong className="motion-preset-slide-right motion-delay-1000" />
+                    </button>
+                ) : (
+                    <button
+                        onClick={onNextClick}
+                        className="w-40 h-14 flex items-center justify-center space-x-5 px-5 py-3 bg-white text-black text-3xl"
+                    >
+                        <CgSpinner className="animate-spin" />
                     </button>
                 )}
             </div>

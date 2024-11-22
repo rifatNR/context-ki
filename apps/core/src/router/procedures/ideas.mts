@@ -2,6 +2,7 @@ import { router } from "@/trpc.mjs";
 import { z } from "zod";
 import { t } from "@/trpc.mjs";
 import { Pool } from "pg";
+import { delay } from "@/utils/helper.js";
 
 const itemSchema = z.object({
     id: z.string(),
@@ -55,6 +56,8 @@ export const ideaRouter = router({
         .mutation(async ({ ctx, input }) => {
             const { id, title, description } = input;
             const userId = 1;
+
+            await delay(5000);
 
             try {
                 await ctx.psql.query(
