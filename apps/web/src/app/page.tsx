@@ -10,8 +10,8 @@ const Home = () => {
 
     return (
         <main className="">
-            <Link href={"/patent/create/title"}>
-                <button>Patent your idea</button>
+            <Link href={"/patent"}>
+                <button>Your patents</button>
             </Link>
 
             <h1 className="text-custom-orange-200 text-xl underline">

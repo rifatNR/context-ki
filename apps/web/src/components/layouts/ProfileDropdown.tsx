@@ -24,7 +24,7 @@ const ProfileDropdown = ({ children }: PropType) => {
             <DropdownMenuTrigger asChild>{children}</DropdownMenuTrigger>
             <DropdownMenuContent
                 align="end"
-                className="w-56 mt-2 rounded-none p-0 bg-black text-white"
+                className="w-56 mt-2 rounded-none p-0 bg-black text-white border-gray-700"
             >
                 <DropdownMenuLabel className="rounded-none text-xl">
                     My Account

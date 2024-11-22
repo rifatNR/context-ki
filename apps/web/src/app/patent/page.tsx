@@ -9,7 +9,7 @@ const PatentList = () => {
                 <AddButton />
             </div>
 
-            <div className="space-y-5">
+            <div className="space-y-5 mb-10">
                 <PatentCard title="This is my new billion $ Idea." />
                 <PatentCard title="An app that tracks your plants’ health and reminds you when to water, prune, or fertilize." />
                 <PatentCard title="Aliqua ut voluptate reprehenderit cupidatat in. Voluptate irure et quis eu in nisi sit veniam non commodo. Magna incididunt minim enim dolor commodo dolor minim quis cillum laboris incididunt." />

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { FaPlus } from "react-icons/fa6";
 
@@ -47,10 +48,12 @@ const AddButton = ({}: PropType) => {
             onMouseLeave={() => setIsHovered(false)}
             className="relative p-0.5 bg-[#6969694b] hover:bg-[#15ca827a] transition-all ease-in duration-150"
         >
-            <div className="sticky flex items-center space-x-3 px-5 py-2 bg-[#08442c4b] hover:bg-[#00000031] transition-all ease-in duration-150 z-hoverEffectCardContent cursor-pointer">
-                <FaPlus className="text-xl" />
-                <div className="text-2xl">Patent Your Ideas</div>
-            </div>
+            <Link href={"/patent/create/title"}>
+                <div className="sticky flex items-center space-x-3 px-5 py-2 bg-[#08442c4b] hover:bg-[#00000031] transition-all ease-in duration-150 z-hoverEffectCardContent cursor-pointer">
+                    <FaPlus className="text-xl" />
+                    <div className="text-2xl">Patent Your Ideas</div>
+                </div>
+            </Link>
 
             <div
                 className="absolute transition-all ease-in duration-150"
