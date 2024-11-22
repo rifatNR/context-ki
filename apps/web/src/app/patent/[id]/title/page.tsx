@@ -1,4 +1,4 @@
-import Title, { IdeaDataType } from "@/app/patent/[id]/title/_page";
+import TitleClient from "@/app/patent/[id]/title/_page";
 import { trpcVanilla } from "@/trpc/server";
 import { GetServerSidePropsContext } from "next";
 
@@ -7,7 +7,7 @@ const TitleServer = async (context: GetServerSidePropsContext) => {
         id: (context.params?.id as string) ?? "",
     });
 
-    return <Title data={response.data} />;
+    return <TitleClient data={response.data} />;
 };
 
 export default TitleServer;
