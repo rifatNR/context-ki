@@ -121,10 +121,10 @@ const Participants = () => {
                     </div>
                 </div>
 
-                <PrevNextButton
+                {/* <PrevNextButton
                     prevPath={`/patent/${id}/participants`}
                     nextPath={`/patent/${id}/confirmation`}
-                />
+                /> */}
             </div>
         </div>
     );

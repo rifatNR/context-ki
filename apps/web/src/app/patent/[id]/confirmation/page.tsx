@@ -53,11 +53,11 @@ const Confirmation = () => {
                     </div>
                 </label>
 
-                <PrevNextButton
+                {/* <PrevNextButton
                     prevPath={`/patent/${id}/preview`}
                     isShowConfirmBtn
                     isDisablePublish
-                />
+                /> */}
             </div>
         </div>
     );

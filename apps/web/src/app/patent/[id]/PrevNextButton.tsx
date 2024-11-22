@@ -5,13 +5,13 @@ import { LiaMedalSolid } from "react-icons/lia";
 
 type PropType = {
     prevPath?: string;
-    nextPath?: string;
+    onNextClick?: () => void;
     isShowConfirmBtn?: boolean;
     isDisablePublish?: boolean;
 };
 const PrevNextButton = ({
     prevPath,
-    nextPath,
+    onNextClick,
     isShowConfirmBtn,
     isDisablePublish,
 }: PropType) => {
@@ -21,11 +21,6 @@ const PrevNextButton = ({
     const onPrevClick = () => {
         if (prevPath) {
             router.push(prevPath);
-        }
-    };
-    const onNextClick = () => {
-        if (nextPath) {
-            router.push(nextPath);
         }
     };
 
@@ -49,7 +44,7 @@ const PrevNextButton = ({
                 )}
             </div>
             <div>
-                {nextPath && (
+                {typeof onNextClick == "function" && (
                     <button
                         onClick={onNextClick}
                         className="flex items-center justify-center space-x-5 px-5 py-3 bg-white text-black text-3xl"

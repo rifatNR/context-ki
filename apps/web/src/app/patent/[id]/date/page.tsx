@@ -119,10 +119,10 @@ const Date = () => {
                     <div className="select-none">I got this idea today.</div>
                 </label>
 
-                <PrevNextButton
+                {/* <PrevNextButton
                     prevPath="/patent/create/title"
                     nextPath="/patent/create/description"
-                />
+                /> */}
             </div>
         </div>
     );

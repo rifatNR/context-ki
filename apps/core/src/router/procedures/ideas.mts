@@ -6,8 +6,8 @@ import { Pool } from "pg";
 const itemSchema = z.object({
     id: z.string(),
     user_id: z.number(),
-    title: z.string(),
-    description: z.string(),
+    title: z.string().optional(),
+    description: z.string().optional(),
 });
 export const ideaRouter = router({
     get: t.procedure
@@ -64,7 +64,7 @@ export const ideaRouter = router({
                     ON CONFLICT (id)
                     DO UPDATE SET title = $3, description = $4;
                     `,
-                    [id, userId, title, description]
+                    [id, userId, title ?? "", description ?? ""]
                 );
 
                 return {

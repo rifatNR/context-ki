@@ -46,10 +46,10 @@ const Description = () => {
                 ></textarea>
                 <div className="w-full bg-white h-0.5 rounded-full motion-scale-x-in-[0] motion"></div>
 
-                <PrevNextButton
+                {/* <PrevNextButton
                     prevPath={`/patent/${id}/title`}
                     nextPath={`/patent/${id}/participants`}
-                />
+                /> */}
             </div>
         </div>
     );
