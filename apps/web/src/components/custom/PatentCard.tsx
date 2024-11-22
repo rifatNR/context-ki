@@ -3,7 +3,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { IoCalendarNumberOutline } from "react-icons/io5";
 
-const PatentCard = () => {
+type PropType = {
+    title: string;
+};
+const PatentCard = ({ title }: PropType) => {
     const cardRef = useRef<HTMLDivElement>(null);
 
     const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -39,22 +42,25 @@ const PatentCard = () => {
     const offsetTop = cardRef?.current?.offsetTop ?? 0;
 
     return (
-        <div ref={cardRef} className="p-0.5 bg-[#6969694b] relative">
-            <div className="sticky p-5 bg-black z-20">
+        <div
+            ref={cardRef}
+            className="relative p-0.5 bg-[#6969694b] hover:bg-[#15ca827a] transition-all ease-in duration-150"
+        >
+            <div className="sticky p-5 bg-black hover:bg-[#000000c4] transition-all ease-in duration-150 z-10 cursor-pointer">
                 <div className="flex items-center space-x-3 text-base">
                     <IoCalendarNumberOutline />
                     <div className="text-custom-gray-25">
                         3rd September, 2017
                     </div>
                 </div>
-                <div className="text-3xl">This is my new billion $ Idea.</div>
+                <div className="text-3xl">
+                    {title} {cardRef.current?.offsetTop}
+                </div>
             </div>
 
             <div
                 className="absolute"
                 style={{
-                    // top: position.y - 300,
-                    // left: position.x - 600,
                     inset: "0px",
                     background: `radial-gradient(
                         200px circle at ${position.x - offsetLeft}px ${
