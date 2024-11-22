@@ -1,5 +1,4 @@
 import DescriptionClient from "@/app/patent/[id]/description/_page";
-import Title from "@/app/patent/[id]/title/_page";
 import { trpcVanilla } from "@/trpc/server";
 import { GetServerSidePropsContext } from "next";
 
