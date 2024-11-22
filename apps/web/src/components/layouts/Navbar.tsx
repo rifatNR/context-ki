@@ -1,3 +1,4 @@
+import ProfileDropdown from "@/components/layouts/ProfileDropdown";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -20,14 +21,17 @@ const Navbar = () => {
                         </div>
                     </div>
                 </Link>
-                <div className="relative h-10 w-10 aspect-square rounded-full bg-gray-500 overflow-hidden mb-[-5px]">
-                    <Image
-                        src="https://avatar.iran.liara.run/public/42"
-                        alt="Avatar"
-                        fill
-                        className="object-cover"
-                    />
-                </div>
+
+                <ProfileDropdown>
+                    <div className="relative h-10 w-10 aspect-square rounded-full bg-gray-500 overflow-hidden mb-[-5px]">
+                        <Image
+                            src="https://avatar.iran.liara.run/public/42"
+                            alt="Avatar"
+                            fill
+                            className="object-cover"
+                        />
+                    </div>
+                </ProfileDropdown>
             </div>
         </div>
     );
