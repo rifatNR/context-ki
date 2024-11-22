@@ -43,10 +43,6 @@ const ParticipantsClient = ({ data }: PropType) => {
         }
     };
 
-    const onNextClick = async () => {
-        router.push(`/patent/${id}/participants`);
-    };
-
     useEffect(() => {
         if (textareaRef.current) {
             textareaRef.current.focus();
@@ -143,7 +139,9 @@ const ParticipantsClient = ({ data }: PropType) => {
 
                 <PrevNextButton
                     prevPath={`/patent/${id}/description`}
-                    onNextClick={onNextClick}
+                    onNextClick={() => {
+                        router.push(`/patent/${id}/preview`);
+                    }}
                 />
             </div>
         </div>
