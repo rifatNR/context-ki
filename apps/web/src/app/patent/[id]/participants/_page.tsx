@@ -5,7 +5,7 @@ import { trpc } from "@/trpc/client";
 import { ParticipantDataType } from "@/utils/types";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { FaUserPlus } from "react-icons/fa6";
 
 type PropType = {
@@ -53,6 +53,15 @@ const ParticipantsClient = ({ data }: PropType) => {
         }
     }, [textareaRef]);
 
+    const pendingInvites = useMemo(
+        () => data.filter((item) => item.state == "pending"),
+        [data]
+    );
+    const acceptedInvites = useMemo(
+        () => data.filter((item) => item.state == "accepted"),
+        [data]
+    );
+
     return (
         <div className="flex-1 flex items-center justify-center w-full -mt-20">
             <div className="flex-1">
@@ -89,8 +98,8 @@ const ParticipantsClient = ({ data }: PropType) => {
                 <div className="mt-5">
                     <div className="text-2xl mb-2">People Invited:</div>
                     <div className="space-y-3">
-                        {data.length ? (
-                            data?.map((item) => (
+                        {pendingInvites.length ? (
+                            pendingInvites?.map((item) => (
                                 <div
                                     key={item.id}
                                     className="text-2xl flex items-center space-x-3 ml-8"
@@ -107,39 +116,28 @@ const ParticipantsClient = ({ data }: PropType) => {
                 <div className="mt-5">
                     <div className="text-2xl mb-2">Participants:</div>
                     <div className="space-y-3">
-                        <div className="text-2xl flex items-center space-x-3 ml-8">
-                            <div className="relative h-8 w-8 aspect-square rounded-full bg-gray-500 overflow-hidden mb-[-5px]">
-                                <Image
-                                    src="https://avatar.iran.liara.run/public/42"
-                                    alt="Avatar"
-                                    fill
-                                    className="object-cover"
-                                />
+                        {acceptedInvites.length ? (
+                            acceptedInvites?.map((item) => (
+                                <div
+                                    key={item.id}
+                                    className="text-2xl flex items-center space-x-3 ml-8"
+                                >
+                                    <div className="relative h-8 w-8 aspect-square rounded-full bg-gray-500 overflow-hidden mb-[-5px]">
+                                        <Image
+                                            src="https://avatar.iran.liara.run/public/42"
+                                            alt="Avatar"
+                                            fill
+                                            className="object-cover"
+                                        />
+                                    </div>
+                                    <div>{item.email}</div>
+                                </div>
+                            ))
+                        ) : (
+                            <div className="mt-3 ml-8 text-lg text-custom-gray-25">
+                                No participants
                             </div>
-                            <div>localghost@gmail.com</div>
-                        </div>
-                        <div className="text-2xl flex items-center space-x-3 ml-8">
-                            <div className="relative h-8 w-8 aspect-square rounded-full bg-gray-500 overflow-hidden mb-[-5px]">
-                                <Image
-                                    src="https://avatar.iran.liara.run/public/42"
-                                    alt="Avatar"
-                                    fill
-                                    className="object-cover"
-                                />
-                            </div>
-                            <div>akagamishanks@gmail.com</div>
-                        </div>
-                        <div className="text-2xl flex items-center space-x-3 ml-8">
-                            <div className="relative h-8 w-8 aspect-square rounded-full bg-gray-500 overflow-hidden mb-[-5px]">
-                                <Image
-                                    src="https://avatar.iran.liara.run/public/42"
-                                    alt="Avatar"
-                                    fill
-                                    className="object-cover"
-                                />
-                            </div>
-                            <div>errorist@gmail.com</div>
-                        </div>
+                        )}
                     </div>
                 </div>
 
