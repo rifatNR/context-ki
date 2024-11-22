@@ -1,11 +1,13 @@
 "use client";
 
-import PrevNextButton from "@/app/patent/create/PrevNextButton";
+import PrevNextButton from "@/app/patent/[id]/PrevNextButton";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { FaUserPlus } from "react-icons/fa6";
 
 const Participants = () => {
+    const { id } = useParams();
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
     useEffect(() => {
@@ -95,8 +97,8 @@ const Participants = () => {
                 </div>
 
                 <PrevNextButton
-                    prevPath="/patent/create/description"
-                    nextPath="/patent/create/preview"
+                    prevPath={`/patent/${id}/title`}
+                    nextPath={`/patent/${id}/preview`}
                 />
             </div>
         </div>

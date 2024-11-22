@@ -1,16 +1,23 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { FaPlus } from "react-icons/fa6";
+import { v4 as uuidv4 } from "uuid";
 
 type PropType = {};
 const AddButton = ({}: PropType) => {
+    const router = useRouter();
     const cardRef = useRef<HTMLButtonElement>(null);
 
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [scrollPosition, setScrollPosition] = useState({ x: 0, y: 0 });
     const [isHovered, setIsHovered] = useState(false);
+
+    const onPatentCreateClick = () => {
+        router.push(`/patent/${uuidv4()}/title`);
+    };
 
     const handleScroll = () => {
         setScrollPosition({
@@ -44,16 +51,15 @@ const AddButton = ({}: PropType) => {
     return (
         <button
             ref={cardRef}
+            onClick={onPatentCreateClick}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             className="relative p-0.5 bg-[#6969694b] hover:bg-[#15ca827a] transition-all ease-in duration-150"
         >
-            <Link href={"/patent/create/title"}>
-                <div className="sticky flex items-center space-x-3 px-5 py-2 bg-[#08442c4b] hover:bg-[#00000031] transition-all ease-in duration-150 z-hoverEffectCardContent cursor-pointer">
-                    <FaPlus className="text-xl" />
-                    <div className="text-2xl">Patent Your Ideas</div>
-                </div>
-            </Link>
+            <div className="sticky flex items-center space-x-3 px-5 py-2 bg-[#08442c4b] hover:bg-[#00000031] transition-all ease-in duration-150 z-hoverEffectCardContent cursor-pointer">
+                <FaPlus className="text-xl" />
+                <div className="text-2xl">Patent Your Ideas</div>
+            </div>
 
             <div
                 className="absolute transition-all ease-in duration-150"

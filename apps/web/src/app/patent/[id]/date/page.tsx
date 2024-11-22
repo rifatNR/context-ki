@@ -1,6 +1,6 @@
 "use client";
 
-import PrevNextButton from "@/app/patent/create/PrevNextButton";
+import PrevNextButton from "@/app/patent/[id]/PrevNextButton";
 import { useEffect, useRef } from "react";
 import { VscTriangleDown } from "react-icons/vsc";
 import {

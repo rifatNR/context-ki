@@ -1,14 +1,17 @@
 "use client";
 
-import PrevNextButton from "@/app/patent/create/PrevNextButton";
+import PrevNextButton from "@/app/patent/[id]/PrevNextButton";
 import Image from "next/image";
 import { IoCalendarNumberOutline } from "react-icons/io5";
 import { GiMedal, GiRibbonMedal } from "react-icons/gi";
 import { LiaMedalSolid } from "react-icons/lia";
 import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 
 const Confirmation = () => {
+    const { id } = useParams();
+
     return (
         <div className="flex-1 flex items-center justify-center w-full mt-10 mb-20">
             <div className="flex-1">
@@ -51,7 +54,7 @@ const Confirmation = () => {
                 </label>
 
                 <PrevNextButton
-                    prevPath="/patent/create/preview"
+                    prevPath={`/patent/${id}/preview`}
                     isShowConfirmBtn
                     isDisablePublish
                 />

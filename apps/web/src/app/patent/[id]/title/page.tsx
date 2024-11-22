@@ -1,9 +1,11 @@
 "use client";
 
-import PrevNextButton from "@/app/patent/create/PrevNextButton";
+import PrevNextButton from "@/app/patent/[id]/PrevNextButton";
+import { useParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 
 const Title = () => {
+    const { id } = useParams();
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
     const handleInputChange = () => {
@@ -31,7 +33,7 @@ const Title = () => {
     return (
         <div className="flex-1 flex items-center justify-center w-full -mt-20 z-100">
             <div className="flex-1">
-                <div className="text-4xl mb-10">Enter a Title:</div>
+                <div className="text-4xl mb-10">Enter a Title: </div>
 
                 <textarea
                     ref={textareaRef}
@@ -42,7 +44,7 @@ const Title = () => {
                 ></textarea>
                 <div className="w-full bg-white h-0.5 rounded-full motion-scale-x-in-[0] motion"></div>
 
-                <PrevNextButton nextPath="/patent/create/date" />
+                <PrevNextButton nextPath={`/patent/${id}/description`} />
             </div>
         </div>
     );

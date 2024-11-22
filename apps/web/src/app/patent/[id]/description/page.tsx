@@ -1,9 +1,11 @@
 "use client";
 
-import PrevNextButton from "@/app/patent/create/PrevNextButton";
+import PrevNextButton from "@/app/patent/[id]/PrevNextButton";
+import { useParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 
 const Description = () => {
+    const { id } = useParams();
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
     const handleInputChange = () => {
@@ -45,8 +47,8 @@ const Description = () => {
                 <div className="w-full bg-white h-0.5 rounded-full motion-scale-x-in-[0] motion"></div>
 
                 <PrevNextButton
-                    prevPath="/patent/create/date"
-                    nextPath="/patent/create/participants"
+                    prevPath={`/patent/${id}/title`}
+                    nextPath={`/patent/${id}/participants`}
                 />
             </div>
         </div>
