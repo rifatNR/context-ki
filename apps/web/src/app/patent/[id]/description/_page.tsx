@@ -38,6 +38,7 @@ const DescriptionClient = ({ data }: PropType) => {
                 onSuccess: () => {
                     router.push(`/patent/${id}/participants`);
                 },
+                // TODO  Show toastr on Error
             }
         );
     };

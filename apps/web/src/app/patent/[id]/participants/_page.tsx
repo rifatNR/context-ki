@@ -1,9 +1,10 @@
 "use client";
 
 import PrevNextButton from "@/app/patent/[id]/PrevNextButton";
+import { trpc } from "@/trpc/client";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaUserPlus } from "react-icons/fa6";
 
 type PropType = {
@@ -13,6 +14,33 @@ const ParticipantsClient = ({ data }: PropType) => {
     const { id } = useParams();
     const router = useRouter();
     const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+    const [email, setEmail] = useState<string>();
+
+    const { mutate: invite, isLoading: isInviting } =
+        trpc.ideas.invite.useMutation();
+
+    const onInviteClick = () => {
+        // TODO  Check valid email
+        if (email) {
+            invite(
+                {
+                    id: id as string,
+                    email: email,
+                },
+                {
+                    onSuccess: (data) => {
+                        console.log("SUCCESS", data);
+                        setEmail("");
+                    },
+                    onError: (data) => {
+                        console.log("ERROR", data);
+                        // TODO  Show toastr on Error
+                    },
+                }
+            );
+        }
+    };
 
     const onNextClick = async () => {
         router.push(`/patent/${id}/participants`);
@@ -34,13 +62,18 @@ const ParticipantsClient = ({ data }: PropType) => {
                 <div className="relative">
                     <textarea
                         ref={textareaRef}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         className="text-custom-gray-25 bg-transparent w-full text-3xl resize-none overflow-hidden focus:outline-none pr-40"
                         rows={1}
                         maxLength={50}
                         placeholder="@ Enter gmail..."
                     ></textarea>
 
-                    <button className="absolute right-0 bottom-2 flex items-center justify-center space-x-5 px-5 py-1 bg-white text-black text-2xl">
+                    <button
+                        onClick={onInviteClick}
+                        className="absolute right-0 bottom-2 flex items-center justify-center space-x-5 px-5 py-1 bg-white text-black text-2xl"
+                    >
                         <span>Invite</span>
                         <FaUserPlus className="" />
                     </button>
