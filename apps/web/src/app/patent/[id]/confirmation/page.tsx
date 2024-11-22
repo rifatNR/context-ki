@@ -7,10 +7,11 @@ import { GiMedal, GiRibbonMedal } from "react-icons/gi";
 import { LiaMedalSolid } from "react-icons/lia";
 import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 const Confirmation = () => {
     const { id } = useParams();
+    const router = useRouter();
 
     return (
         <div className="flex-1 flex items-center justify-center w-full mt-10 mb-20">
@@ -58,6 +59,11 @@ const Confirmation = () => {
                     isShowConfirmBtn
                     isDisablePublish
                 /> */}
+                <PrevNextButton
+                    prevPath={`/patent/${id}/preview`}
+                    isShowConfirmBtn
+                    isDisablePublish
+                />
             </div>
         </div>
     );

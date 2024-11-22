@@ -47,20 +47,19 @@ const PrevNextButton = ({
                 )}
             </div>
             <div>
-                {typeof onNextClick == "function" && !isLoading ? (
+                {typeof onNextClick == "function" && (
                     <button
                         onClick={onNextClick}
-                        className="w-40 h-14 flex items-center justify-center space-x-5 px-5 py-3 bg-white text-black text-3xl"
+                        className="w-40 h-14 flex items-center justify-center px-5 py-3 bg-white text-black text-3xl"
                     >
-                        <span>Next</span>
-                        <FaArrowRightLong className="motion-preset-slide-right motion-delay-1000" />
-                    </button>
-                ) : (
-                    <button
-                        onClick={onNextClick}
-                        className="w-40 h-14 flex items-center justify-center space-x-5 px-5 py-3 bg-white text-black text-3xl"
-                    >
-                        <CgSpinner className="animate-spin" />
+                        {isLoading ? (
+                            <CgSpinner className="animate-spin" />
+                        ) : (
+                            <div className="flex items-center justify-center space-x-5">
+                                <span>Next</span>
+                                <FaArrowRightLong className="motion-preset-slide-right motion-delay-1000" />
+                            </div>
+                        )}
                     </button>
                 )}
             </div>
