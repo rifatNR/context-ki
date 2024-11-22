@@ -18,6 +18,20 @@ const PatentList = () => {
                 <PatentCard />
                 <PatentCard />
                 <PatentCard />
+                <PatentCard />
+                <PatentCard />
+                <PatentCard />
+                <PatentCard />
+                <PatentCard />
+                <PatentCard />
+                <PatentCard />
+                <PatentCard />
+                <PatentCard />
+                <PatentCard />
+                <PatentCard />
+                <PatentCard />
+                <PatentCard />
+                <PatentCard />
             </div>
         </div>
     );
