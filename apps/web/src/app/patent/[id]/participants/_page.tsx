@@ -2,7 +2,7 @@
 
 import PrevNextButton from "@/app/patent/[id]/PrevNextButton";
 import Image from "next/image";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { FaUserPlus } from "react-icons/fa6";
 
@@ -11,7 +11,12 @@ type PropType = {
 };
 const ParticipantsClient = ({ data }: PropType) => {
     const { id } = useParams();
+    const router = useRouter();
     const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+    const onNextClick = async () => {
+        router.push(`/patent/${id}/participants`);
+    };
 
     useEffect(() => {
         if (textareaRef.current) {
@@ -99,10 +104,10 @@ const ParticipantsClient = ({ data }: PropType) => {
                     </div>
                 </div>
 
-                {/* <PrevNextButton
-                    prevPath={`/patent/${id}/title`}
-                    nextPath={`/patent/${id}/preview`}
-                /> */}
+                <PrevNextButton
+                    prevPath={`/patent/${id}/description`}
+                    onNextClick={onNextClick}
+                />
             </div>
         </div>
     );

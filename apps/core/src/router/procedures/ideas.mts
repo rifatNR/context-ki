@@ -57,7 +57,7 @@ export const ideaRouter = router({
             const { id, title, description } = input;
             const userId = 1;
 
-            await delay(5000);
+            await delay(1500);
 
             try {
                 await ctx.psql.query(

@@ -64,6 +64,10 @@ const DescriptionClient = ({ data }: PropType) => {
         }
     }, [textareaRef]);
 
+    useEffect(() => {
+        handleInputChange();
+    }, []);
+
     return (
         <div className="flex-1 flex items-center justify-center w-full -mt-20">
             <div className="flex-1">
