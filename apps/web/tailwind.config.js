@@ -48,6 +48,8 @@ module.exports = {
             },
             zIndex: {
                 loader: "4",
+                navbar: "10",
+                hoverEffectCardContent: "4",
             },
             backgroundImage: {
                 "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

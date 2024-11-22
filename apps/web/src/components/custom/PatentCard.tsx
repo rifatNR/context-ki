@@ -49,7 +49,7 @@ const PatentCard = ({ title }: PropType) => {
             onMouseLeave={() => setIsHovered(false)}
             className="relative p-0.5 bg-[#6969694b] hover:bg-[#15ca827a] transition-all ease-in duration-150"
         >
-            <div className="sticky p-5 bg-black hover:bg-[#000000c4] transition-all ease-in duration-150 z-10 cursor-pointer">
+            <div className="sticky p-5 bg-black hover:bg-[#000000c4] transition-all ease-in duration-150 z-hoverEffectCardContent cursor-pointer">
                 <div className="flex items-center space-x-3 text-base">
                     <IoCalendarNumberOutline />
                     <div className="text-custom-gray-25">
