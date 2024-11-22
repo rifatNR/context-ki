@@ -1,6 +1,6 @@
 "use client";
 
-import { trpc } from "@/utils/trpc";
+import { trpc } from "@/trpc/client";
 import Image from "next/image";
 import Link from "next/link";
 
