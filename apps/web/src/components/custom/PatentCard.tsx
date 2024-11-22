@@ -11,6 +11,7 @@ const PatentCard = ({ title }: PropType) => {
 
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [scrollPosition, setScrollPosition] = useState({ x: 0, y: 0 });
+    const [isHovered, setIsHovered] = useState(false);
 
     const handleScroll = () => {
         setScrollPosition({
@@ -44,6 +45,8 @@ const PatentCard = ({ title }: PropType) => {
     return (
         <div
             ref={cardRef}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
             className="relative p-0.5 bg-[#6969694b] hover:bg-[#15ca827a] transition-all ease-in duration-150"
         >
             <div className="sticky p-5 bg-black hover:bg-[#000000c4] transition-all ease-in duration-150 z-10 cursor-pointer">
@@ -59,13 +62,13 @@ const PatentCard = ({ title }: PropType) => {
             </div>
 
             <div
-                className="absolute"
+                className="absolute transition-all ease-in duration-150"
                 style={{
                     inset: "0px",
                     background: `radial-gradient(
-                        200px circle at ${position.x - offsetLeft}px ${
-                        position.y - (offsetTop - scrollPosition.y)
-                    }px,
+                ${isHovered ? "800px" : "200px"} circle at ${
+                        position.x - offsetLeft
+                    }px ${position.y - (offsetTop - scrollPosition.y)}px,
                         #15ca82,
                         transparent
                       )`,
