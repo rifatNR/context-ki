@@ -1,9 +1,13 @@
+import AddButton from "@/components/custom/AddButton";
 import PatentCard from "@/components/custom/PatentCard";
 
 const PatentList = () => {
     return (
         <div>
-            <div className="mb-10 text-4xl">My Patents:</div>
+            <div className="mb-10 flex items-center justify-between">
+                <div className=" text-4xl">My Patents:</div>
+                <AddButton />
+            </div>
 
             <div className="space-y-5">
                 <PatentCard title="This is my new billion $ Idea." />

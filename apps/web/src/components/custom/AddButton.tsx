@@ -1,13 +1,11 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { IoCalendarNumberOutline } from "react-icons/io5";
+import { FaPlus } from "react-icons/fa6";
 
-type PropType = {
-    title: string;
-};
-const PatentCard = ({ title }: PropType) => {
-    const cardRef = useRef<HTMLDivElement>(null);
+type PropType = {};
+const AddButton = ({}: PropType) => {
+    const cardRef = useRef<HTMLButtonElement>(null);
 
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [scrollPosition, setScrollPosition] = useState({ x: 0, y: 0 });
@@ -43,20 +41,15 @@ const PatentCard = ({ title }: PropType) => {
     const offsetTop = cardRef?.current?.offsetTop ?? 0;
 
     return (
-        <div
+        <button
             ref={cardRef}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             className="relative p-0.5 bg-[#6969694b] hover:bg-[#15ca827a] transition-all ease-in duration-150"
         >
-            <div className="sticky p-5 bg-black hover:bg-[#000000c4] transition-all ease-in duration-150 z-hoverEffectCardContent cursor-pointer">
-                <div className="flex items-center space-x-3 text-base">
-                    <IoCalendarNumberOutline />
-                    <div className="text-custom-gray-25">
-                        3rd September, 2017
-                    </div>
-                </div>
-                <div className="text-3xl">{title}</div>
+            <div className="sticky flex items-center space-x-3 px-5 py-2 bg-[#08442c4b] hover:bg-[#00000031] transition-all ease-in duration-150 z-hoverEffectCardContent cursor-pointer">
+                <FaPlus className="text-xl" />
+                <div className="text-2xl">Patent Your Ideas</div>
             </div>
 
             <div
@@ -72,8 +65,8 @@ const PatentCard = ({ title }: PropType) => {
                       )`,
                 }}
             ></div>
-        </div>
+        </button>
     );
 };
 
-export default PatentCard;
+export default AddButton;
