@@ -5,7 +5,7 @@ import { Pool } from "pg";
 
 const itemSchema = z.object({
     id: z.string(),
-    userId: z.number(),
+    user_id: z.number(),
     title: z.string(),
     description: z.string(),
 });
