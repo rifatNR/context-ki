@@ -4,11 +4,18 @@ import { t } from "@/trpc.mjs";
 import { Pool } from "pg";
 import { delay } from "@/utils/helper.js";
 
-const itemSchema = z.object({
+const ideaItemSchema = z.object({
     id: z.string(),
     user_id: z.number(),
     title: z.string().optional(),
     description: z.string().optional(),
+});
+const participantItemSchema = z.object({
+    id: z.number(),
+    idea_id: z.string(),
+    user_id: z.number().nullable(),
+    email: z.string().email(),
+    state: z.string(),
 });
 export const ideaRouter = router({
     get: t.procedure
@@ -17,7 +24,9 @@ export const ideaRouter = router({
                 id: z.string(),
             })
         )
-        .output(z.object({ message: z.string(), data: itemSchema.optional() }))
+        .output(
+            z.object({ message: z.string(), data: ideaItemSchema.optional() })
+        )
         .query(async ({ ctx, input }) => {
             const { id } = input;
 
@@ -76,6 +85,40 @@ export const ideaRouter = router({
             } catch (error) {
                 console.error("Error saving idea:", error);
                 throw new Error("Failed to save idea.");
+            }
+        }),
+    getInvitations: t.procedure
+        .input(
+            z.object({
+                id: z.string(),
+            })
+        )
+        .output(
+            z.object({
+                message: z.string(),
+                data: z.array(participantItemSchema),
+            })
+        )
+        .query(async ({ ctx, input }) => {
+            const { id: ideaId } = input;
+
+            try {
+                const result = await ctx.psql.query(
+                    `
+                    SELECT id, idea_id, user_id, email, state
+                    FROM participants
+                    WHERE idea_id = $1;
+                    `,
+                    [ideaId]
+                );
+
+                return {
+                    message: "Participants retrieved successfully.",
+                    data: result.rows,
+                };
+            } catch (error) {
+                console.error("Error retrieving item:", error);
+                throw new Error("Failed to retrieve item.");
             }
         }),
     invite: t.procedure

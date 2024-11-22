@@ -3,7 +3,7 @@ import { trpcVanilla } from "@/trpc/server";
 import { GetServerSidePropsContext } from "next";
 
 const ParticipantsServer = async (context: GetServerSidePropsContext) => {
-    const response = await trpcVanilla.ideas.get.query({
+    const response = await trpcVanilla.ideas.getInvitations.query({
         id: (context.params?.id as string) ?? "",
     });
 
