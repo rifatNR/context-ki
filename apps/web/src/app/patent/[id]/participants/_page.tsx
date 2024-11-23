@@ -85,7 +85,7 @@ const ParticipantsClient = ({ data: ssrParticipants }: PropType) => {
     );
 
     return (
-        <div className="flex-1 flex items-center justify-center w-full -mt-20">
+        <div className="flex-1 flex items-center justify-center w-full pb-10">
             <div className="flex-1">
                 <div className="text-4xl mb-10">
                     Invite people who were with you on this idea:
