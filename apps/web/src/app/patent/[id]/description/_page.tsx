@@ -18,20 +18,20 @@ const DescriptionClient = ({ data }: PropType) => {
         data?.description ?? null
     );
 
-    const { mutate: save, isLoading: isSaving } = trpc.ideas.save.useMutation({
-        onSuccess: (data) => {
-            console.log("SUCCESS", data);
-        },
-        onError: (data) => {
-            console.log("ERROR", data);
-        },
-    });
+    const { mutate: save, isLoading: isSaving } =
+        trpc.ideas.saveDescription.useMutation({
+            onSuccess: (data) => {
+                console.log("SUCCESS", data);
+            },
+            onError: (error) => {
+                console.log("ERROR", error);
+            },
+        });
 
     const onNextClick = async () => {
         await save(
             {
                 id: id as string,
-                title: data?.description,
                 description: description as string,
             },
             {

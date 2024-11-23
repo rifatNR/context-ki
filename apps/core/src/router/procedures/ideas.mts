@@ -7,8 +7,8 @@ import { delay } from "@/utils/helper.js";
 const ideaItemSchema = z.object({
     id: z.string(),
     user_id: z.number(),
-    title: z.string().optional(),
-    description: z.string().optional(),
+    title: z.string(),
+    description: z.string().nullable(),
 });
 const participantItemSchema = z.object({
     id: z.number(),
@@ -53,38 +53,73 @@ export const ideaRouter = router({
                 throw new Error("Failed to retrieve item.");
             }
         }),
-    save: t.procedure
+    saveTitle: t.procedure
         .input(
             z.object({
                 id: z.string(),
-                title: z.string().optional(),
-                description: z.string().optional(),
+                title: z.string(),
             })
         )
         .output(z.object({ message: z.string() }))
         .mutation(async ({ ctx, input }) => {
-            const { id, title, description } = input;
+            const { id, title } = input;
             const userId = 1;
 
-            await delay(1500);
+            await delay(1000);
 
             try {
                 await ctx.psql.query(
                     `
-                    INSERT INTO ideas (id, user_id, title, description)
-                    VALUES ($1, $2, $3, $4)
+                    INSERT INTO ideas (id, user_id, title)
+                    VALUES ($1, $2, $3)
                     ON CONFLICT (id)
-                    DO UPDATE SET title = $3, description = $4;
+                    DO UPDATE SET title = $3;
                     `,
-                    [id, userId, title ?? "", description ?? ""]
+                    [id, userId, title]
                 );
 
                 return {
-                    message: `Saved successfully.`,
+                    message: `Successfully saved title.`,
                 };
             } catch (error) {
                 console.error("Error saving idea:", error);
-                throw new Error("Failed to save idea.");
+                if (error instanceof Error) {
+                    throw new Error(error.message);
+                } else {
+                    throw new Error("An unexpected error occurred");
+                }
+            }
+        }),
+    saveDescription: t.procedure
+        .input(
+            z.object({
+                id: z.string(),
+                description: z.string(),
+            })
+        )
+        .output(z.object({ message: z.string() }))
+        .mutation(async ({ ctx, input }) => {
+            const { id, description } = input;
+            const userId = 1;
+
+            try {
+                await ctx.psql.query(
+                    `
+                    UPDATE ideas SET description = $1 WHERE id = $2;
+                    `,
+                    [description, id]
+                );
+
+                return {
+                    message: `Successfully saved description.`,
+                };
+            } catch (error) {
+                console.error("Error saving idea:", error);
+                if (error instanceof Error) {
+                    throw new Error(error.message);
+                } else {
+                    throw new Error("An unexpected error occurred");
+                }
             }
         }),
     getInvitations: t.procedure

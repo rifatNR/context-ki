@@ -16,21 +16,21 @@ const TitleClient = ({ data }: PropType) => {
 
     const [title, setTitle] = useState<string | null>(data?.title ?? null);
 
-    const { mutate: save, isLoading: isSaving } = trpc.ideas.save.useMutation({
-        onSuccess: (data) => {
-            console.log("SUCCESS", data);
-        },
-        onError: (data) => {
-            console.log("ERROR", data);
-        },
-    });
+    const { mutate: save, isLoading: isSaving } =
+        trpc.ideas.saveTitle.useMutation({
+            onSuccess: (data) => {
+                console.log("SUCCESS", data);
+            },
+            onError: (data) => {
+                console.log("ERROR", data);
+            },
+        });
 
     const onNextClick = async () => {
         await save(
             {
                 id: id as string,
                 title: title as string,
-                description: data?.description,
             },
             {
                 onSuccess: () => {
