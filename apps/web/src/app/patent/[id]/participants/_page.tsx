@@ -3,6 +3,7 @@
 import PrevNextButton from "@/app/patent/[id]/PrevNextButton";
 import { trpc } from "@/trpc/client";
 import { ParticipantDataType } from "@/utils/types";
+import { TRPCClientError } from "@trpc/client";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -14,15 +15,15 @@ type PropType = {
 const ParticipantsClient = ({ data }: PropType) => {
     const { id } = useParams();
     const router = useRouter();
-    const textareaRef = useRef<HTMLTextAreaElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const [email, setEmail] = useState<string>();
+    const [error, setError] = useState<string | null>(null);
 
     const { mutate: invite, isLoading: isInviting } =
         trpc.ideas.invite.useMutation();
 
     const onInviteClick = () => {
-        // TODO  Check valid email
         if (email) {
             invite(
                 {
@@ -33,10 +34,29 @@ const ParticipantsClient = ({ data }: PropType) => {
                     onSuccess: (data) => {
                         console.log("SUCCESS", data);
                         setEmail("");
+                        setError(null);
                     },
-                    onError: (data) => {
-                        console.log("ERROR", data);
-                        // TODO  Show toastr on Error
+                    onError: (error) => {
+                        console.log("ERROR", error.message);
+
+                        if (error instanceof TRPCClientError) {
+                            if (error.data?.zodError) {
+                                const fieldErrors =
+                                    error.data.zodError.fieldErrors;
+                                const firstError = (
+                                    Object.values(fieldErrors)[0] as any
+                                )?.[0];
+
+                                if (firstError) {
+                                    setError(firstError);
+                                }
+                            } else {
+                                const errorMessage = error.message;
+                                if (errorMessage) {
+                                    setError(errorMessage);
+                                }
+                            }
+                        }
                     },
                 }
             );
@@ -44,10 +64,10 @@ const ParticipantsClient = ({ data }: PropType) => {
     };
 
     useEffect(() => {
-        if (textareaRef.current) {
-            textareaRef.current.focus();
+        if (inputRef.current) {
+            inputRef.current.focus();
         }
-    }, [textareaRef]);
+    }, [inputRef]);
 
     const pendingInvites = useMemo(
         () => data.filter((item) => item.state == "pending"),
@@ -66,16 +86,15 @@ const ParticipantsClient = ({ data }: PropType) => {
                 </div>
 
                 <div className="relative">
-                    <textarea
-                        ref={textareaRef}
+                    <input
+                        ref={inputRef}
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         className="text-custom-gray-25 bg-transparent w-full text-3xl resize-none overflow-hidden focus:outline-none pr-40"
-                        rows={1}
                         maxLength={50}
+                        type="email"
                         placeholder="@ Enter gmail..."
-                    ></textarea>
-
+                    ></input>
                     <button
                         onClick={onInviteClick}
                         className="absolute right-0 bottom-2 flex items-center justify-center space-x-5 px-5 py-1 bg-white text-black text-2xl"
@@ -85,6 +104,14 @@ const ParticipantsClient = ({ data }: PropType) => {
                     </button>
                 </div>
                 <div className="w-full bg-white h-0.5 rounded-full motion-scale-x-in-[0] motion"></div>
+
+                {error && (
+                    <div
+                        className={`text-red-400 text-xl mt-2 motion-preset-typewriter `}
+                    >
+                        {error}
+                    </div>
+                )}
 
                 <div className="text-xl text-custom-gray-25 mt-3">
                     People will be included as soon as they join and accept your
