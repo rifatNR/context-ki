@@ -4,6 +4,7 @@ import { createTRPCProxyClient, httpBatchLink } from "@trpc/client";
 import { createTRPCNext } from "@trpc/next";
 
 export const trpc = createTRPCReact<AppRouter>();
+
 // export const trpcClient = createTRPCProxyClient<AppRouter>({
 //     links: [
 //         httpBatchLink({

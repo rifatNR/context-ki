@@ -12,7 +12,9 @@ import { FaUserPlus } from "react-icons/fa6";
 type PropType = {
     data: ParticipantDataType[];
 };
-const ParticipantsClient = ({ data }: PropType) => {
+const ParticipantsClient = ({ data: ssrParticipants }: PropType) => {
+    const utils = trpc.useUtils();
+
     const { id } = useParams();
     const router = useRouter();
     const inputRef = useRef<HTMLInputElement>(null);
@@ -20,47 +22,50 @@ const ParticipantsClient = ({ data }: PropType) => {
     const [email, setEmail] = useState<string>();
     const [error, setError] = useState<string | null>(null);
 
+    const { data: csrParticipants } = trpc.ideas.getInvitations.useQuery({
+        id: id as string,
+    });
+
     const { mutate: invite, isLoading: isInviting } =
         trpc.ideas.invite.useMutation();
 
     const onInviteClick = () => {
-        if (email) {
-            invite(
-                {
-                    id: id as string,
-                    email: email,
+        invite(
+            {
+                id: id as string,
+                email: email ?? "",
+            },
+            {
+                onSuccess: (data) => {
+                    console.log("SUCCESS", data);
+                    setEmail("");
+                    setError(null);
+
+                    utils.ideas.getInvitations.invalidate();
                 },
-                {
-                    onSuccess: (data) => {
-                        console.log("SUCCESS", data);
-                        setEmail("");
-                        setError(null);
-                    },
-                    onError: (error) => {
-                        console.log("ERROR", error.message);
+                onError: (error) => {
+                    console.log("ERROR", error.message);
 
-                        if (error instanceof TRPCClientError) {
-                            if (error.data?.zodError) {
-                                const fieldErrors =
-                                    error.data.zodError.fieldErrors;
-                                const firstError = (
-                                    Object.values(fieldErrors)[0] as any
-                                )?.[0];
+                    if (error instanceof TRPCClientError) {
+                        if (error.data?.zodError) {
+                            const fieldErrors = error.data.zodError.fieldErrors;
+                            const firstError = (
+                                Object.values(fieldErrors)[0] as any
+                            )?.[0];
 
-                                if (firstError) {
-                                    setError(firstError);
-                                }
-                            } else {
-                                const errorMessage = error.message;
-                                if (errorMessage) {
-                                    setError(errorMessage);
-                                }
+                            if (firstError) {
+                                setError(firstError);
+                            }
+                        } else {
+                            const errorMessage = error.message;
+                            if (errorMessage) {
+                                setError(errorMessage);
                             }
                         }
-                    },
-                }
-            );
-        }
+                    }
+                },
+            }
+        );
     };
 
     useEffect(() => {
@@ -69,13 +74,14 @@ const ParticipantsClient = ({ data }: PropType) => {
         }
     }, [inputRef]);
 
+    const participants = csrParticipants?.data ?? ssrParticipants;
     const pendingInvites = useMemo(
-        () => data.filter((item) => item.state == "pending"),
-        [data]
+        () => participants.filter((item) => item.state == "pending"),
+        [participants]
     );
     const acceptedInvites = useMemo(
-        () => data.filter((item) => item.state == "accepted"),
-        [data]
+        () => participants.filter((item) => item.state == "accepted"),
+        [participants]
     );
 
     return (
