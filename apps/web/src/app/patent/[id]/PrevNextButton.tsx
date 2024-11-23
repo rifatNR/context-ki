@@ -57,7 +57,7 @@ const PrevNextButton = ({
                         ) : (
                             <div className="flex items-center justify-center space-x-5">
                                 <span>Next</span>
-                                <FaArrowRightLong className="motion-preset-slide-right motion-delay-1000" />
+                                <FaArrowRightLong className="motion-preset-slide-right motion-delay-500" />
                             </div>
                         )}
                     </button>

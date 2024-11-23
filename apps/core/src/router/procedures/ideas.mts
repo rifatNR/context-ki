@@ -3,6 +3,7 @@ import { z } from "zod";
 import { t } from "@/trpc.mjs";
 import { Pool } from "pg";
 import { delay } from "@/utils/helper.js";
+import { TRPCError } from "@trpc/server";
 
 const ideaItemSchema = z.object({
     id: z.string(),
@@ -57,7 +58,7 @@ export const ideaRouter = router({
         .input(
             z.object({
                 id: z.string(),
-                title: z.string(),
+                title: z.string().min(1, "Title cannot be empty"),
             })
         )
         .output(z.object({ message: z.string() }))
@@ -84,9 +85,17 @@ export const ideaRouter = router({
             } catch (error) {
                 console.error("Error saving idea:", error);
                 if (error instanceof Error) {
-                    throw new Error(error.message);
+                    throw new TRPCError({
+                        code: "BAD_REQUEST",
+                        message: error.message,
+                        cause: error,
+                    });
                 } else {
-                    throw new Error("An unexpected error occurred");
+                    throw new TRPCError({
+                        code: "BAD_REQUEST",
+                        message: "An unexpected error occurred",
+                        cause: error,
+                    });
                 }
             }
         }),
@@ -94,7 +103,7 @@ export const ideaRouter = router({
         .input(
             z.object({
                 id: z.string(),
-                description: z.string(),
+                description: z.string().min(1, "Description cannot be empty"),
             })
         )
         .output(z.object({ message: z.string() }))
@@ -116,9 +125,17 @@ export const ideaRouter = router({
             } catch (error) {
                 console.error("Error saving idea:", error);
                 if (error instanceof Error) {
-                    throw new Error(error.message);
+                    throw new TRPCError({
+                        code: "BAD_REQUEST",
+                        message: error.message,
+                        cause: error,
+                    });
                 } else {
-                    throw new Error("An unexpected error occurred");
+                    throw new TRPCError({
+                        code: "BAD_REQUEST",
+                        message: "An unexpected error occurred",
+                        cause: error,
+                    });
                 }
             }
         }),
@@ -153,7 +170,19 @@ export const ideaRouter = router({
                 };
             } catch (error) {
                 console.error("Error retrieving item:", error);
-                throw new Error("Failed to retrieve item.");
+                if (error instanceof Error) {
+                    throw new TRPCError({
+                        code: "BAD_REQUEST",
+                        message: error.message,
+                        cause: error,
+                    });
+                } else {
+                    throw new TRPCError({
+                        code: "BAD_REQUEST",
+                        message: "Failed to retrieve item.",
+                        cause: error,
+                    });
+                }
             }
         }),
     invite: t.procedure
@@ -193,9 +222,17 @@ export const ideaRouter = router({
             } catch (error) {
                 console.error("Error saving idea:", error);
                 if (error instanceof Error) {
-                    throw new Error(error.message);
+                    throw new TRPCError({
+                        code: "BAD_REQUEST",
+                        message: error.message,
+                        cause: error,
+                    });
                 } else {
-                    throw new Error("An unexpected error occurred");
+                    throw new TRPCError({
+                        code: "BAD_REQUEST",
+                        message: "Failed to retrieve item.",
+                        cause: error,
+                    });
                 }
             }
         }),
@@ -238,9 +275,17 @@ export const ideaRouter = router({
             } catch (error) {
                 console.error("Error saving idea:", error);
                 if (error instanceof Error) {
-                    throw new Error(error.message);
+                    throw new TRPCError({
+                        code: "BAD_REQUEST",
+                        message: error.message,
+                        cause: error,
+                    });
                 } else {
-                    throw new Error("An unexpected error occurred");
+                    throw new TRPCError({
+                        code: "BAD_REQUEST",
+                        message: "An unexpected error occurred",
+                        cause: error,
+                    });
                 }
             }
         }),

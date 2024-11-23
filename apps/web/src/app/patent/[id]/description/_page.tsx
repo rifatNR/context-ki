@@ -3,6 +3,7 @@
 import PrevNextButton from "@/app/patent/[id]/PrevNextButton";
 import { trpc } from "@/trpc/client";
 import { IdeaDataType } from "@/utils/types";
+import { TRPCClientError } from "@trpc/client";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
@@ -17,6 +18,7 @@ const DescriptionClient = ({ data }: PropType) => {
     const [description, setDescription] = useState<string | null>(
         data?.description ?? null
     );
+    const [error, setError] = useState<string | null>(null);
 
     const { mutate: save, isLoading: isSaving } =
         trpc.ideas.saveDescription.useMutation({
@@ -38,7 +40,27 @@ const DescriptionClient = ({ data }: PropType) => {
                 onSuccess: () => {
                     router.push(`/patent/${id}/participants`);
                 },
-                // TODO  Show toastr on Error
+                onError: (error) => {
+                    console.log("ERROR", error.message);
+
+                    if (error instanceof TRPCClientError) {
+                        if (error.data?.zodError) {
+                            const fieldErrors = error.data.zodError.fieldErrors;
+                            const firstError = (
+                                Object.values(fieldErrors)[0] as any
+                            )?.[0];
+
+                            if (firstError) {
+                                setError(firstError);
+                            }
+                        } else {
+                            const errorMessage = error.message;
+                            if (errorMessage) {
+                                setError(errorMessage);
+                            }
+                        }
+                    }
+                },
             }
         );
     };
@@ -86,6 +108,14 @@ const DescriptionClient = ({ data }: PropType) => {
                     placeholder="..."
                 ></textarea>
                 <div className="w-full bg-white h-0.5 rounded-full motion-scale-x-in-[0] motion"></div>
+
+                {error && (
+                    <div
+                        className={`text-red-400 text-xl mt-2 motion-preset-typewriter `}
+                    >
+                        {error}
+                    </div>
+                )}
 
                 <PrevNextButton
                     prevPath={`/patent/${id}/title`}

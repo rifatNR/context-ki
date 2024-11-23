@@ -3,6 +3,7 @@
 import PrevNextButton from "@/app/patent/[id]/PrevNextButton";
 import { trpc } from "@/trpc/client";
 import { IdeaDataType } from "@/utils/types";
+import { TRPCClientError } from "@trpc/client";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
@@ -15,16 +16,10 @@ const TitleClient = ({ data }: PropType) => {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
     const [title, setTitle] = useState<string | null>(data?.title ?? null);
+    const [error, setError] = useState<string | null>(null);
 
     const { mutate: save, isLoading: isSaving } =
-        trpc.ideas.saveTitle.useMutation({
-            onSuccess: (data) => {
-                console.log("SUCCESS", data);
-            },
-            onError: (data) => {
-                console.log("ERROR", data);
-            },
-        });
+        trpc.ideas.saveTitle.useMutation();
 
     const onNextClick = async () => {
         await save(
@@ -36,7 +31,27 @@ const TitleClient = ({ data }: PropType) => {
                 onSuccess: () => {
                     router.push(`/patent/${id}/description`);
                 },
-                // TODO  Show toastr on Error
+                onError: (error) => {
+                    console.log("ERROR", error.message);
+
+                    if (error instanceof TRPCClientError) {
+                        if (error.data?.zodError) {
+                            const fieldErrors = error.data.zodError.fieldErrors;
+                            const firstError = (
+                                Object.values(fieldErrors)[0] as any
+                            )?.[0];
+
+                            if (firstError) {
+                                setError(firstError);
+                            }
+                        } else {
+                            const errorMessage = error.message;
+                            if (errorMessage) {
+                                setError(errorMessage);
+                            }
+                        }
+                    }
+                },
             }
         );
     };
@@ -78,6 +93,14 @@ const TitleClient = ({ data }: PropType) => {
                     placeholder="Enter the title of your idea..."
                 ></textarea>
                 <div className="w-full bg-white h-0.5 rounded-full motion-scale-x-in-[0] motion"></div>
+
+                {error && (
+                    <div
+                        className={`text-red-400 text-xl mt-2 motion-preset-typewriter `}
+                    >
+                        {error}
+                    </div>
+                )}
 
                 <PrevNextButton
                     isLoading={isSaving}
