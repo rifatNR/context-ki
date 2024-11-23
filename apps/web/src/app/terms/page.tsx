@@ -90,7 +90,7 @@ const Terms = () => {
                     We try our best to keep your ideas safe, but we’re not
                     liable if something goes wrong (e.g., server issues, someone
                     else having the same idea, or your pet accidentally hitting
-                    "delete").
+                    &quot;delete&quot;).
                 </p>
                 <p>
                     Use the platform at your own risk. This is all for fun, not

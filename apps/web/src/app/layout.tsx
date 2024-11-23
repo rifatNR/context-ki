@@ -43,7 +43,7 @@ export default function RootLayout({
             <body className="bg-black text-white font-merriweather">
                 <TrpcProvider>
                     <Navbar />
-                    <main className="pt-20 min-h-screen">{children}</main>
+                    <main className="pt-24 min-h-screen">{children}</main>
                 </TrpcProvider>
             </body>
         </html>
