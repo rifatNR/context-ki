@@ -6,7 +6,7 @@ import { ParticipantDataType } from "@/utils/types";
 import { TRPCClientError } from "@trpc/client";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { FaUserPlus } from "react-icons/fa6";
 
 type PropType = {
@@ -29,7 +29,9 @@ const ParticipantsClient = ({ data: ssrParticipants }: PropType) => {
     const { mutate: invite, isLoading: isInviting } =
         trpc.ideas.invite.useMutation();
 
-    const onInviteClick = () => {
+    const onInviteClick = (e: FormEvent) => {
+        e.preventDefault();
+
         invite(
             {
                 id: id as string,
@@ -91,7 +93,7 @@ const ParticipantsClient = ({ data: ssrParticipants }: PropType) => {
                     Invite people who were with you on this idea:
                 </div>
 
-                <div className="relative">
+                <form onSubmit={onInviteClick} className="relative">
                     <input
                         ref={inputRef}
                         value={email}
@@ -101,14 +103,11 @@ const ParticipantsClient = ({ data: ssrParticipants }: PropType) => {
                         type="email"
                         placeholder="@ Enter gmail..."
                     ></input>
-                    <button
-                        onClick={onInviteClick}
-                        className="absolute right-0 bottom-2 flex items-center justify-center space-x-5 px-5 py-1 bg-white text-black text-2xl"
-                    >
+                    <button className="absolute right-0 bottom-2 flex items-center justify-center space-x-5 px-5 py-1 bg-white text-black text-2xl">
                         <span>Invite</span>
                         <FaUserPlus className="" />
                     </button>
-                </div>
+                </form>
                 <div className="w-full bg-white h-0.5 rounded-full motion-scale-x-in-[0] motion"></div>
 
                 {error && (

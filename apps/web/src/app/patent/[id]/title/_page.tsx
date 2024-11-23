@@ -5,7 +5,7 @@ import { trpc } from "@/trpc/client";
 import { IdeaDataType } from "@/utils/types";
 import { TRPCClientError } from "@trpc/client";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 
 type PropType = {
     data: IdeaDataType;
