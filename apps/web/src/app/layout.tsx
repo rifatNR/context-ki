@@ -4,6 +4,7 @@ import "@/styles/globals.css";
 import TrpcProvider from "@/app/TrpcProvider";
 import Navbar from "@/components/layouts/Navbar";
 import Head from "next/head";
+import { AuthProvider } from "@/contexts/AuthContext";
 
 export const metadata: Metadata = {
     title: {
@@ -42,8 +43,10 @@ export default function RootLayout({
             </Head>
             <body className="bg-black text-white font-merriweather">
                 <TrpcProvider>
-                    <Navbar />
-                    <main className="pt-24 min-h-screen">{children}</main>
+                    <AuthProvider>
+                        <Navbar />
+                        <main className="pt-24 min-h-screen">{children}</main>
+                    </AuthProvider>
                 </TrpcProvider>
             </body>
         </html>

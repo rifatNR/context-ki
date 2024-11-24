@@ -1,41 +1,46 @@
 "use client";
 
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { useAuth } from "@/contexts/AuthContext";
+// import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 type PropType = {
     title?: string;
 };
 
 const LoginButton = ({ title }: PropType) => {
+    const { user, signInWithGoogle } = useAuth();
+
     const handleLogin = async () => {
         console.log("Login with Google");
 
-        try {
-            const provider = new GoogleAuthProvider();
-            const auth = getAuth();
+        signInWithGoogle();
 
-            const result = await signInWithPopup(auth, provider);
-            const { user } = result;
-            console.log("result", result);
+        // try {
+        //     const provider = new GoogleAuthProvider();
+        //     const auth = getAuth();
 
-            const userData = {
-                id: user.uid,
-                info: {
-                    email: user.email,
-                    name: user.displayName,
-                    photoURL: user.photoURL,
-                    others: user,
-                },
-            };
-            localStorage.setItem("pi-user-id", user.uid);
-            localStorage.setItem("pi-user", JSON.stringify(userData));
+        //     const result = await signInWithPopup(auth, provider);
+        //     const { user } = result;
+        //     console.log("result", result);
 
-            const name = user.displayName;
-            const email = user.email;
-            console.log("CUSTOM EVENT", name, email);
-        } catch (error) {
-            console.error(error);
-        }
+        //     const userData = {
+        //         id: user.uid,
+        //         info: {
+        //             email: user.email,
+        //             name: user.displayName,
+        //             photoURL: user.photoURL,
+        //             others: user,
+        //         },
+        //     };
+        //     localStorage.setItem("pi-user-id", user.uid);
+        //     localStorage.setItem("pi-user", JSON.stringify(userData));
+
+        //     const name = user.displayName;
+        //     const email = user.email;
+        //     console.log("CUSTOM EVENT", name, email);
+        // } catch (error) {
+        //     console.error(error);
+        // }
     };
 
     return (
