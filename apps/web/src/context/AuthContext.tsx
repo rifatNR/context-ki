@@ -87,7 +87,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const logout = async (): Promise<void> => {
         try {
             await signOut(auth);
-            router.push("/login");
+            // router.push("/login");
         } catch (error) {
             console.error("Error signing out:", error);
             throw error;
