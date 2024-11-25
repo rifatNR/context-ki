@@ -1,4 +1,4 @@
-import { router } from "@/trpc.mjs";
+import { privateProcedure, publicProcedure, router } from "@/trpc.mjs";
 import { z } from "zod";
 import { t } from "@/trpc.mjs";
 import { Pool } from "pg";
@@ -19,7 +19,7 @@ const participantItemSchema = z.object({
     state: z.string(),
 });
 export const ideaRouter = router({
-    get: t.procedure
+    get: publicProcedure
         .input(
             z.object({
                 id: z.string(),
@@ -54,7 +54,7 @@ export const ideaRouter = router({
                 throw new Error("Failed to retrieve item.");
             }
         }),
-    saveTitle: t.procedure
+    saveTitle: privateProcedure
         .input(
             z.object({
                 id: z.string(),
@@ -99,7 +99,7 @@ export const ideaRouter = router({
                 }
             }
         }),
-    saveDescription: t.procedure
+    saveDescription: publicProcedure
         .input(
             z.object({
                 id: z.string(),
@@ -139,7 +139,7 @@ export const ideaRouter = router({
                 }
             }
         }),
-    getInvitations: t.procedure
+    getInvitations: publicProcedure
         .input(
             z.object({
                 id: z.string(),
@@ -185,7 +185,7 @@ export const ideaRouter = router({
                 }
             }
         }),
-    invite: t.procedure
+    invite: publicProcedure
         .input(
             z.object({
                 id: z.string(),
@@ -236,7 +236,7 @@ export const ideaRouter = router({
                 }
             }
         }),
-    inviteResponse: t.procedure
+    inviteResponse: publicProcedure
         .input(
             z.object({
                 id: z.string(),
