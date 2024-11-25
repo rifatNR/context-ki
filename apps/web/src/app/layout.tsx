@@ -42,12 +42,12 @@ export default function RootLayout({
                 />
             </Head>
             <body className="bg-black text-white font-merriweather">
-                <TrpcProvider>
-                    <AuthProvider>
+                <AuthProvider>
+                    <TrpcProvider>
                         <Navbar />
                         <main className="pt-24 min-h-screen">{children}</main>
-                    </AuthProvider>
-                </TrpcProvider>
+                    </TrpcProvider>
+                </AuthProvider>
             </body>
         </html>
     );

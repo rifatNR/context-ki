@@ -79,6 +79,11 @@ export const ideaRouter = router({
                     [id, userId, title]
                 );
 
+                console.log("====================================");
+                console.log(ctx.token);
+                console.log(ctx.user);
+                console.log("====================================");
+
                 return {
                     message: `Successfully saved title.`,
                 };

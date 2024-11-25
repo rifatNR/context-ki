@@ -17,6 +17,7 @@ import {
 } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { auth } from "@/utils/firebase";
+import { useCookies } from "react-cookie";
 
 export interface User {
     uid: string;
@@ -54,9 +55,15 @@ const mapFirebaseUser = (user: FirebaseUser): User => ({
 });
 
 export function AuthProvider({ children }: AuthProviderProps) {
+    const [cookies, setCookie, removeCookie] = useCookies(["token"]);
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const router = useRouter();
+
+    const saveToken = async (user: FirebaseUser) => {
+        const token = await user.getIdToken();
+        setCookie("token", token);
+    };
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -64,6 +71,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 console.log("user", user);
                 const mappedUser = mapFirebaseUser(user);
                 setUser(mappedUser);
+                saveToken(user);
             } else {
                 setUser(null);
             }
@@ -77,9 +85,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         try {
             const provider = new GoogleAuthProvider();
             const result = await signInWithPopup(auth, provider);
-            const token = await result.user.getIdToken();
-            console.log("Token:", token);
-            // router.push("/dashboard");
+            saveToken(result.user);
             return result;
         } catch (error) {
             console.error("Error signing in with Google:", error);

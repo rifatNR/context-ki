@@ -14,6 +14,9 @@ const nextConfig = {
             },
         ],
     },
+    experimental: {
+        serverComponentsExternalPackages: ["@vercel/otel"],
+    },
 };
 
 module.exports = nextConfig;

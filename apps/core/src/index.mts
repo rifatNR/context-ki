@@ -4,6 +4,8 @@ import { appRouter } from "@/router/appRouter.mjs";
 import * as trpcExpress from "@trpc/server/adapters/express";
 import { expressHandler } from "trpc-playground/handlers/express";
 import cors from "cors";
+import firebaseAdmin from "firebase-admin";
+import { readFileSync } from "fs";
 
 // RIFAT  NOOR .
 
@@ -14,6 +16,13 @@ const app = express();
 
 const trpcApiEndpoint = "/trpc";
 const playgroundEndpoint = "/trpc-playground";
+
+const serviceAccountKey = JSON.parse(
+    readFileSync("./serviceAccountKey.json", "utf-8")
+);
+firebaseAdmin.initializeApp({
+    credential: firebaseAdmin.credential.cert(serviceAccountKey),
+});
 
 app.use(express.json());
 app.use(cors());

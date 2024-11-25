@@ -4,6 +4,7 @@ import { trpc } from "@/trpc/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { getFetch, httpBatchLink, loggerLink } from "@trpc/react-query";
 import { useState } from "react";
+import { useCookies } from "react-cookie";
 
 const queryClient = new QueryClient({
     defaultOptions: { queries: { staleTime: 5 * 1000 } },
@@ -14,6 +15,7 @@ export default function TrpcProvider({
 }: {
     children: React.ReactNode;
 }) {
+    const [cookies, setCookie, removeCookie] = useCookies(["token"]);
     const [queryClient] = useState(() => new QueryClient());
 
     const url = "http://localhost:3333/trpc/";
@@ -24,7 +26,7 @@ export default function TrpcProvider({
                     url,
                     async headers() {
                         return {
-                            // authorization: getAuthCookie(),
+                            authorization: `Bearer ${cookies.token}`,
                         };
                     },
                 }),

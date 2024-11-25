@@ -1,6 +1,7 @@
 import { Context, createContext } from "@/context.mjs";
 import { initTRPC, TRPCError } from "@trpc/server";
 import { ZodError } from "zod";
+import firebaseAdmin from "firebase-admin";
 
 export const t = initTRPC.context<Context>().create({
     errorFormatter(opts) {
@@ -35,11 +36,13 @@ export const privateProcedure = publicProcedure.use(async (opts) => {
 
     const token = authorization.split(" ")[1];
 
+    const decodedToken = await firebaseAdmin.auth().verifyIdToken(token);
+    const { uid, email, name, picture } = decodedToken;
+
     return opts.next({
         ctx: {
-            user: {
-                token: token,
-            },
+            token: token,
+            user: { uid, email, name, picture },
         },
     });
 });
