@@ -7,6 +7,11 @@ const nextConfig = {
                 hostname: "avatar.iran.liara.run",
                 pathname: "/**",
             },
+            {
+                protocol: "https",
+                hostname: "lh3.googleusercontent.com",
+                pathname: "/**",
+            },
         ],
     },
 };

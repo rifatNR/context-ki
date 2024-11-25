@@ -39,6 +39,7 @@
     "@cloudflare/next-on-pages": "1",
     "@cloudflare/workers-types": "^4.20240821.1",
     "@pi/core": "workspace:*",
+    "@types/firebase": "^3.2.3",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

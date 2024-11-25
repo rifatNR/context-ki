@@ -1,6 +1,7 @@
 "use client";
 
 import { useAuth } from "@/context/AuthContext";
+import { useEffect } from "react";
 // import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 type PropType = {
@@ -8,39 +9,10 @@ type PropType = {
 };
 
 const LoginButton = ({ title }: PropType) => {
-    const { user, signInWithGoogle } = useAuth();
+    const { signInWithGoogle } = useAuth();
 
     const handleLogin = async () => {
-        console.log("Login with Google");
-
         signInWithGoogle();
-
-        // try {
-        //     const provider = new GoogleAuthProvider();
-        //     const auth = getAuth();
-
-        //     const result = await signInWithPopup(auth, provider);
-        //     const { user } = result;
-        //     console.log("result", result);
-
-        //     const userData = {
-        //         id: user.uid,
-        //         info: {
-        //             email: user.email,
-        //             name: user.displayName,
-        //             photoURL: user.photoURL,
-        //             others: user,
-        //         },
-        //     };
-        //     localStorage.setItem("pi-user-id", user.uid);
-        //     localStorage.setItem("pi-user", JSON.stringify(userData));
-
-        //     const name = user.displayName;
-        //     const email = user.email;
-        //     console.log("CUSTOM EVENT", name, email);
-        // } catch (error) {
-        //     console.error(error);
-        // }
     };
 
     return (
