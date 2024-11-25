@@ -88,6 +88,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
             const provider = new GoogleAuthProvider();
             const result = await signInWithPopup(auth, provider);
             saveToken(result.user);
+
+            const mappedUser = mapFirebaseUser(result.user);
+
             return result;
         } catch (error) {
             console.error("Error signing in with Google:", error);
