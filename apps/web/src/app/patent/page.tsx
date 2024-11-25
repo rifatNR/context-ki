@@ -1,7 +1,10 @@
 import AddButton from "@/components/custom/AddButton";
 import PatentCard from "@/components/custom/PatentCard";
+import { trpcVanilla } from "@/trpc/server";
 
-const PatentList = () => {
+const PatentList = async () => {
+    const response = await trpcVanilla.ideas.list.query();
+
     return (
         <div>
             <div className="mb-10 flex items-center justify-between">
@@ -10,7 +13,11 @@ const PatentList = () => {
             </div>
 
             <div className="space-y-5 mb-10">
-                <PatentCard title="This is my new billion $ Idea." />
+                {response.data.map((item) => (
+                    <PatentCard key={item.id} title={item.title} />
+                ))}
+
+                {/* <PatentCard title="This is my new billion $ Idea." />
                 <PatentCard title="An app that tracks your plants’ health and reminds you when to water, prune, or fertilize." />
                 <PatentCard title="Aliqua ut voluptate reprehenderit cupidatat in. Voluptate irure et quis eu in nisi sit veniam non commodo. Magna incididunt minim enim dolor commodo dolor minim quis cillum laboris incididunt." />
                 <PatentCard title="Quotify: Daily Inspiration Dashboard. A browser extension that generates a new motivational quote and matching aesthetic every day." />
@@ -36,7 +43,7 @@ const PatentList = () => {
                 <PatentCard title="Non dolore laboris mollit occaecat laborum laboris cupidatat irure fugiat culpa excepteur dolore consectetur nulla." />
                 <PatentCard title="Do minim ex pariatur ea nulla in voluptate commodo eu." />
                 <PatentCard title="Excepteur irure commodo nostrud aliqua occaecat labore anim aute nisi exercitation tempor dolore veniam ullamco." />
-                <PatentCard title="Aute magna magna ex tempor laboris fugiat nulla ut sunt excepteur sint." />
+                <PatentCard title="Aute magna magna ex tempor laboris fugiat nulla ut sunt excepteur sint." /> */}
             </div>
         </div>
     );

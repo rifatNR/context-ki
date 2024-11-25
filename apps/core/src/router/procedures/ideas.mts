@@ -19,6 +19,39 @@ const participantItemSchema = z.object({
     state: z.string(),
 });
 export const ideaRouter = router({
+    list: publicProcedure
+        .output(
+            z.object({
+                message: z.string(),
+                data: ideaItemSchema
+                    .omit({
+                        description: true,
+                    })
+                    .array(),
+            })
+        )
+        .query(async ({ ctx, input }) => {
+            const userId = 1;
+
+            try {
+                const result = await ctx.psql.query(
+                    `
+                    SELECT id, user_id, title
+                    FROM ideas
+                    WHERE user_id = $1;
+                    `,
+                    [userId]
+                );
+
+                return {
+                    message: "Successfully retrieved ideas.",
+                    data: result.rows,
+                };
+            } catch (error) {
+                console.error("Error retrieving item:", error);
+                throw new Error("Failed to retrieve item.");
+            }
+        }),
     get: privateProcedure
         .input(
             z.object({
