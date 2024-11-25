@@ -1,6 +1,6 @@
 "use client";
 
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "@/context/AuthContext";
 // import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 type PropType = {

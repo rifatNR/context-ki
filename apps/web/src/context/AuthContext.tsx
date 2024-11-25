@@ -1,5 +1,3 @@
-"use client";
-
 import {
     createContext,
     ReactNode,
@@ -12,21 +10,34 @@ import {
     signInWithPopup,
     signOut,
     onAuthStateChanged,
+    User as FirebaseUser,
+    UserCredential,
 } from "firebase/auth";
-import { useRouter } from "next/navigation";
 import { auth } from "@/utils/firebase";
 
-const AuthContext = createContext({});
+type UserType = {
+    uid: string;
+    email: string | null;
+    displayName: string | null;
+    photoURL: string | null;
+};
+type AuthContextType = {
+    user: UserType | null;
+    loading: boolean;
+    signInWithGoogle: () => Promise<UserCredential>;
+    logout: () => Promise<void>;
+};
 
-export const useAuth: any = () => useContext(AuthContext);
+const AuthContext = createContext<AuthContextType>({} as AuthContextType);
+
+export const useAuth = () => useContext(AuthContext);
 
 type PropType = {
     children: ReactNode;
 };
-export function AuthProvider({ children }: PropType) {
-    const [user, setUser] = useState<any>(null);
+export const AuthProvider = ({ children }: PropType) => {
+    const [user, setUser] = useState<UserType | null>(null);
     const [loading, setLoading] = useState(true);
-    const router = useRouter();
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -50,7 +61,6 @@ export function AuthProvider({ children }: PropType) {
         try {
             const provider = new GoogleAuthProvider();
             const result = await signInWithPopup(auth, provider);
-            router.push("/dashboard");
             return result;
         } catch (error) {
             console.error("Error signing in with Google:", error);
@@ -61,7 +71,6 @@ export function AuthProvider({ children }: PropType) {
     const logout = async () => {
         try {
             await signOut(auth);
-            router.push("/login");
         } catch (error) {
             console.error("Error signing out:", error);
             throw error;
@@ -72,7 +81,7 @@ export function AuthProvider({ children }: PropType) {
         <AuthContext.Provider
             value={{ user, signInWithGoogle, logout, loading }}
         >
-            {children}
+            {!loading && children}
         </AuthContext.Provider>
     );
-}
+};
