@@ -1,8 +1,6 @@
 "use client";
 
 import { useAuth } from "@/context/AuthContext";
-import { useEffect } from "react";
-// import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 type PropType = {
     title?: string;

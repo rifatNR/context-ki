@@ -61,6 +61,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
+                console.log("user", user);
                 const mappedUser = mapFirebaseUser(user);
                 setUser(mappedUser);
             } else {
@@ -76,6 +77,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
         try {
             const provider = new GoogleAuthProvider();
             const result = await signInWithPopup(auth, provider);
+            const token = await result.user.getIdToken();
+            console.log("Token:", token);
             // router.push("/dashboard");
             return result;
         } catch (error) {
