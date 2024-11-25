@@ -23,7 +23,7 @@ const Navbar = ({ userFromServer }: PropType) => {
         } else {
             setAuthUser(undefined);
         }
-    }, [user]);
+    }, [user, loading]);
 
     return (
         <div className="fixed w-full bg-black z-navbar">
