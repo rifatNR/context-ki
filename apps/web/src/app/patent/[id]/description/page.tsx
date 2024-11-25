@@ -2,9 +2,12 @@ import DescriptionClient from "@/app/patent/[id]/description/_page";
 import { trpcVanilla } from "@/trpc/server";
 import { GetServerSidePropsContext } from "next";
 
-const DescriptionServer = async (context: GetServerSidePropsContext) => {
+type PropType = {
+    params: { id: string };
+};
+const DescriptionServer = async ({ params }: PropType) => {
     const response = await trpcVanilla.ideas.get.query({
-        id: (context.params?.id as string) ?? "",
+        id: (params?.id as string) ?? "",
     });
 
     return <DescriptionClient data={response.data} />;

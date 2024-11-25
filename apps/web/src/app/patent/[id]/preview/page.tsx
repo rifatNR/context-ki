@@ -2,12 +2,15 @@ import PreviewClient from "@/app/patent/[id]/preview/_page";
 import { trpcVanilla } from "@/trpc/server";
 import { GetServerSidePropsContext } from "next";
 
-const PreviewServer = async (context: GetServerSidePropsContext) => {
+type PropType = {
+    params: { id: string };
+};
+const PreviewServer = async ({ params }: PropType) => {
     const ideaResponse = await trpcVanilla.ideas.get.query({
-        id: (context.params?.id as string) ?? "",
+        id: (params?.id as string) ?? "",
     });
     const participantsResponse = await trpcVanilla.ideas.getInvitations.query({
-        id: (context.params?.id as string) ?? "",
+        id: (params?.id as string) ?? "",
     });
 
     return (

@@ -4,7 +4,7 @@ import "@/styles/globals.css";
 import TrpcProvider from "@/app/TrpcProvider";
 import Navbar from "@/components/layouts/Navbar";
 import Head from "next/head";
-import { AuthProvider } from "@/contexts/AuthContext";
+import { AuthProvider } from "@/context/AuthContext";
 
 export const metadata: Metadata = {
     title: {

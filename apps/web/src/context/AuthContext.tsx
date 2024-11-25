@@ -1,9 +1,11 @@
+"use client";
+
 import {
     createContext,
-    ReactNode,
     useContext,
     useEffect,
     useState,
+    ReactNode,
 } from "react";
 import {
     GoogleAuthProvider,
@@ -13,41 +15,53 @@ import {
     User as FirebaseUser,
     UserCredential,
 } from "firebase/auth";
+import { useRouter } from "next/navigation";
 import { auth } from "@/utils/firebase";
 
-type UserType = {
+export interface User {
     uid: string;
     email: string | null;
     displayName: string | null;
     photoURL: string | null;
-};
-type AuthContextType = {
-    user: UserType | null;
+}
+
+export interface AuthContextType {
+    user: User | null;
     loading: boolean;
     signInWithGoogle: () => Promise<UserCredential>;
     logout: () => Promise<void>;
-};
+}
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
-export const useAuth = () => useContext(AuthContext);
-
-type PropType = {
-    children: ReactNode;
+export const useAuth = () => {
+    const context = useContext(AuthContext);
+    if (!context) {
+        throw new Error("useAuth must be used within an AuthProvider");
+    }
+    return context;
 };
-export const AuthProvider = ({ children }: PropType) => {
-    const [user, setUser] = useState<UserType | null>(null);
-    const [loading, setLoading] = useState(true);
+
+interface AuthProviderProps {
+    children: ReactNode;
+}
+
+const mapFirebaseUser = (user: FirebaseUser): User => ({
+    uid: user.uid,
+    email: user.email,
+    displayName: user.displayName,
+    photoURL: user.photoURL,
+});
+
+export function AuthProvider({ children }: AuthProviderProps) {
+    const [user, setUser] = useState<User | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
+    const router = useRouter();
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
-                setUser({
-                    uid: user.uid,
-                    email: user.email,
-                    displayName: user.displayName,
-                    photoURL: user.photoURL,
-                });
+                setUser(mapFirebaseUser(user));
             } else {
                 setUser(null);
             }
@@ -57,10 +71,11 @@ export const AuthProvider = ({ children }: PropType) => {
         return () => unsubscribe();
     }, []);
 
-    const signInWithGoogle = async () => {
+    const signInWithGoogle = async (): Promise<UserCredential> => {
         try {
             const provider = new GoogleAuthProvider();
             const result = await signInWithPopup(auth, provider);
+            router.push("/dashboard");
             return result;
         } catch (error) {
             console.error("Error signing in with Google:", error);
@@ -68,9 +83,10 @@ export const AuthProvider = ({ children }: PropType) => {
         }
     };
 
-    const logout = async () => {
+    const logout = async (): Promise<void> => {
         try {
             await signOut(auth);
+            router.push("/login");
         } catch (error) {
             console.error("Error signing out:", error);
             throw error;
@@ -81,7 +97,7 @@ export const AuthProvider = ({ children }: PropType) => {
         <AuthContext.Provider
             value={{ user, signInWithGoogle, logout, loading }}
         >
-            {!loading && children}
+            {children}
         </AuthContext.Provider>
     );
-};
+}
