@@ -1,6 +1,7 @@
 import AddButton from "@/components/custom/AddButton";
 import PatentCard from "@/components/custom/PatentCard";
 import { trpcVanilla } from "@/trpc/server";
+import Link from "next/link";
 
 const PatentList = async () => {
     const response = await trpcVanilla.ideas.list.query();
@@ -14,7 +15,13 @@ const PatentList = async () => {
 
             <div className="space-y-5 mb-10">
                 {response.data.map((item) => (
-                    <PatentCard key={item.id} title={item.title} />
+                    <Link
+                        className="block"
+                        key={item.id}
+                        href={`/patent/${item.id}/title`}
+                    >
+                        <PatentCard title={item.title} />
+                    </Link>
                 ))}
 
                 {/* <PatentCard title="This is my new billion $ Idea." />
