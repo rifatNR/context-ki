@@ -18,6 +18,7 @@ import {
 import { useRouter } from "next/navigation";
 import { auth } from "@/utils/firebase";
 import { useCookies } from "react-cookie";
+import { trpc } from "@/trpc/client";
 
 export interface User {
     uid: string;
@@ -60,17 +61,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const [loading, setLoading] = useState<boolean>(true);
     const router = useRouter();
 
-    const saveToken = async (user: FirebaseUser) => {
-        const token = await user.getIdToken();
-        setCookie("token", token);
-    };
+    const { mutate: syncYser } = trpc.users.syncUser.useMutation();
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
+        const unsubscribe = onAuthStateChanged(auth, async (user) => {
             if (user) {
                 const mappedUser = mapFirebaseUser(user);
                 setUser(mappedUser);
-                saveToken(user);
+                const token = await user.getIdToken();
+                setCookie("token", token);
                 setCookie("user", mappedUser);
             } else {
                 setUser(null);
@@ -87,9 +86,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
         try {
             const provider = new GoogleAuthProvider();
             const result = await signInWithPopup(auth, provider);
-            saveToken(result.user);
 
-            const mappedUser = mapFirebaseUser(result.user);
+            const token = await result.user.getIdToken();
+            setCookie("token", token);
+
+            syncYser({ token });
 
             return result;
         } catch (error) {
