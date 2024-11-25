@@ -49,12 +49,12 @@ export default async function RootLayout({
                 />
             </Head>
             <body className="bg-black text-white font-merriweather">
-                <AuthProvider>
-                    <TrpcProvider>
+                <TrpcProvider>
+                    <AuthProvider>
                         <Navbar userFromServer={userFromServer} />
                         <main className="pt-24 min-h-screen">{children}</main>
-                    </TrpcProvider>
-                </AuthProvider>
+                    </AuthProvider>
+                </TrpcProvider>
             </body>
         </html>
     );

@@ -21,10 +21,6 @@ export const userRouter = router({
                 .verifyIdToken(input.token);
             const { uid, email, name, picture } = decodedToken;
 
-            console.log("====================================");
-            console.log(decodedToken);
-            console.log("====================================");
-
             return {
                 message: "User synced",
             };

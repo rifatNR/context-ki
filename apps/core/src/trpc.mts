@@ -36,6 +36,18 @@ export const privateProcedure = publicProcedure.use(async (opts) => {
 
     const token = authorization.split(" ")[1];
 
+    if (
+        !token ||
+        token.trim() === "" ||
+        token === "undefined" ||
+        token === "null"
+    ) {
+        throw new TRPCError({
+            code: "UNAUTHORIZED",
+            message: "Bearer token empty",
+        });
+    }
+
     const decodedToken = await firebaseAdmin.auth().verifyIdToken(token);
     const { uid, email, name, picture } = decodedToken;
 

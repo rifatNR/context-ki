@@ -19,7 +19,7 @@ const participantItemSchema = z.object({
     state: z.string(),
 });
 export const ideaRouter = router({
-    get: publicProcedure
+    get: privateProcedure
         .input(
             z.object({
                 id: z.string(),
@@ -79,11 +79,6 @@ export const ideaRouter = router({
                     [id, userId, title]
                 );
 
-                console.log("💚💚💚💚💚💚💚💚💚💚💚💚💚💚💚💚💚");
-                console.log(ctx.token);
-                console.log(ctx.user);
-                console.log("💚💚💚💚💚💚💚💚💚💚💚💚💚💚💚💚💚");
-
                 return {
                     message: `Successfully saved title.`,
                 };
@@ -104,7 +99,7 @@ export const ideaRouter = router({
                 }
             }
         }),
-    saveDescription: publicProcedure
+    saveDescription: privateProcedure
         .input(
             z.object({
                 id: z.string(),
@@ -144,7 +139,7 @@ export const ideaRouter = router({
                 }
             }
         }),
-    getInvitations: publicProcedure
+    getInvitations: privateProcedure
         .input(
             z.object({
                 id: z.string(),
@@ -190,7 +185,7 @@ export const ideaRouter = router({
                 }
             }
         }),
-    invite: publicProcedure
+    invite: privateProcedure
         .input(
             z.object({
                 id: z.string(),
@@ -241,7 +236,7 @@ export const ideaRouter = router({
                 }
             }
         }),
-    inviteResponse: publicProcedure
+    inviteResponse: privateProcedure
         .input(
             z.object({
                 id: z.string(),
