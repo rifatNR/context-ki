@@ -55,7 +55,7 @@ const mapFirebaseUser = (user: FirebaseUser): User => ({
 });
 
 export function AuthProvider({ children }: AuthProviderProps) {
-    const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+    const [cookies, setCookie, removeCookie] = useCookies(["token", "user"]);
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const router = useRouter();
@@ -68,12 +68,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
-                console.log("user", user);
                 const mappedUser = mapFirebaseUser(user);
                 setUser(mappedUser);
                 saveToken(user);
+                setCookie("user", mappedUser);
             } else {
                 setUser(null);
+                removeCookie("token");
+                removeCookie("user");
             }
             setLoading(false);
         });

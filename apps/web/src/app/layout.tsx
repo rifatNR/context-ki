@@ -5,6 +5,7 @@ import TrpcProvider from "@/app/TrpcProvider";
 import Navbar from "@/components/layouts/Navbar";
 import Head from "next/head";
 import { AuthProvider } from "@/context/AuthContext";
+import { cookies } from "next/headers";
 
 export const metadata: Metadata = {
     title: {
@@ -19,11 +20,17 @@ export const metadata: Metadata = {
     description: "Description",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const cookieStore = await cookies();
+    const userCookieValue = cookieStore.get("user")?.value;
+    const userFromServer = userCookieValue
+        ? JSON.parse(userCookieValue)
+        : undefined;
+
     return (
         <html lang="en">
             <Head>
@@ -44,7 +51,7 @@ export default function RootLayout({
             <body className="bg-black text-white font-merriweather">
                 <AuthProvider>
                     <TrpcProvider>
-                        <Navbar />
+                        <Navbar userFromServer={userFromServer} />
                         <main className="pt-24 min-h-screen">{children}</main>
                     </TrpcProvider>
                 </AuthProvider>

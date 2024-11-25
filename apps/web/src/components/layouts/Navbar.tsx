@@ -2,12 +2,28 @@
 
 import LoginButton from "@/components/layouts/LoginButton";
 import ProfileDropdown from "@/components/layouts/ProfileDropdown";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth, User } from "@/context/AuthContext";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
 
-const Navbar = () => {
-    const { user } = useAuth();
+type PropType = {
+    userFromServer: User | undefined;
+};
+const Navbar = ({ userFromServer }: PropType) => {
+    const { user, loading } = useAuth();
+    const [authUser, setAuthUser] = useState<User | undefined>(userFromServer);
+
+    useEffect(() => {
+        if (loading) {
+            return;
+        }
+        if (user) {
+            setAuthUser(user);
+        } else {
+            setAuthUser(undefined);
+        }
+    }, [user]);
 
     return (
         <div className="fixed w-full bg-black z-navbar">
@@ -29,12 +45,12 @@ const Navbar = () => {
                 </Link>
 
                 <div>
-                    {user ? (
+                    {authUser ? (
                         <ProfileDropdown>
                             <div className="relative h-10 w-10 aspect-square rounded-full bg-gray-500 overflow-hidden mb-[-5px]">
                                 <Image
                                     src={
-                                        user.photoURL ??
+                                        authUser?.photoURL ??
                                         "https://avatar.iran.liara.run/public/42"
                                     }
                                     alt="Avatar"
