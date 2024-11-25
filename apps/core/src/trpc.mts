@@ -36,10 +36,6 @@ export const privateProcedure = publicProcedure.use(async (opts) => {
 
     const token = authorization.split(" ")[1];
 
-    console.log("🔺🔺🔺🔺🔺🔺🔺🔺🔺🔺🔺🔺🔺🔺🔺🔺🔺");
-    console.log(token);
-    console.log("🔻🔻🔻🔻🔻🔻🔻🔻🔻🔻🔻🔻🔻🔻🔻🔻🔻");
-
     if (
         !token ||
         token.trim() === "" ||
