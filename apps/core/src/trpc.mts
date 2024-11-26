@@ -51,6 +51,13 @@ export const privateProcedure = publicProcedure.use(async (opts) => {
     const decodedToken = await firebaseAdmin.auth().verifyIdToken(token);
     const { uid, email, name, picture } = decodedToken;
 
+    if (!uid || !email) {
+        throw new TRPCError({
+            code: "UNAUTHORIZED",
+            message: "User not found",
+        });
+    }
+
     return opts.next({
         ctx: {
             token: token,

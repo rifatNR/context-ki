@@ -7,7 +7,7 @@ exports.up = (pgm) => {
             primaryKey: true,
         },
         user_id: {
-            type: "integer",
+            type: "varchar(255)",
             references: "users(id)",
             onDelete: "CASCADE",
             onUpdate: "CASCADE",

@@ -14,7 +14,7 @@ exports.up = (pgm) => {
             notNull: true,
         },
         user_id: {
-            type: "integer",
+            type: "varchar(255)",
             references: "users(id)",
             notNull: false,
         },

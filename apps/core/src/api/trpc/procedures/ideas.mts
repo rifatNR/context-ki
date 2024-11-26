@@ -8,19 +8,19 @@ import { mapErrorToTRPCError } from "@/utils/trpcError.js";
 
 const ideaItemSchema = z.object({
     id: z.string(),
-    user_id: z.number(),
+    user_id: z.string(),
     title: z.string(),
     description: z.string().nullable(),
 });
 const participantItemSchema = z.object({
     id: z.number(),
     idea_id: z.string(),
-    user_id: z.number().nullable(),
+    user_id: z.string().nullable(),
     email: z.string().email(),
     state: z.string(),
 });
 export const ideaRouter = router({
-    list: publicProcedure
+    list: privateProcedure
         .output(
             z.object({
                 message: z.string(),
@@ -32,7 +32,7 @@ export const ideaRouter = router({
             })
         )
         .query(async ({ ctx, input }) => {
-            const userId = 1;
+            const userId = ctx.user.uid;
 
             try {
                 const result = await ctx.psql.query(
@@ -96,7 +96,7 @@ export const ideaRouter = router({
         .output(z.object({ message: z.string() }))
         .mutation(async ({ ctx, input }) => {
             const { id, title } = input;
-            const userId = 1;
+            const userId = ctx.user.uid;
 
             await delay(1000);
 
@@ -128,7 +128,6 @@ export const ideaRouter = router({
         .output(z.object({ message: z.string() }))
         .mutation(async ({ ctx, input }) => {
             const { id, description } = input;
-            const userId = 1;
 
             try {
                 await ctx.psql.query(

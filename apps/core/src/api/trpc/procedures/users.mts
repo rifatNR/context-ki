@@ -24,18 +24,18 @@ export const userRouter = router({
                     .verifyIdToken(input.token);
                 const { uid, email, name, picture } = decodedToken;
 
-                const result = await ctx.psql.query(
+                await ctx.psql.query(
                     `
-                    INSERT INTO users (username, email, photo)
-                    VALUES ($1, $2, $3)
-                    ON CONFLICT (email)
+                    INSERT INTO users (id, username, email, photo)
+                    VALUES ($1, $2, $3, $4)
+                    ON CONFLICT (id)
                     DO UPDATE SET
                         username = EXCLUDED.username,
                         email = EXCLUDED.email,
                         photo = EXCLUDED.photo
                     RETURNING *;
                     `,
-                    [name, email, picture]
+                    [uid, name, email, picture]
                 );
 
                 return {
