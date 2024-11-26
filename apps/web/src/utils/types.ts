@@ -1,7 +1,7 @@
 export type IdeaDataType =
     | {
           id: string;
-          user_id: number;
+          user_id: string;
           title: string;
           description: string | null;
       }
@@ -10,7 +10,7 @@ export type IdeaDataType =
 export type ParticipantDataType = {
     id: number;
     idea_id: string;
-    user_id: number | null;
+    user_id: string | null;
     email: string;
     state: string;
 };

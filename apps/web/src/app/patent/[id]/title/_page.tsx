@@ -82,7 +82,7 @@ const TitleClient = ({ data }: PropType) => {
     return (
         <div className="flex-1 flex items-center justify-center w-full -mt-20 z-100">
             <div className="flex-1">
-                <div className="text-4xl mb-10">Enter a Title:</div>
+                <h1 className="text-4xl mb-10">Enter a Title:</h1>
 
                 <textarea
                     ref={textareaRef}
