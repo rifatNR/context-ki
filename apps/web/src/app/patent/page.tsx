@@ -34,7 +34,11 @@ const PatentList = async ({ searchParams }: PropType) => {
                     <Link
                         className="block"
                         key={item.id}
-                        href={`/patent/${item.id}/title`}
+                        href={
+                            item.publish_date
+                                ? `/patent/view/${item.id}`
+                                : `/patent/${item.id}/title`
+                        }
                     >
                         <PatentCard title={item.title} />
                     </Link>

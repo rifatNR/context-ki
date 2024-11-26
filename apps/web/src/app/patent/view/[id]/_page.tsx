@@ -7,7 +7,7 @@ import { LiaMedalSolid } from "react-icons/lia";
 import { useParams, useRouter } from "next/navigation";
 import { IdeaDataType, ParticipantDataType } from "@/utils/types";
 import { useEffect, useMemo, useState } from "react";
-import { getCurrentDateFormatted, getCurrentTime } from "@/utils/helper";
+import { formatDate, formatTime, getCurrentTime } from "@/utils/helper";
 
 type PropType = {
     data: {
@@ -15,7 +15,7 @@ type PropType = {
         participants: ParticipantDataType[];
     };
 };
-const PreviewClient = ({ data }: PropType) => {
+const ViewClient = ({ data }: PropType) => {
     const { id } = useParams();
     const router = useRouter();
     const [date, setDate] = useState<string>("");
@@ -32,15 +32,15 @@ const PreviewClient = ({ data }: PropType) => {
     );
 
     useEffect(() => {
-        setDate(getCurrentDateFormatted());
-        setTime(getCurrentTime());
-    }, []);
+        if (data.idea?.publish_date) {
+            setDate(formatDate(data.idea?.publish_date));
+            setTime(formatTime(data.idea?.publish_date));
+        }
+    }, [data.idea?.publish_date]);
 
     return (
-        <div className="flex-1 flex items-center justify-center w-full mt-10 mb-20">
+        <div className="flex-1 flex w-full mt-10 mb-20">
             <div className="flex-1">
-                <div className="text-4xl mb-12 font-bold">Preview:</div>
-
                 <div className="text-3xl font-semibold">{data.idea?.title}</div>
                 <div className="text-2xl mt-5">{data.idea?.description}</div>
 
@@ -105,16 +105,9 @@ const PreviewClient = ({ data }: PropType) => {
                         )}
                     </div>
                 </div>
-
-                <PrevNextButton
-                    prevPath={`/patent/${id}/participants`}
-                    onNextClick={() => {
-                        router.push(`/patent/${id}/confirmation`);
-                    }}
-                />
             </div>
         </div>
     );
 };
 
-export default PreviewClient;
+export default ViewClient;

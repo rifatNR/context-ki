@@ -4,6 +4,7 @@ export type IdeaDataType =
           user_id: string;
           title: string;
           description: string | null;
+          publish_date: string | null;
       }
     | undefined;
 
