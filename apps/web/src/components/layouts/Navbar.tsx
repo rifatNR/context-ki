@@ -60,7 +60,7 @@ const Navbar = ({ userFromServer }: PropType) => {
                             </div>
                         </ProfileDropdown>
                     ) : (
-                        <></>
+                        <LoginButton />
                     )}
                 </div>
             </div>

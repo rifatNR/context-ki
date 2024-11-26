@@ -18,9 +18,9 @@ const LoginButton = ({ title }: PropType) => {
             <button
                 onClick={handleLogin}
                 className="flex items-center justify-center space-x-3 rounded-lg
-                px-3 py-2 bg-black text-white border border-white text-2xl"
+                px-3 py-2 bg-black text-white border border-white"
             >
-                <img className="w-10" src="/google.svg" alt="" />
+                <img className="w-7" src="/google.svg" alt="" />
                 <div className="text-nowrap">Login with Google</div>
             </button>
         </>
