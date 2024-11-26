@@ -4,6 +4,7 @@ import { t } from "@/trpc.mjs";
 import { Pool } from "pg";
 import { delay } from "@/utils/helper.js";
 import { TRPCError } from "@trpc/server";
+import { mapErrorToTRPCError } from "@/utils/trpcError.js";
 
 const ideaItemSchema = z.object({
     id: z.string(),
@@ -48,8 +49,7 @@ export const ideaRouter = router({
                     data: result.rows,
                 };
             } catch (error) {
-                console.error("Error retrieving item:", error);
-                throw new Error("Failed to retrieve item.");
+                throw mapErrorToTRPCError(error);
             }
         }),
     get: privateProcedure
@@ -83,8 +83,7 @@ export const ideaRouter = router({
                     data: result.rows[0],
                 };
             } catch (error) {
-                console.error("Error retrieving item:", error);
-                throw new Error("Failed to retrieve item.");
+                throw mapErrorToTRPCError(error);
             }
         }),
     saveTitle: privateProcedure
@@ -116,20 +115,7 @@ export const ideaRouter = router({
                     message: `Successfully saved title.`,
                 };
             } catch (error) {
-                console.error("Error saving idea:", error);
-                if (error instanceof Error) {
-                    throw new TRPCError({
-                        code: "BAD_REQUEST",
-                        message: error.message,
-                        cause: error,
-                    });
-                } else {
-                    throw new TRPCError({
-                        code: "BAD_REQUEST",
-                        message: "An unexpected error occurred",
-                        cause: error,
-                    });
-                }
+                throw mapErrorToTRPCError(error);
             }
         }),
     saveDescription: privateProcedure
@@ -156,20 +142,7 @@ export const ideaRouter = router({
                     message: `Successfully saved description.`,
                 };
             } catch (error) {
-                console.error("Error saving idea:", error);
-                if (error instanceof Error) {
-                    throw new TRPCError({
-                        code: "BAD_REQUEST",
-                        message: error.message,
-                        cause: error,
-                    });
-                } else {
-                    throw new TRPCError({
-                        code: "BAD_REQUEST",
-                        message: "An unexpected error occurred",
-                        cause: error,
-                    });
-                }
+                throw mapErrorToTRPCError(error);
             }
         }),
     getInvitations: privateProcedure
@@ -202,20 +175,7 @@ export const ideaRouter = router({
                     data: result.rows,
                 };
             } catch (error) {
-                console.error("Error retrieving item:", error);
-                if (error instanceof Error) {
-                    throw new TRPCError({
-                        code: "BAD_REQUEST",
-                        message: error.message,
-                        cause: error,
-                    });
-                } else {
-                    throw new TRPCError({
-                        code: "BAD_REQUEST",
-                        message: "Failed to retrieve item.",
-                        cause: error,
-                    });
-                }
+                throw mapErrorToTRPCError(error);
             }
         }),
     invite: privateProcedure
@@ -253,20 +213,7 @@ export const ideaRouter = router({
                     message: `Invited successfully.`,
                 };
             } catch (error) {
-                console.error("Error saving idea:", error);
-                if (error instanceof Error) {
-                    throw new TRPCError({
-                        code: "BAD_REQUEST",
-                        message: error.message,
-                        cause: error,
-                    });
-                } else {
-                    throw new TRPCError({
-                        code: "BAD_REQUEST",
-                        message: "Failed to retrieve item.",
-                        cause: error,
-                    });
-                }
+                throw mapErrorToTRPCError(error);
             }
         }),
     inviteResponse: privateProcedure
@@ -306,20 +253,7 @@ export const ideaRouter = router({
                             : `Invited rejected.`,
                 };
             } catch (error) {
-                console.error("Error saving idea:", error);
-                if (error instanceof Error) {
-                    throw new TRPCError({
-                        code: "BAD_REQUEST",
-                        message: error.message,
-                        cause: error,
-                    });
-                } else {
-                    throw new TRPCError({
-                        code: "BAD_REQUEST",
-                        message: "An unexpected error occurred",
-                        cause: error,
-                    });
-                }
+                throw mapErrorToTRPCError(error);
             }
         }),
 });

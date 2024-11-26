@@ -30,6 +30,9 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb)); */
+
+    
+    /* scrollbar-gutter: stable; */
 }
 
 @layer utilities {
