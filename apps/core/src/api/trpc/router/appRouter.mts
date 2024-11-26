@@ -1,5 +1,5 @@
-import { ideaRouter } from "@/router/procedures/ideas.mjs";
-import { userRouter } from "@/router/procedures/users.mjs";
+import { ideaRouter } from "@/api/trpc/procedures/ideas.mjs";
+import { userRouter } from "@/api/trpc/procedures/users.mjs";
 import { router, t } from "@/trpc.mjs";
 import { z } from "zod";
 

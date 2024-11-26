@@ -71,6 +71,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 const token = await user.getIdToken();
                 setCookie("token", token);
                 setCookie("user", mappedUser);
+                syncYser({ token });
             } else {
                 setUser(null);
                 removeCookie("token");

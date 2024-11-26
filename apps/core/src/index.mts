@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import { createContext } from "@/context.mjs";
-import { appRouter } from "@/router/appRouter.mjs";
+import { appRouter } from "@/api/trpc/router/appRouter.mjs";
 import * as trpcExpress from "@trpc/server/adapters/express";
 import { expressHandler } from "trpc-playground/handlers/express";
 import cors from "cors";
