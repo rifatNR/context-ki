@@ -8,10 +8,20 @@ import { LiaMedalSolid } from "react-icons/lia";
 import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
+import { useRef, useState } from "react";
 
 const Confirmation = () => {
     const { id } = useParams();
+    const publishButtonRef = useRef<HTMLButtonElement>(null);
     const router = useRouter();
+
+    const [isAgree, setIsAgree] = useState<boolean>(false);
+
+    const onPublishClick = () => {
+        if (publishButtonRef.current) {
+            publishButtonRef.current.classList.add("motion-preset-confetti");
+        }
+    };
 
     return (
         <div className="flex-1 flex items-center justify-center w-full mt-10 mb-20">
@@ -34,10 +44,10 @@ const Confirmation = () => {
                 </div>
 
                 <div className="flex items-center space-x-3 text-custom-gray-25">
-                    <Link href={"/terms"}>
+                    <Link href={"/terms"} target="_blank">
                         <div className="underline">Terms &amp; Conditions</div>
                     </Link>
-                    <Link href={"/privacy"}>
+                    <Link href={"/privacy"} target="_blank">
                         <div className="underline">Privacy Policy</div>
                     </Link>
                 </div>
@@ -47,6 +57,9 @@ const Confirmation = () => {
                 >
                     <Checkbox
                         id="terms"
+                        onCheckedChange={(checked) =>
+                            setIsAgree(checked === true)
+                        }
                         className="h-6 w-6 rounded-none border-2 border-white data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
                     />
                     <div className="select-none">
@@ -54,11 +67,19 @@ const Confirmation = () => {
                     </div>
                 </label>
 
-                <PrevNextButton
-                    prevPath={`/patent/${id}/preview`}
-                    isShowConfirmBtn
-                    isDisablePublish
-                />
+                <PrevNextButton prevPath={`/patent/${id}/preview`}>
+                    <button
+                        ref={publishButtonRef}
+                        onClick={onPublishClick}
+                        disabled={!isAgree}
+                        className="flex items-center justify-center space-x-3 px-5 py-3
+                                bg-white text-black text-3xl
+                                    disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        <LiaMedalSolid className="motion-preset-bounce " />
+                        <span>Confirm Patent</span>
+                    </button>
+                </PrevNextButton>
             </div>
         </div>
     );

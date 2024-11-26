@@ -1,5 +1,5 @@
 import { redirect, useRouter } from "next/navigation";
-import { useRef } from "react";
+import { ReactNode, useRef } from "react";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import { CgSpinner } from "react-icons/cg";
 import { LiaMedalSolid } from "react-icons/lia";
@@ -8,28 +8,20 @@ type PropType = {
     prevPath?: string;
     onNextClick?: () => void;
     isLoading?: boolean;
-    isShowConfirmBtn?: boolean;
-    isDisablePublish?: boolean;
+    children?: ReactNode;
+    onPublishClick?: () => void;
 };
 const PrevNextButton = ({
     prevPath,
     onNextClick,
     isLoading,
-    isShowConfirmBtn,
-    isDisablePublish,
+    children,
 }: PropType) => {
     const router = useRouter();
-    const publishButtonRef = useRef<HTMLButtonElement>(null);
 
     const onPrevClick = () => {
         if (prevPath) {
             router.push(prevPath);
-        }
-    };
-
-    const onPublishClick = () => {
-        if (publishButtonRef.current) {
-            publishButtonRef.current.classList.add("motion-preset-confetti");
         }
     };
 
@@ -63,16 +55,7 @@ const PrevNextButton = ({
                     </button>
                 )}
             </div>
-            {isShowConfirmBtn && (
-                <button
-                    ref={publishButtonRef}
-                    onClick={onPublishClick}
-                    className="flex items-center justify-center space-x-3 px-5 py-3 bg-white text-black text-3xl"
-                >
-                    <LiaMedalSolid className="motion-preset-bounce " />
-                    <span>Publish Your Patent</span>
-                </button>
-            )}
+            {children && children}
         </div>
     );
 };

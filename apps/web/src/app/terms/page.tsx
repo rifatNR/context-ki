@@ -19,22 +19,21 @@ const Terms = () => {
                 </p>
                 <p className="mb-4">
                     <strong>What we don’t do:</strong>
-                    <ul className="list-disc ml-6">
-                        <li>
-                            We don’t legally patent your ideas. This isn’t the
-                            USPTO, folks.
-                        </li>
-                        <li>
-                            We don’t guarantee that no one will independently
-                            come up with the same idea (great minds think
-                            alike).
-                        </li>
-                        <li>
-                            We’re not responsible if you accidentally share your
-                            billion-dollar concept with the world.
-                        </li>
-                    </ul>
                 </p>
+                <ul className="list-disc ml-6">
+                    <li>
+                        We don’t legally patent your ideas. This isn’t the
+                        USPTO, folks.
+                    </li>
+                    <li>
+                        We don’t guarantee that no one will independently come
+                        up with the same idea (great minds think alike).
+                    </li>
+                    <li>
+                        We’re not responsible if you accidentally share your
+                        billion-dollar concept with the world.
+                    </li>
+                </ul>
             </section>
 
             <section className="shadow-md rounded-lg py-5">
