@@ -21,6 +21,12 @@ const participantItemSchema = z.object({
 });
 export const ideaRouter = router({
     list: privateProcedure
+        .input(
+            z.object({
+                page: z.number().optional().default(1),
+                limit: z.number().optional().default(5),
+            })
+        )
         .output(
             z.object({
                 message: z.string(),
@@ -33,15 +39,44 @@ export const ideaRouter = router({
         )
         .query(async ({ ctx, input }) => {
             const userId = ctx.user.uid;
+            const { page, limit } = input;
+
+            const offset = (page - 1) * limit;
 
             try {
-                const result = await ctx.psql.query(
+                const totalResult = await ctx.psql.query(
                     `
-                    SELECT id, user_id, title
+                    SELECT COUNT(*) AS total
                     FROM ideas
                     WHERE user_id = $1;
                     `,
                     [userId]
+                );
+                const total = parseInt(totalResult.rows[0].total, 10);
+
+                console.log("====================================");
+                console.log(page, limit);
+                console.log(total);
+                console.log("====================================");
+
+                // const result = await ctx.psql.query(
+                //     `
+                //     SELECT id, user_id, title
+                //     FROM ideas
+                //     WHERE user_id = $1;
+                //     `,
+                //     [userId]
+                // );
+
+                const result = await ctx.psql.query(
+                    `
+                    SELECT id, user_id, title
+                    FROM ideas
+                    WHERE user_id = $1
+                    ORDER BY created_at ASC
+                    LIMIT $2 OFFSET $3;
+                    `,
+                    [userId, limit, offset]
                 );
 
                 return {

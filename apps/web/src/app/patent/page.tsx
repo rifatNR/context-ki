@@ -4,7 +4,7 @@ import { trpcVanilla } from "@/trpc/server";
 import Link from "next/link";
 
 const PatentList = async () => {
-    const response = await trpcVanilla.ideas.list.query();
+    const response = await trpcVanilla.ideas.list.query({});
 
     return (
         <div>
