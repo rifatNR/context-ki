@@ -6,7 +6,8 @@ import { IoCalendarNumberOutline } from "react-icons/io5";
 import { LiaMedalSolid } from "react-icons/lia";
 import { useParams, useRouter } from "next/navigation";
 import { IdeaDataType, ParticipantDataType } from "@/utils/types";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { getCurrentTime } from "@/utils/helper";
 
 type PropType = {
     data: {
@@ -17,6 +18,7 @@ type PropType = {
 const PreviewClient = ({ data }: PropType) => {
     const { id } = useParams();
     const router = useRouter();
+    const [time, setTime] = useState<string>("");
 
     const participants = data.participants;
     const pendingInvites = useMemo(
@@ -27,6 +29,10 @@ const PreviewClient = ({ data }: PropType) => {
         () => participants.filter((item) => item.state == "accepted"),
         [participants]
     );
+
+    useEffect(() => {
+        setTime(getCurrentTime());
+    }, []);
 
     return (
         <div className="flex-1 flex items-center justify-center w-full mt-10 mb-20">
@@ -42,9 +48,7 @@ const PreviewClient = ({ data }: PropType) => {
                     <div className="text-custom-gray-25 gradient-animation">
                         ⠀5th November, 2024
                     </div>
-                    <div className="text-base text-custom-gray-25">
-                        03:13 PM
-                    </div>
+                    <div className="text-base text-custom-gray-25">{time}</div>
                 </div>
 
                 <div className="mt-10">
