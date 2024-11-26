@@ -13,8 +13,8 @@ services:
       - target: 3333
         published: 3333
         
-      - target: 4321
-        published: 4321
+      - target: 4444
+        published: 4444
     environment:
       NODE_ENV: development
     command: sh -c "pnpm install && pnpm dev"

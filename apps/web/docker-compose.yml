@@ -6,7 +6,7 @@ services:
     build: .
     # container_name: patent-ideas-web
     ports:
-      - "4321:4321"
+      - "4444:4444"
     volumes:
       - .:/app
       - /app/node_modules

@@ -15,5 +15,5 @@ EXPOSE 4050
 CMD ["pnpm", "dev"]
 
 # ! docker build -t patent-ideas-web .
-# ! docker run -p 4321:4321 patent-ideas-web
-# ! docker run -p 4321:4321 -v $(pwd):/app -v /app/node_modules patent-ideas-web
+# ! docker run -p 4444:4444 patent-ideas-web
+# ! docker run -p 4444:4444 -v $(pwd):/app -v /app/node_modules patent-ideas-web
