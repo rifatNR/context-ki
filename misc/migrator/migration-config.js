@@ -3,12 +3,12 @@
 
 // dotenv.config();
 
-module.exports = {
-    databaseUrl: process.env.DATABASE_URL_LOCAL,
-    migrationsTable: "pgmigrations",
-    dir: "migrations",
-    direction: "up",
-};
+// module.exports = {
+//     databaseUrl: process.env.DATABASE_URL_LOCAL,
+//     migrationsTable: "pgmigrations",
+//     dir: "migrations",
+//     direction: "up",
+// };
 
 // ! Create Migration
 // npx node-pg-migrate create <migration_name>
