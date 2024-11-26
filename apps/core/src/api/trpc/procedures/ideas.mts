@@ -74,7 +74,7 @@ export const ideaRouter = router({
                     SELECT id, user_id, title, publish_date
                     FROM ideas
                     WHERE user_id = $1
-                    ORDER BY created_at ASC
+                    ORDER BY created_at DESC
                     LIMIT $2 OFFSET $3;
                     `,
                     [userId, limit, offset]
@@ -214,6 +214,8 @@ export const ideaRouter = router({
             const currentTime = getPostgresTimestamp();
 
             try {
+                await delay(2000);
+
                 const result = await ctx.psql.query(
                     `
                     UPDATE ideas SET publish_date = $1 WHERE publish_date IS NULL AND id = $2 AND user_id = $3;

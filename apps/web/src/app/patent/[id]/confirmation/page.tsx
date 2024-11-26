@@ -40,7 +40,7 @@ const Confirmation = () => {
                     }
                     setTimeout(() => {
                         router.push(`/patent`);
-                    }, 2000);
+                    }, 1000);
                 },
                 onError: (error) => {
                     if (error instanceof TRPCClientError) {
