@@ -43,7 +43,6 @@ const TitleClient = ({ data }: PropType) => {
 
                             if (firstError) {
                                 setError(firstError);
-                                setError(null);
                             }
                         } else {
                             const errorMessage = error.message;

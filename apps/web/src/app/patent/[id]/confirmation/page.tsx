@@ -9,6 +9,9 @@ import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useRef, useState } from "react";
+import { trpc } from "@/trpc/client";
+import { TRPCClientError } from "@trpc/client";
+import { CgSpinner } from "react-icons/cg";
 
 const Confirmation = () => {
     const { id } = useParams();
@@ -16,12 +19,54 @@ const Confirmation = () => {
     const router = useRouter();
 
     const [isAgree, setIsAgree] = useState<boolean>(false);
+    const [error, setError] = useState<string | null>(null);
+
+    const {
+        mutate: publish,
+        isLoading: isPublishing,
+        isSuccess: isPublished,
+    } = trpc.ideas.publish.useMutation();
 
     const onPublishClick = () => {
-        if (publishButtonRef.current) {
-            publishButtonRef.current.classList.add("motion-preset-confetti");
-        }
+        publish(
+            { id: id as string },
+            {
+                onSuccess: (data) => {
+                    console.log(data);
+                    if (publishButtonRef.current) {
+                        publishButtonRef.current.classList.add(
+                            "motion-preset-confetti"
+                        );
+                    }
+                    setTimeout(() => {
+                        router.push(`/patent`);
+                    }, 2000);
+                },
+                onError: (error) => {
+                    if (error instanceof TRPCClientError) {
+                        if (error.data?.zodError) {
+                            const fieldErrors = error.data.zodError.fieldErrors;
+                            const firstError = (
+                                Object.values(fieldErrors)[0] as any
+                            )?.[0];
+
+                            if (firstError) {
+                                setError(firstError);
+                                setError(null);
+                            }
+                        } else {
+                            const errorMessage = error.message;
+                            if (errorMessage) {
+                                setError(errorMessage);
+                            }
+                        }
+                    }
+                },
+            }
+        );
     };
+
+    const isDisable = !isAgree || isPublishing || isPublished;
 
     return (
         <div className="flex-1 flex items-center justify-center w-full mt-10 mb-20">
@@ -67,16 +112,30 @@ const Confirmation = () => {
                     </div>
                 </label>
 
+                {error && (
+                    <div className={`text-red-400 text-xl mt-5`}>{error}</div>
+                )}
+
                 <PrevNextButton prevPath={`/patent/${id}/preview`}>
                     <button
                         ref={publishButtonRef}
                         onClick={onPublishClick}
-                        disabled={!isAgree}
-                        className="flex items-center justify-center space-x-3 px-5 py-3
+                        disabled={isDisable}
+                        className="px-5 py-3
+                        flex items-center justify-center space-x-3 
                                 bg-white text-black text-3xl
+                                    min-w-44
                                     disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                        <LiaMedalSolid className="motion-preset-bounce " />
+                        {isPublishing ? (
+                            <CgSpinner className="animate-spin" />
+                        ) : (
+                            <LiaMedalSolid
+                                className={`motion-preset-bounce ${
+                                    isPublished ? "text-yellow-400" : ""
+                                }`}
+                            />
+                        )}
                         <span>Confirm Patent</span>
                     </button>
                 </PrevNextButton>

@@ -2,7 +2,7 @@ import { privateProcedure, publicProcedure, router } from "@/trpc.mjs";
 import { z } from "zod";
 import { t } from "@/trpc.mjs";
 import { Pool } from "pg";
-import { delay } from "@/utils/helper.js";
+import { delay, getPostgresTimestamp } from "@/utils/helper.js";
 import { TRPCError } from "@trpc/server";
 import { mapErrorToTRPCError } from "@/utils/trpcError.js";
 
@@ -11,6 +11,7 @@ const ideaItemSchema = z.object({
     user_id: z.string(),
     title: z.string(),
     description: z.string().nullable(),
+    publish_date: z.date().nullable(),
 });
 const participantItemSchema = z.object({
     id: z.number(),
@@ -59,11 +60,6 @@ export const ideaRouter = router({
                 const total = parseInt(totalResult.rows[0].total, 10);
                 const totalPage = Math.ceil(total / limit);
 
-                console.log("====================================");
-                console.log(page, limit);
-                console.log(total);
-                console.log("====================================");
-
                 // const result = await ctx.psql.query(
                 //     `
                 //     SELECT id, user_id, title
@@ -75,7 +71,7 @@ export const ideaRouter = router({
 
                 const result = await ctx.psql.query(
                     `
-                    SELECT id, user_id, title
+                    SELECT id, user_id, title, publish_date
                     FROM ideas
                     WHERE user_id = $1
                     ORDER BY created_at ASC
@@ -111,7 +107,7 @@ export const ideaRouter = router({
             try {
                 const result = await ctx.psql.query(
                     `
-                    SELECT id, user_id, title, description
+                    SELECT id, user_id, title, description, publish_date
                     FROM ideas
                     WHERE id = $1;
                     `,
@@ -145,7 +141,7 @@ export const ideaRouter = router({
             await delay(1000);
 
             try {
-                await ctx.psql.query(
+                const result = await ctx.psql.query(
                     `
                     INSERT INTO ideas (id, user_id, title)
                     VALUES ($1, $2, $3)
@@ -154,6 +150,14 @@ export const ideaRouter = router({
                     `,
                     [id, userId, title]
                 );
+
+                if (result.rowCount === 0) {
+                    throw new TRPCError({
+                        code: "NOT_FOUND",
+                        message: "No item found or already published.",
+                        cause: "Item not found.",
+                    });
+                }
 
                 return {
                     message: `Successfully saved title.`,
@@ -174,15 +178,59 @@ export const ideaRouter = router({
             const { id, description } = input;
 
             try {
-                await ctx.psql.query(
+                const result = await ctx.psql.query(
                     `
                     UPDATE ideas SET description = $1 WHERE id = $2;
                     `,
                     [description, id]
                 );
 
+                if (result.rowCount === 0) {
+                    throw new TRPCError({
+                        code: "NOT_FOUND",
+                        message: "No item found or already published.",
+                        cause: "Item not found.",
+                    });
+                }
+
                 return {
                     message: `Successfully saved description.`,
+                };
+            } catch (error) {
+                throw mapErrorToTRPCError(error);
+            }
+        }),
+    publish: privateProcedure
+        .input(
+            z.object({
+                id: z.string(),
+            })
+        )
+        .output(z.object({ message: z.string() }))
+        .mutation(async ({ ctx, input }) => {
+            const { id } = input;
+
+            const userId = ctx.user.uid;
+            const currentTime = getPostgresTimestamp();
+
+            try {
+                const result = await ctx.psql.query(
+                    `
+                    UPDATE ideas SET publish_date = $1 WHERE publish_date IS NULL AND id = $2 AND user_id = $3;
+                    `,
+                    [currentTime, id, userId]
+                );
+
+                if (result.rowCount === 0) {
+                    throw new TRPCError({
+                        code: "NOT_FOUND",
+                        message: "No item found or already published.",
+                        cause: "Item not found.",
+                    });
+                }
+
+                return {
+                    message: `Successfully patented.`,
                 };
             } catch (error) {
                 throw mapErrorToTRPCError(error);
