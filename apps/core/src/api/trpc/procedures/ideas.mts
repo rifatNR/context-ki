@@ -30,11 +30,15 @@ export const ideaRouter = router({
         .output(
             z.object({
                 message: z.string(),
-                data: ideaItemSchema
-                    .omit({
-                        description: true,
-                    })
-                    .array(),
+                data: z.object({
+                    data: ideaItemSchema
+                        .omit({
+                            description: true,
+                        })
+                        .array(),
+                    page: z.number(),
+                    totalPage: z.number(),
+                }),
             })
         )
         .query(async ({ ctx, input }) => {
@@ -53,6 +57,7 @@ export const ideaRouter = router({
                     [userId]
                 );
                 const total = parseInt(totalResult.rows[0].total, 10);
+                const totalPage = Math.ceil(total / limit);
 
                 console.log("====================================");
                 console.log(page, limit);
@@ -81,7 +86,11 @@ export const ideaRouter = router({
 
                 return {
                     message: "Successfully retrieved ideas.",
-                    data: result.rows,
+                    data: {
+                        data: result.rows,
+                        page: page,
+                        totalPage: totalPage,
+                    },
                 };
             } catch (error) {
                 throw mapErrorToTRPCError(error);
