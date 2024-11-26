@@ -12,6 +12,7 @@ const ideaItemSchema = z.object({
     title: z.string(),
     description: z.string().nullable(),
     publish_date: z.date().nullable(),
+    created_at: z.date(),
 });
 const participantItemSchema = z.object({
     id: z.number(),
@@ -71,7 +72,7 @@ export const ideaRouter = router({
 
                 const result = await ctx.psql.query(
                     `
-                    SELECT id, user_id, title, publish_date
+                    SELECT id, user_id, title, publish_date, created_at
                     FROM ideas
                     WHERE user_id = $1
                     ORDER BY created_at DESC
@@ -107,7 +108,7 @@ export const ideaRouter = router({
             try {
                 const result = await ctx.psql.query(
                     `
-                    SELECT id, user_id, title, description, publish_date
+                    SELECT id, user_id, title, description, publish_date, created_at
                     FROM ideas
                     WHERE id = $1;
                     `,

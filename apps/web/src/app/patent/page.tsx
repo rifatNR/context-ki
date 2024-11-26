@@ -40,7 +40,11 @@ const PatentList = async ({ searchParams }: PropType) => {
                                 : `/patent/${item.id}/title`
                         }
                     >
-                        <PatentCard title={item.title} />
+                        <PatentCard
+                            title={item.title}
+                            publish_date={item.publish_date}
+                            created_at={item.created_at}
+                        />
                     </Link>
                 ))}
             </div>

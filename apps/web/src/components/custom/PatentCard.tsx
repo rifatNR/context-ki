@@ -1,17 +1,22 @@
 "use client";
 
+import SealSVG from "@/components/misc/SealSVG";
+import { formatDate } from "@/utils/helper";
 import React, { useEffect, useRef, useState } from "react";
 import { IoCalendarNumberOutline } from "react-icons/io5";
 
 type PropType = {
     title: string;
+    created_at?: string;
+    publish_date: string | null;
 };
-const PatentCard = ({ title }: PropType) => {
+const PatentCard = ({ title, publish_date, created_at }: PropType) => {
     const cardRef = useRef<HTMLDivElement>(null);
 
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [scrollPosition, setScrollPosition] = useState({ x: 0, y: 0 });
     const [isHovered, setIsHovered] = useState(false);
+    const [date, setDate] = useState<string>();
 
     const handleScroll = () => {
         setScrollPosition({
@@ -39,6 +44,15 @@ const PatentCard = ({ title }: PropType) => {
         };
     }, []);
 
+    useEffect(() => {
+        if (publish_date || created_at) {
+            const dateToFormat = publish_date ?? created_at;
+            if (dateToFormat) {
+                setDate(formatDate(dateToFormat));
+            }
+        }
+    }, [publish_date, created_at]);
+
     const offsetLeft = cardRef?.current?.offsetLeft ?? 0;
     const offsetTop = cardRef?.current?.offsetTop ?? 0;
 
@@ -50,10 +64,23 @@ const PatentCard = ({ title }: PropType) => {
             className="relative p-0.5 bg-[#6969694b] hover:bg-[#15ca827a] transition-all ease-in duration-150"
         >
             <div className="sticky p-5 bg-black hover:bg-[#000000c4] transition-all ease-in duration-150 z-hoverEffectCardContent cursor-pointer">
-                <div className="flex items-center space-x-3 text-base">
+                {publish_date && (
+                    <div
+                        title="patented"
+                        className="absolute right-1 top-3 w-14 bg-red-100"
+                    >
+                        {/* <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full">
+                            <SealSVG />
+                        </div> */}
+                        <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-2xl">
+                            🏅
+                        </span>
+                    </div>
+                )}
+                <div className="flex items-center space-x-3 text-base mb-1">
                     <IoCalendarNumberOutline />
                     <div className="text-custom-gray-25">
-                        3rd September, 2017
+                        {date ?? publish_date ?? created_at}
                     </div>
                 </div>
                 <div className="text-3xl">{title}</div>

@@ -5,6 +5,7 @@ export type IdeaDataType =
           title: string;
           description: string | null;
           publish_date: string | null;
+          created_at: string | null;
       }
     | undefined;
 
