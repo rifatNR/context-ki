@@ -17,6 +17,7 @@ services:
         published: 4444
     environment:
       NODE_ENV: development
+      DATABASE_URL: ${DATABASE_URL_DOCKER}
     command: sh -c "pnpm install && pnpm dev"
     depends_on:
       - postgres
