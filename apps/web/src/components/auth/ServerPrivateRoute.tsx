@@ -1,17 +1,32 @@
-import { ReactNode } from "react";
-import { cookies } from "next/headers";
+"use client";
+
+import { ReactNode, useEffect, useState } from "react";
 import LoginFallback from "@/components/auth/LoginFallback";
+import { useAuth } from "@/context/AuthContext";
 
 type PropType = {
     children: ReactNode;
     fallback?: ReactNode;
+    token?: string;
 };
 
-const ServerPrivateRoute = async ({ children, fallback }: PropType) => {
-    const cookieStore = await cookies();
-    const token = cookieStore.get("token")?.value;
+const ServerPrivateRoute = ({ children, fallback, token }: PropType) => {
+    const { user, loading } = useAuth();
 
-    if (!token) {
+    const [isAuthenticated, setIsAuthenticated] = useState(!!token);
+
+    useEffect(() => {
+        if (loading) {
+            return;
+        }
+        if (user) {
+            setIsAuthenticated(true);
+        } else {
+            setIsAuthenticated(false);
+        }
+    }, [user, loading]);
+
+    if (!isAuthenticated) {
         return <>{fallback ?? <LoginFallback />}</>;
     } else {
         return <>{children}</>;
