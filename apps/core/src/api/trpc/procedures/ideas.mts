@@ -324,7 +324,7 @@ export const ideaRouter = router({
 
             try {
                 const existingInvite = await ctx.psql.query(
-                    "SELECT * FROM participants WHERE idea_id = $1 AND email = $2 AND state != pending",
+                    "SELECT * FROM participants WHERE idea_id = $1 AND email = $2 AND state = 'pending'",
                     [ideaId, email]
                 );
 
@@ -333,11 +333,15 @@ export const ideaRouter = router({
                 }
 
                 // TODO  Update response date
+
+                const currentTime = getPostgresTimestamp();
                 await ctx.psql.query(
                     `
-                    UPDATE participants SET state = $1 WHERE id = $2;
+                    UPDATE participants 
+                    SET state = $1, accept_reject_date = $2 
+                    WHERE id = $3;
                     `,
-                    [state, ideaId]
+                    [state, currentTime, ideaId]
                 );
 
                 return {

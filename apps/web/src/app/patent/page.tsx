@@ -5,6 +5,15 @@ import { trpcVanilla } from "@/trpc/server";
 import { GetServerSideProps } from "next";
 import { headers } from "next/headers";
 import Link from "next/link";
+import { NextRequest } from "next/server";
+
+export function getCurrentUrl(request: NextRequest): string {
+    const protocol = request.nextUrl.protocol; // e.g., "https:"
+    const host = request.headers.get("host"); // e.g., "example.com"
+    const pathname = request.nextUrl.pathname; // e.g., "/about"
+
+    return `${protocol}//${host}${pathname}`;
+}
 
 type PropType = {
     searchParams: Record<string, string | string[]>;
@@ -25,7 +34,7 @@ const PatentList = async ({ searchParams }: PropType) => {
     return (
         <div>
             <div className="mb-10 flex items-center justify-between">
-                <div className=" text-4xl">My Patents:</div>
+                <div className=" text-4xl">My Patents: {currentUrl}</div>
                 <AddButton />
             </div>
 
