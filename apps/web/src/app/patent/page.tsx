@@ -23,6 +23,14 @@ const PatentList = async ({ searchParams }: PropType) => {
     const currentUrl =
         requestHeaders.get("referer") || requestHeaders.get("host");
 
+    const headersList = headers();
+    const referer = headersList.get("referer");
+
+    if (referer) {
+        const request = new NextRequest(referer);
+        console.log("🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥", request.nextUrl);
+    }
+
     const page = parseInt(
         Array.isArray(searchParams.page)
             ? searchParams.page[0]
