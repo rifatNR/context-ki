@@ -313,18 +313,18 @@ export const ideaRouter = router({
     inviteResponse: privateProcedure
         .input(
             z.object({
-                id: z.string(),
+                ideaId: z.string(),
                 email: z.string().email(),
                 state: z.string(), // TODO  Validate State
             })
         )
         .output(z.object({ message: z.string() }))
         .mutation(async ({ ctx, input }) => {
-            const { id: ideaId, email, state } = input;
+            const { ideaId, email, state } = input;
 
             try {
                 const existingInvite = await ctx.psql.query(
-                    "SELECT * FROM participants WHERE idea_id = $1 AND email = $2 AND state = 'pending'",
+                    "SELECT * FROM participants WHERE idea_id = $1 AND email = $2;",
                     [ideaId, email]
                 );
 
@@ -332,7 +332,9 @@ export const ideaRouter = router({
                     throw new Error("No invitation found.");
                 }
 
-                // TODO  Update response date
+                if (existingInvite.rows[0].state != "pending") {
+                    throw new Error("Invitation not pending.");
+                }
 
                 const currentTime = getPostgresTimestamp();
                 await ctx.psql.query(
@@ -341,14 +343,14 @@ export const ideaRouter = router({
                     SET state = $1, accept_reject_date = $2 
                     WHERE id = $3;
                     `,
-                    [state, currentTime, ideaId]
+                    [state, currentTime, existingInvite.rows[0].id]
                 );
 
                 return {
                     message:
                         state == "accepted"
-                            ? `Invited accepted.`
-                            : `Invited rejected.`,
+                            ? `Accepted Invitation.`
+                            : `Rejected Invitation.`,
                 };
             } catch (error) {
                 throw mapErrorToTRPCError(error);
