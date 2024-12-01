@@ -1,7 +1,6 @@
 import PreviewClient from "@/app/patent/[id]/preview/_page";
-import { isTRPCClientError, trpcVanilla } from "@/trpc/server";
-import { GetServerSidePropsContext } from "next";
-import { redirect } from "next/navigation";
+import { trpcVanilla } from "@/trpc/server";
+import { handleSSRError } from "@/utils/errorHandler";
 
 type PropType = {
     params: { id: string };
@@ -25,11 +24,7 @@ const PreviewServer = async ({ params }: PropType) => {
             />
         );
     } catch (error) {
-        if (isTRPCClientError(error)) {
-            if (error.data?.code == "UNAUTHORIZED") {
-                redirect("/login");
-            }
-        }
+        handleSSRError(error);
         return <div>Error Occurred!</div>;
     }
 };

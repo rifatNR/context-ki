@@ -1,7 +1,6 @@
 import TitleClient from "@/app/patent/[id]/title/_page";
-import { isTRPCClientError, trpcVanilla } from "@/trpc/server";
-import { GetServerSidePropsContext } from "next";
-import { redirect } from "next/navigation";
+import { trpcVanilla } from "@/trpc/server";
+import { handleSSRError } from "@/utils/errorHandler";
 
 type PropType = {
     params: { id: string };
@@ -14,11 +13,7 @@ const TitleServer = async ({ params }: PropType) => {
 
         return <TitleClient data={response.data} />;
     } catch (error) {
-        if (isTRPCClientError(error)) {
-            if (error.data?.code == "UNAUTHORIZED") {
-                redirect("/login");
-            }
-        }
+        handleSSRError(error);
         return <div>Error Occurred!</div>;
     }
 };
