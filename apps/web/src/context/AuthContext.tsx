@@ -61,7 +61,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const [loading, setLoading] = useState<boolean>(true);
     const router = useRouter();
 
-    const { mutate: syncYser } = trpc.users.syncUser.useMutation();
+    const { mutate: syncUser } = trpc.users.syncUser.useMutation();
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -90,7 +90,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
             const token = await result.user.getIdToken();
             setCookie("token", token);
 
-            syncYser({ token });
+            syncUser({ token });
+
+            router.push("/patent");
 
             return result;
         } catch (error) {
@@ -104,7 +106,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
             await signOut(auth);
             removeCookie("token");
             removeCookie("user");
-            // router.push("/login");
+            router.push("/login");
         } catch (error) {
             console.error("Error signing out:", error);
             throw error;

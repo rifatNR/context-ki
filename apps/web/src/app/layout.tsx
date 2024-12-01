@@ -25,12 +25,6 @@ export default async function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const cookieStore = await cookies();
-    const userCookieValue = cookieStore.get("user")?.value;
-    const userFromServer = userCookieValue
-        ? JSON.parse(userCookieValue)
-        : undefined;
-
     return (
         <html lang="en">
             <Head>
@@ -50,10 +44,7 @@ export default async function RootLayout({
             </Head>
             <body className="bg-black text-white font-merriweather">
                 <TrpcProvider>
-                    <AuthProvider>
-                        <Navbar userFromServer={userFromServer} />
-                        <main className="pt-24 min-h-screen">{children}</main>
-                    </AuthProvider>
+                    <AuthProvider>{children}</AuthProvider>
                 </TrpcProvider>
             </body>
         </html>
