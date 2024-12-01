@@ -47,6 +47,8 @@ module.exports = {
                 xs: "392px",
             },
             zIndex: {
+                decoration: "-10",
+                body: "3",
                 loader: "4",
                 navbar: "10",
                 hoverEffectCardContent: "4",
