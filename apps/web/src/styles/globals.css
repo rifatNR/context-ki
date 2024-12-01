@@ -5,6 +5,7 @@
 @import url("@/styles/components/gradient-shine.css");
 @import url("@/styles/components/gradient-hero.css");
 @import url("@/styles/components/gradient-button.css");
+@import url("@/styles/components/tilt-box.css");
 
 @tailwind base;
 @tailwind components;

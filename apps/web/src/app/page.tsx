@@ -34,6 +34,23 @@ const Home = () => {
                             </Link>
                         </div>
                     </div>
+
+                    <div className="pr-48">
+                        <div className="relative tilt-box bg-white rounded-lg h-[400px] w-[300px] text-black">
+                            <div className="t_over border border-gray-600/50 grid place-content-center">1</div>
+                            <div className="t_over border border-gray-600/50 grid place-content-center">2</div>
+                            <div className="t_over border border-gray-600/50 grid place-content-center">3</div>
+                            <div className="t_over border border-gray-600/50 grid place-content-center">4</div>
+                            <div className="t_over border border-gray-600/50 grid place-content-center">5</div>
+                            <div className="t_over border border-gray-600/50 grid place-content-center">6</div>
+                            <div className="t_over border border-gray-600/50 grid place-content-center">7</div>
+                            <div className="t_over border border-gray-600/50 grid place-content-center">8</div>
+                            <div className="t_over border border-gray-600/50 grid place-content-center">9</div>
+                            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-7xl">
+                                HI
+                            </div>
+                        </div>
+                    </div>
                 </header>
 
                 <div className="relative h-0.5 w-full overflow-hidden">
