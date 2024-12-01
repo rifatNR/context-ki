@@ -16,7 +16,7 @@ const Home = () => {
             <div className="fixed -left-96 top-0 h-[30rem] w-[30rem] rounded-full bg-gray-600 blur-[200px] z-decoration"></div>
             <div className="fixed -right-96 top-1/2 -translate-y-1/2 h-[30rem] w-[30rem] rounded-full bg-gray-600 blur-[250px] z-decoration"></div>
             <div className="z-body">
-                <header className="max-w-[1600px] mx-auto h-[700px] text-white p-10 flex items-center justify-between">
+                <header className="max-w-[1600px] mx-auto h-[100vh] text-white p-10 flex items-center justify-between">
                     <div className="my-auto">
                         <h1 className="text-7xl font-bold gradient-hero-text pb-2">
                             Patent Your <br /> Crazy Ideas (Kinda)
@@ -89,21 +89,19 @@ const Home = () => {
                         </div>
                     </section>
 
-                    <section className="border border-[#1b865b] p-6 rounded-lg my-12">
-                        <h2 className="text-3xl font-bold text-center mb-4">
-                            Why Patent Ideas?
-                        </h2>
-                        <p className="text-center mb-6">
-                            Because sometimes, it’s not about building the
-                            thing... it’s about being the genius who thought of
-                            it first. 🌟
-                        </p>
-                        <div className="text-center">
-                            <Link href={"/patent"}>
-                                <button className="bg-[#1b865b] hover:bg-[#0d744a] text-white px-6 py-3 rounded-lg font-bold transition">
-                                    Start Patenting My Ideas
-                                </button>
-                            </Link>
+                    <section className="relative py-32">
+                        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[30rem] w-[30rem] rounded-full bg-gray-600 blur-[200px] z-decoration"></div>
+                        <div className=" bg-black mx-auto w-[700px] h-[400px] p-6 rounded-lg grid place-items-center">
+                            <div>
+                                <h2 className="text-3xl font-bold text-center mb-4">
+                                    Why Patent Ideas?
+                                </h2>
+                                <p className="text-center mb-6">
+                                    Because sometimes, it’s not about building
+                                    the thing... it’s about being the genius who
+                                    thought of it first. 🌟
+                                </p>
+                            </div>
                         </div>
                     </section>
 
