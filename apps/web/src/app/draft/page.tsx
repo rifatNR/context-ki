@@ -9,7 +9,7 @@ const Home = () => {
     console.log(user.data?.message);
 
     return (
-        <div className="max-w-5xl mx-auto px-5 py-20">
+        <div className="max-w-5xl mx-auto px-5">
             <header className="text-white">
                 <div className="text-center">
                     <h1 className="text-4xl font-bold">
