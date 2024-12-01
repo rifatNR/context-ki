@@ -3,6 +3,8 @@
 @import url("@/styles/utility.css");
 @import url("@/styles/components/main-spinner.css");
 @import url("@/styles/components/gradient-shine.css");
+@import url("@/styles/components/gradient-hero.css");
+@import url("@/styles/components/gradient-button.css");
 
 @tailwind base;
 @tailwind components;
@@ -44,15 +46,4 @@ body {
     :root {
         --radius: 0.5rem;
     }
-}
-
-.bw-gradient-text {
-    font-size: 72px;
-    background: -webkit-linear-gradient(-45deg, #eee, #333);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-.bw-gradient-text::selection {
-    color: white !important;
-    /* background-color: blue; */
 }

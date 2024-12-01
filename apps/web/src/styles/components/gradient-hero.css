@@ -1,0 +1,11 @@
+.gradient-hero-text {
+    font-size: 72px;
+    background: -webkit-linear-gradient(-45deg, #eee, #333);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.gradient-hero-text::selection {
+    color: white !important;
+    -webkit-text-fill-color: white;
+    /* background-color: blue; */
+}

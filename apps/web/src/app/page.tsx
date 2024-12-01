@@ -13,9 +13,9 @@ const Home = () => {
             <div className="fixed -left-96 top-0 h-[30rem] w-[30rem] rounded-full bg-gray-600 blur-[200px] z-decoration"></div>
             <div className="fixed -right-96 top-1/2 -translate-y-1/2 h-[30rem] w-[30rem] rounded-full bg-gray-600 blur-[250px] z-decoration"></div>
             <div className="z-body">
-                <header className="max-w-[1600px] mx-auto h-[700px] text-white p-10 flex items-center">
+                <header className="max-w-[1600px] mx-auto h-[700px] text-white p-10 flex items-center justify-between">
                     <div className="my-auto">
-                        <h1 className="text-7xl font-bold bw-gradient-text pb-2">
+                        <h1 className="text-7xl font-bold gradient-hero-text pb-2">
                             Patent Your <br /> Crazy Ideas (Kinda)
                         </h1>
                         <p className="text-4xl mt-10">
@@ -23,8 +23,10 @@ const Home = () => {
                         </p>
                         <div className="mt-10">
                             <Link href={"/patent"}>
-                                <button className="bg-[#1b865b] hover:bg-[#0d744a] text-xl text-white px-6 py-3 rounded-lg font-bold transition">
-                                    Start Patenting Ideas
+                                <button className="gradient-button text-xl text-white rounded-lg font-bold">
+                                    <div className="gradient-button-content px-5 py-3">
+                                        Start Patenting Ideas
+                                    </div>
                                 </button>
                             </Link>
                         </div>
