@@ -33,8 +33,6 @@ const PatentList = async ({ searchParams }: PropType) => {
                     <AddButton />
                 </div>
 
-                <>{currentUrl}</>
-
                 <div className="space-y-5 mb-10">
                     {response.data.data.map((item) => (
                         <Link
