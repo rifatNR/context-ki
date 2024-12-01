@@ -1,7 +1,7 @@
 import LoginButton from "@/components/layouts/LoginButton";
 import { IoWarningOutline } from "react-icons/io5";
 
-const LoginFallback = () => {
+const Login = () => {
     return (
         <div className="flex-1 flex items-center justify-center w-full -mt-20 z-100">
             <div className="space-y-5">
@@ -15,4 +15,4 @@ const LoginFallback = () => {
     );
 };
 
-export default LoginFallback;
+export default Login;

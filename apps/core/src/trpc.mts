@@ -2,6 +2,7 @@ import { Context, createContext } from "@/context.mjs";
 import { initTRPC, TRPCError } from "@trpc/server";
 import { ZodError } from "zod";
 import firebaseAdmin from "firebase-admin";
+import { DecodedIdToken } from "firebase-admin/auth";
 
 export const t = initTRPC.context<Context>().create({
     errorFormatter(opts) {
@@ -48,7 +49,15 @@ export const privateProcedure = publicProcedure.use(async (opts) => {
         });
     }
 
-    const decodedToken = await firebaseAdmin.auth().verifyIdToken(token);
+    let decodedToken: DecodedIdToken;
+    try {
+        decodedToken = await firebaseAdmin.auth().verifyIdToken(token);
+    } catch (error) {
+        throw new TRPCError({
+            code: "UNAUTHORIZED",
+            message: "ID token has expired!",
+        });
+    }
     const { uid, email, name, picture } = decodedToken;
 
     if (!uid || !email) {

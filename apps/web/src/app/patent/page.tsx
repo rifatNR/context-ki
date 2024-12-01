@@ -42,9 +42,11 @@ const PatentList = async ({ searchParams }: PropType) => {
     return (
         <div>
             <div className="mb-10 flex items-center justify-between">
-                <div className=" text-4xl">My Patents: {currentUrl}</div>
+                <div className=" text-4xl">My Patents:</div>
                 <AddButton />
             </div>
+
+            <>{currentUrl}</>
 
             <div className="space-y-5 mb-10">
                 {response.data.data.map((item) => (

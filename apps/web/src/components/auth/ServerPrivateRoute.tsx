@@ -1,33 +1,18 @@
-"use client";
-
-import { ReactNode, useEffect, useState } from "react";
-import LoginFallback from "@/components/auth/LoginFallback";
-import { useAuth } from "@/context/AuthContext";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { ReactNode } from "react";
 
 type PropType = {
     children: ReactNode;
     fallback?: ReactNode;
-    token?: string;
 };
 
-const ServerPrivateRoute = ({ children, fallback, token }: PropType) => {
-    const { user, loading } = useAuth();
+const ServerPrivateRoute = async ({ children, fallback }: PropType) => {
+    const cookieStore = await cookies();
+    const token = cookieStore.get("token")?.value;
 
-    const [isAuthenticated, setIsAuthenticated] = useState(!!token);
-
-    useEffect(() => {
-        if (loading) {
-            return;
-        }
-        if (user) {
-            setIsAuthenticated(true);
-        } else {
-            setIsAuthenticated(false);
-        }
-    }, [user, loading]);
-
-    if (!isAuthenticated) {
-        return <>{fallback ?? <LoginFallback />}</>;
+    if (!token) {
+        redirect("/login");
     } else {
         return <>{children}</>;
     }

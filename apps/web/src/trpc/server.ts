@@ -1,6 +1,10 @@
 import type { AppRouter } from "@pi/core";
 import { createTRPCReact } from "@trpc/react-query";
-import { createTRPCProxyClient, httpBatchLink } from "@trpc/client";
+import {
+    createTRPCProxyClient,
+    httpBatchLink,
+    TRPCClientError,
+} from "@trpc/client";
 import { cookies } from "next/headers";
 
 const getAuthCookie = async () => {
@@ -21,3 +25,9 @@ export const trpcVanilla = createTRPCProxyClient<AppRouter>({
         }),
     ],
 });
+
+export function isTRPCClientError(
+    cause: unknown
+): cause is TRPCClientError<AppRouter> {
+    return cause instanceof TRPCClientError;
+}

@@ -1,26 +1,37 @@
 import ViewClient from "@/app/patent/view/[id]/_page";
-import { trpcVanilla } from "@/trpc/server";
+import { isTRPCClientError, trpcVanilla } from "@/trpc/server";
 import { GetServerSidePropsContext } from "next";
+import { redirect } from "next/navigation";
 
 type PropType = {
     params: { id: string };
 };
 const ViewServer = async ({ params }: PropType) => {
-    const ideaResponse = await trpcVanilla.ideas.get.query({
-        id: (params?.id as string) ?? "",
-    });
-    const participantsResponse = await trpcVanilla.ideas.getInvitations.query({
-        id: (params?.id as string) ?? "",
-    });
+    try {
+        const ideaResponse = await trpcVanilla.ideas.get.query({
+            id: (params?.id as string) ?? "",
+        });
+        const participantsResponse =
+            await trpcVanilla.ideas.getInvitations.query({
+                id: (params?.id as string) ?? "",
+            });
 
-    return (
-        <ViewClient
-            data={{
-                idea: ideaResponse.data,
-                participants: participantsResponse.data,
-            }}
-        />
-    );
+        return (
+            <ViewClient
+                data={{
+                    idea: ideaResponse.data,
+                    participants: participantsResponse.data,
+                }}
+            />
+        );
+    } catch (error) {
+        if (isTRPCClientError(error)) {
+            if (error.data?.code == "UNAUTHORIZED") {
+                redirect("/login");
+            }
+        }
+        return <div>Error Occurred!</div>;
+    }
 };
 
 export default ViewServer;
