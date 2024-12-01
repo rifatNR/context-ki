@@ -1,6 +1,6 @@
 "use client";
 
-import SealSVG from "@/components/misc/SealSVG";
+import SealSVG from "@/components/svg/SealSVG";
 import { formatDate } from "@/utils/helper";
 import React, { useEffect, useRef, useState } from "react";
 import { IoCalendarNumberOutline } from "react-icons/io5";
