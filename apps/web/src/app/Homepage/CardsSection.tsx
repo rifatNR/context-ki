@@ -1,21 +1,45 @@
 import BrainSVG from "@/components/svg/BrainSVG";
 import LockSVG from "@/components/svg/LockSVG";
 import ProveSVG from "@/components/svg/ProveSVG";
+import useOnScreenVisible from "@/hooks/useOnScreenVisible";
 import React from "react";
 
 const CardsSection = () => {
+    const [observableRef, isVisible] = useOnScreenVisible({
+        threshold: 0.5,
+    });
+
     return (
-        <section className="text-center my-12">
-            <h2 className="text-5xl font-bold mb-4 mt-20">
+        <section className="text-center mb-12">
+            <div className="relative h-0.5 w-full overflow-hidden flex items-center justify-center">
+                <div
+                    className={`
+                                h-[50rem] w-[50rem] ${
+                                    isVisible
+                                        ? "motion-scale-x-in-[0]"
+                                        : "invisible"
+                                }
+                                rounded-full bg-gray-600 blur-[200px]`}
+                ></div>
+            </div>
+
+            <h2 className="text-5xl font-bold mb-4 mt-32">
                 Got a wild idea but no time to build it?
             </h2>
             <p className="text-2xl mb-6">
                 Let us save your brilliance so you can brag later. Here’s how:
             </p>
-            <div className="grid md:grid-cols-3 gap-10 text-left mt-20">
+            <div
+                ref={observableRef as any}
+                className="grid md:grid-cols-3 gap-10 text-left mt-20"
+            >
                 <div
-                    className="bg-[#1A1A1B] shadow-md p-6 rounded-lg
-                                            motion-preset-slide-down motion-preset-focus motion-duration-1000"
+                    className={`bg-[#1A1A1B] shadow-md p-6 rounded-lg
+                                ${
+                                    isVisible
+                                        ? "motion-preset-slide-down motion-preset-focus motion-duration-1000"
+                                        : "invisible"
+                                }`}
                 >
                     <div className="w-16 mb-5">
                         <BrainSVG />
@@ -29,8 +53,12 @@ const CardsSection = () => {
                     </p>
                 </div>
                 <div
-                    className="bg-[#1A1A1B] shadow-md p-6 rounded-lg
-                                            motion-preset-slide-up motion-preset-focus motion-duration-1000"
+                    className={`bg-[#1A1A1B] shadow-md p-6 rounded-lg
+                                ${
+                                    isVisible
+                                        ? "motion-preset-slide-up motion-preset-focus motion-duration-1000"
+                                        : "invisible"
+                                }`}
                 >
                     <div className="w-16 mb-5">
                         <LockSVG />
@@ -44,8 +72,12 @@ const CardsSection = () => {
                     </p>
                 </div>
                 <div
-                    className="bg-[#1A1A1B] shadow-md p-6 rounded-lg
-                                            motion-preset-slide-down motion-preset-focus motion-duration-1000"
+                    className={`bg-[#1A1A1B] shadow-md p-6 rounded-lg
+                                ${
+                                    isVisible
+                                        ? "motion-preset-slide-down motion-preset-focus motion-duration-1000"
+                                        : "invisible"
+                                }`}
                 >
                     <div className="w-16 mb-5">
                         <ProveSVG />
