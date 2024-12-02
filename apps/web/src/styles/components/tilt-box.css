@@ -7,6 +7,7 @@
     width: 33.33%;
     height: 33.33%;
     position: absolute;
+    z-index: 1;
 }
 
 .t_over:nth-child(1) {left: 0; top: 0;}
@@ -19,12 +20,22 @@
 .t_over:nth-child(8) {left: 33.33%; top: 66.66%;}
 .t_over:nth-child(9) {left: 66.66%; top: 66.66%;}
 
-.t_over:nth-child(1):hover ~ .tilt-box{transform: rotateX(20deg) rotateY(20deg);}
-.t_over:nth-child(2):hover ~ .tilt-box{transform: rotateX(20deg) rotateY(20deg);}
-.t_over:nth-child(3):hover ~ .tilt-box{transform: rotateX(20deg) rotateY(20deg);}
-.t_over:nth-child(4):hover ~ .tilt-box{transform: rotateX(20deg) rotateY(20deg);}
-.t_over:nth-child(5):hover ~ .tilt-box{transform: rotateX(20deg) rotateY(20deg);}
-.t_over:nth-child(6):hover ~ .tilt-box{transform: rotateX(20deg) rotateY(20deg);}
+/* .t_over:nth-child(1):hover ~ .tilt-box{background-color: #ff0000;}
+.t_over:nth-child(2):hover ~ .tilt-box{background-color: #ff3a3a;}
+.t_over:nth-child(3):hover ~ .tilt-box{background-color: #ffacac;}
+.t_over:nth-child(4):hover ~ .tilt-box{background-color: #00ff2a;}
+.t_over:nth-child(5):hover ~ .tilt-box{background-color: #54ff4e;}
+.t_over:nth-child(6):hover ~ .tilt-box{background-color: #9ff5a6;}
+.t_over:nth-child(7):hover ~ .tilt-box{background-color: #003cff;}
+.t_over:nth-child(8):hover ~ .tilt-box{background-color: #494cff;}
+.t_over:nth-child(9):hover ~ .tilt-box{background-color: #bfb4ff;} */
+
+.t_over:nth-child(1):hover ~ .tilt-box{transform: rotateX(-20deg) rotateY(20deg);}
+.t_over:nth-child(2):hover ~ .tilt-box{transform: rotateX(-20deg) rotateY(0deg);}
+.t_over:nth-child(3):hover ~ .tilt-box{transform: rotateX(-20deg) rotateY(-20deg);}
+.t_over:nth-child(4):hover ~ .tilt-box{transform: rotateX(0deg) rotateY(20deg);}
+.t_over:nth-child(5):hover ~ .tilt-box{transform: rotateX(0deg) rotateY(0deg);}
+.t_over:nth-child(6):hover ~ .tilt-box{transform: rotateX(0deg) rotateY(-20deg);}
 .t_over:nth-child(7):hover ~ .tilt-box{transform: rotateX(20deg) rotateY(20deg);}
-.t_over:nth-child(8):hover ~ .tilt-box{transform: rotateX(20deg) rotateY(20deg);}
-.t_over:nth-child(9):hover ~ .tilt-box{transform: rotateX(20deg) rotateY(20deg);}
+.t_over:nth-child(8):hover ~ .tilt-box{transform: rotateX(20deg) rotateY(0deg);}
+.t_over:nth-child(9):hover ~ .tilt-box{transform: rotateX(20deg) rotateY(-20deg);}
