@@ -2,7 +2,7 @@
 
 import CardsSection from "@/app/Homepage/CardsSection";
 import Hero from "@/app/Homepage/Hero";
-import WhatPeopleSay from "@/app/Homepage/WhatPeopleSay";
+import Testimonial from "@/app/Homepage/Testimonial";
 import WhyUse from "@/app/Homepage/WhyUse";
 import { trpc } from "@/trpc/client";
 
@@ -22,7 +22,7 @@ const Home = () => {
 
                     <WhyUse />
 
-                    <WhatPeopleSay />
+                    <Testimonial />
 
                     {/* <FAQ /> */}
                 </main>
