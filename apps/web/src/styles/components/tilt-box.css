@@ -4,8 +4,35 @@
 }
 
 .tilt-box {
+    transform: rotateX(0deg) rotateY(-10deg);
     /* perspective: 1000px; */
-    /* transform-style: preserve-3d; */
+    transform-style: preserve-3d;
+}
+
+.tilt-box::before {
+    content: "";
+    position: absolute;
+    inset: 1.5rem;
+    background-color: black;
+    opacity: 0.5;
+    filter: blur(15px);
+    transform-style: preserve-3d;
+    transform: translateZ(30px);
+
+}
+
+.tilt-box-inside-tilt-box {
+    transform-style: preserve-3d;
+    transform: translateZ(50px);
+    
+    /* box-shadow: 5.5px 11.0px 11.0px hsl(0deg 0% 0% / 0.33); */
+    box-shadow:
+      0 1px 1px hsl(0deg 0% 0% / 0.075),
+      0 2px 2px hsl(0deg 0% 0% / 0.075),
+      0 4px 4px hsl(0deg 0% 0% / 0.075),
+      0 8px 8px hsl(0deg 0% 0% / 0.075),
+      0 16px 16px hsl(0deg 0% 0% / 0.075)
+    ;
 }
 
 .t_over {
