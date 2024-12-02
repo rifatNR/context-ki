@@ -41,7 +41,7 @@ const CardsSection = () => {
                 <BorderHoverEffectCard
                     parentClass={
                         isVisible
-                            ? "motion-preset-slide-down motion-preset-focus motion-duration-1000"
+                            ? "motion-preset-slide-up motion-preset-focus motion-duration-1000"
                             : "invisible"
                     }
                 >
@@ -59,7 +59,7 @@ const CardsSection = () => {
                 <BorderHoverEffectCard
                     parentClass={
                         isVisible
-                            ? "motion-preset-slide-up motion-preset-focus motion-duration-1000"
+                            ? "motion-preset-slide-down motion-preset-focus motion-duration-1000"
                             : "invisible"
                     }
                 >
@@ -77,7 +77,7 @@ const CardsSection = () => {
                 <BorderHoverEffectCard
                     parentClass={
                         isVisible
-                            ? "motion-preset-slide-down motion-preset-focus motion-duration-1000"
+                            ? "motion-preset-slide-up motion-preset-focus motion-duration-1000"
                             : "invisible"
                     }
                 >
@@ -94,7 +94,7 @@ const CardsSection = () => {
                 <BorderHoverEffectCard
                     parentClass={
                         isVisible
-                            ? "motion-preset-slide-down motion-preset-focus motion-duration-1000"
+                            ? "motion-preset-slide-right motion-preset-focus motion-duration-1000"
                             : "invisible"
                     }
                 >
@@ -130,7 +130,7 @@ const CardsSection = () => {
                 <BorderHoverEffectCard
                     parentClass={
                         isVisible
-                            ? "motion-preset-slide-down motion-preset-focus motion-duration-1000"
+                            ? "motion-preset-slide-left motion-preset-focus motion-duration-1000"
                             : "invisible"
                     }
                 >
