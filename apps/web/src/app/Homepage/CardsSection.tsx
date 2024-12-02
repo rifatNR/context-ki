@@ -1,7 +1,10 @@
 import BorderHoverEffectCard from "@/app/Homepage/BorderHoverEffectCard";
 import BrainSVG from "@/components/svg/BrainSVG";
 import LockSVG from "@/components/svg/LockSVG";
+import PartnerSVG from "@/components/svg/PartnerSVG";
 import ProveSVG from "@/components/svg/ProveSVG";
+import SaveSVG from "@/components/svg/SaveSVG";
+import VideoCameraSVG from "@/components/svg/VideoCameraSVG";
 import useOnScreenVisible from "@/hooks/useOnScreenVisible";
 import React from "react";
 
@@ -96,7 +99,7 @@ const CardsSection = () => {
                     }
                 >
                     <div className="w-16 mb-5">
-                        <BrainSVG />
+                        <VideoCameraSVG />
                     </div>
                     <h3 className="font-bold text-3xl mb-2">
                         4. Choose Your Input Style
@@ -114,7 +117,7 @@ const CardsSection = () => {
                     }
                 >
                     <div className="w-16 mb-5">
-                        <LockSVG />
+                        <SaveSVG />
                     </div>
                     <h3 className="font-bold text-3xl mb-2">
                         5. Mark Your Claim
@@ -132,7 +135,7 @@ const CardsSection = () => {
                     }
                 >
                     <div className="w-16 mb-5">
-                        <ProveSVG />
+                        <PartnerSVG />
                     </div>
                     <h3 className="font-bold text-3xl mb-2">
                         6. Add Participants
