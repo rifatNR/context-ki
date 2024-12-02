@@ -32,7 +32,13 @@ const CardsSection = () => {
             </p>
 
             <div className="grid md:grid-cols-3 gap-10 text-left mt-20  ">
-                <BorderHoverEffectCard>
+                <BorderHoverEffectCard
+                    parentClass={
+                        isVisible
+                            ? "motion-preset-slide-down motion-preset-focus motion-duration-1000"
+                            : "invisible"
+                    }
+                >
                     <div className="w-16 mb-5">
                         <BrainSVG />
                     </div>
@@ -44,7 +50,13 @@ const CardsSection = () => {
                         it. 🧠
                     </p>
                 </BorderHoverEffectCard>
-                <BorderHoverEffectCard>
+                <BorderHoverEffectCard
+                    parentClass={
+                        isVisible
+                            ? "motion-preset-slide-up motion-preset-focus motion-duration-1000"
+                            : "invisible"
+                    }
+                >
                     <div className="w-16 mb-5">
                         <LockSVG />
                     </div>
@@ -56,7 +68,13 @@ const CardsSection = () => {
                         🔒
                     </p>
                 </BorderHoverEffectCard>
-                <BorderHoverEffectCard>
+                <BorderHoverEffectCard
+                    parentClass={
+                        isVisible
+                            ? "motion-preset-slide-down motion-preset-focus motion-duration-1000"
+                            : "invisible"
+                    }
+                >
                     <div className="w-16 mb-5">
                         <ProveSVG />
                     </div>

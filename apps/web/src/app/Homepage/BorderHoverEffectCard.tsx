@@ -1,12 +1,14 @@
 "use client";
 
 import BrainSVG from "@/components/svg/BrainSVG";
+import { cn } from "@/lib/utils";
 import React, { ReactNode, useEffect, useRef, useState } from "react";
 
 type PropType = {
     children: ReactNode;
+    parentClass?: string;
 };
-const BorderHoverEffectCard = ({ children }: PropType) => {
+const BorderHoverEffectCard = ({ children, parentClass }: PropType) => {
     const cardRef = useRef<HTMLDivElement>(null);
 
     const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -51,12 +53,17 @@ const BorderHoverEffectCard = ({ children }: PropType) => {
             ref={cardRef}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className="relative p-0.5 bg-[#6969694b] hover:bg-[#15ca827a] transition-all ease-in duration-150"
+            className={cn(
+                `relative p-0.5 bg-[#6969694b] hover:bg-[#15ca827a]
+                        transition-all
+                        rounded-lg h-full`,
+                parentClass
+            )}
         >
             <div
                 className="sticky p-5 bg-[#1A1A1B] hover:bg-[#000000c4]
                         transition-all ease-in duration-150 z-hoverEffectCardContent
-                        h-full cursor-pointer rounded-lg"
+                        h-full rounded-lg"
             >
                 {children}
             </div>
