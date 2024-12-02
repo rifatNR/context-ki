@@ -17,7 +17,7 @@ const CardsSection = () => {
                                 h-[50rem] w-[50rem] ${
                                     isVisible
                                         ? "motion-scale-x-in-[0]"
-                                        : "invisible"
+                                        : "motion-scale-x-out-[0]"
                                 }
                                 rounded-full bg-gray-600 blur-[200px]`}
                 ></div>
