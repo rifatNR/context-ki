@@ -15,7 +15,7 @@ import {
     User as FirebaseUser,
     UserCredential,
 } from "firebase/auth";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { auth } from "@/utils/firebase";
 import { useCookies } from "react-cookie";
 import { trpc } from "@/trpc/client";
@@ -55,8 +55,23 @@ const mapFirebaseUser = (user: FirebaseUser): User => ({
     photoURL: user.photoURL,
 });
 
+const getRedirectPath = (_url: string | null) => {
+    try {
+        if (_url) {
+            const url = new URL(_url);
+            return url.pathname;
+        }
+        return "/patent";
+    } catch (error) {
+        return "/patent";
+    }
+};
+
 export function AuthProvider({ children }: AuthProviderProps) {
+    const searchParams = useSearchParams();
+    const pathname = usePathname();
     const [cookies, setCookie, removeCookie] = useCookies(["token", "user"]);
+
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const router = useRouter();
@@ -92,7 +107,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
             syncUser({ token });
 
-            router.push("/patent");
+            router.push(getRedirectPath(searchParams.get("redirect")));
 
             return result;
         } catch (error) {
@@ -106,7 +121,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
             await signOut(auth);
             removeCookie("token");
             removeCookie("user");
-            router.push("/login");
+
+            const currentUrl = window.location.href;
+            router.push(`/login?redirect=${encodeURIComponent(currentUrl)}`);
         } catch (error) {
             console.error("Error signing out:", error);
             throw error;
