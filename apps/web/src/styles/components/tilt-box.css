@@ -1,6 +1,10 @@
+.tilt-box-container {
+    /* border: 2px solid red; */
+    perspective: 1000px;
+}
+
 .tilt-box {
-    /* transform: rotateX(-20deg) rotateY(-20deg); */
-    /* transform: rotateX(20deg) rotateY(20deg); */
+
 }
 
 .t_over {
@@ -8,6 +12,10 @@
     height: 33.33%;
     position: absolute;
     z-index: 1;
+
+    /* border: 2px solid rgb(97, 97, 97);
+    display: grid;
+    place-items: center; */
 }
 
 .t_over:nth-child(1) {left: 0; top: 0;}

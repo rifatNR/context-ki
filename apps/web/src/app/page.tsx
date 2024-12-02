@@ -36,17 +36,17 @@ const Home = () => {
                     </div>
 
                     <div className="pr-48">
-                        <div className="relative bg-white rounded-lg h-[400px] w-[300px] text-black">
-                            <div className="t_over border border-gray-600/50 grid place-content-center">1</div>
-                            <div className="t_over border border-gray-600/50 grid place-content-center">2</div>
-                            <div className="t_over border border-gray-600/50 grid place-content-center">3</div>
-                            <div className="t_over border border-gray-600/50 grid place-content-center">4</div>
-                            <div className="t_over border border-gray-600/50 grid place-content-center">5</div>
-                            <div className="t_over border border-gray-600/50 grid place-content-center">6</div>
-                            <div className="t_over border border-gray-600/50 grid place-content-center">7</div>
-                            <div className="t_over border border-gray-600/50 grid place-content-center">8</div>
-                            <div className="t_over border border-gray-600/50 grid place-content-center">9</div>
-                            <div className="relative transition-all ease-in tilt-box h-full w-full border-4 border-red-500">
+                        <div className="tilt-box-container relative rounded-lg h-[400px] w-[300px] text-black">
+                            <div className="t_over"></div>
+                            <div className="t_over"></div>
+                            <div className="t_over"></div>
+                            <div className="t_over"></div>
+                            <div className="t_over"></div>
+                            <div className="t_over"></div>
+                            <div className="t_over"></div>
+                            <div className="t_over"></div>
+                            <div className="t_over"></div>
+                            <div className="tilt-box relative transition-all duration-300 ease-in h-full w-full bg-white">
                                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-7xl">
                                     HI
                                 </div>
