@@ -19,7 +19,7 @@ const WhyUse = () => {
                     <h2 className="text-3xl font-bold text-center mb-4">
                         Why Patent Ideas?
                     </h2>
-                    <p className="text-center mb-6">
+                    <p className="text-2xl text-center mb-6">
                         Because sometimes, it’s not about building the thing...
                         it’s about being the genius who thought of it first. 🌟
                     </p>
