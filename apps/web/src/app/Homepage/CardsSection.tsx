@@ -1,3 +1,4 @@
+import BorderHoverEffectCard from "@/app/Homepage/BorderHoverEffectCard";
 import BrainSVG from "@/components/svg/BrainSVG";
 import LockSVG from "@/components/svg/LockSVG";
 import ProveSVG from "@/components/svg/ProveSVG";
@@ -29,6 +30,45 @@ const CardsSection = () => {
             <p className="text-2xl mb-6">
                 Let us save your brilliance so you can brag later. Here’s how:
             </p>
+
+            <div className="grid md:grid-cols-3 gap-10 text-left mt-20  ">
+                <BorderHoverEffectCard>
+                    <div className="w-16 mb-5">
+                        <BrainSVG />
+                    </div>
+                    <h3 className="font-bold text-3xl mb-2">
+                        1. Share Your Idea
+                    </h3>
+                    <p className="text-lg text-[#89898D]">
+                        Give it a cool title, add juicy details, and timestamp
+                        it. 🧠
+                    </p>
+                </BorderHoverEffectCard>
+                <BorderHoverEffectCard>
+                    <div className="w-16 mb-5">
+                        <LockSVG />
+                    </div>
+                    <h3 className="font-bold text-3xl mb-2">
+                        2. Secure Your Bragging Rights
+                    </h3>
+                    <p className="text-lg text-[#89898D]">
+                        We’ll keep your idea safe in our vault for future glory.
+                        🔒
+                    </p>
+                </BorderHoverEffectCard>
+                <BorderHoverEffectCard>
+                    <div className="w-16 mb-5">
+                        <ProveSVG />
+                    </div>
+                    <h3 className="font-bold text-3xl mb-2">
+                        3. Show Off Later
+                    </h3>
+                    <p className="text-lg text-[#89898D]">
+                        Prove you thought of it first when it goes viral. 🎤
+                    </p>
+                </BorderHoverEffectCard>
+            </div>
+
             <div
                 ref={observableRef as any}
                 className="grid md:grid-cols-3 gap-10 text-left mt-20"
@@ -52,6 +92,7 @@ const CardsSection = () => {
                         it. 🧠
                     </p>
                 </div>
+
                 <div
                     className={`bg-[#1A1A1B] shadow-md p-6 rounded-lg
                                 ${
@@ -71,6 +112,7 @@ const CardsSection = () => {
                         🔒
                     </p>
                 </div>
+
                 <div
                     className={`bg-[#1A1A1B] shadow-md p-6 rounded-lg
                                 ${
