@@ -1,6 +1,7 @@
 "use client";
 
 import CardsSection from "@/app/Homepage/CardsSection";
+import FAQ from "@/app/Homepage/FAQ";
 import Hero from "@/app/Homepage/Hero";
 import Testimonial from "@/app/Homepage/Testimonial";
 import WhyUse from "@/app/Homepage/WhyUse";
@@ -24,7 +25,7 @@ const Home = () => {
 
                     <Testimonial />
 
-                    {/* <FAQ /> */}
+                    <FAQ />
                 </main>
 
                 {/* <Footer /> */}

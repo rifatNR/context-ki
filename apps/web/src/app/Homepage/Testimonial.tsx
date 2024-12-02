@@ -8,7 +8,7 @@ const Testimonial = () => {
     });
 
     return (
-        <section ref={observableRef as any} className="mt-12 mb-96">
+        <section ref={observableRef as any} className="mt-12 mb-40">
             <h2 className="text-4xl font-bold text-center mb-20">
                 What People Are Saying
             </h2>

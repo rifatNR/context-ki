@@ -88,6 +88,60 @@ const CardsSection = () => {
                         Prove you thought of it first when it goes viral. 🎤
                     </p>
                 </BorderHoverEffectCard>
+                <BorderHoverEffectCard
+                    parentClass={
+                        isVisible
+                            ? "motion-preset-slide-down motion-preset-focus motion-duration-1000"
+                            : "invisible"
+                    }
+                >
+                    <div className="w-16 mb-5">
+                        <BrainSVG />
+                    </div>
+                    <h3 className="font-bold text-3xl mb-2">
+                        4. Choose Your Input Style
+                    </h3>
+                    <p className="text-lg text-[#89898D]">
+                        Record a video or type your idea—it’s your creativity,
+                        your way. ✍️🎥
+                    </p>
+                </BorderHoverEffectCard>
+                <BorderHoverEffectCard
+                    parentClass={
+                        isVisible
+                            ? "motion-preset-slide-up motion-preset-focus motion-duration-1000"
+                            : "invisible"
+                    }
+                >
+                    <div className="w-16 mb-5">
+                        <LockSVG />
+                    </div>
+                    <h3 className="font-bold text-3xl mb-2">
+                        5. Mark Your Claim
+                    </h3>
+                    <p className="text-lg text-[#89898D]">
+                        Save your idea with current timestamp. No edits or
+                        deletes, but it’s locked and official! (not really) 💾
+                    </p>
+                </BorderHoverEffectCard>
+                <BorderHoverEffectCard
+                    parentClass={
+                        isVisible
+                            ? "motion-preset-slide-down motion-preset-focus motion-duration-1000"
+                            : "invisible"
+                    }
+                >
+                    <div className="w-16 mb-5">
+                        <ProveSVG />
+                    </div>
+                    <h3 className="font-bold text-3xl mb-2">
+                        6. Add Participants
+                    </h3>
+                    <p className="text-lg text-[#89898D]">
+                        Got collaborators? Invite them to join your idea, even
+                        after it’s published! 🤝
+                    </p>
+                </BorderHoverEffectCard>
             </div>
         </section>
     );
