@@ -1,3 +1,4 @@
+import TiltBoxContent from "@/app/Homepage/TiltBoxContent";
 import React from "react";
 
 const TiltBox = () => {
@@ -28,9 +29,7 @@ const TiltBox = () => {
                         bg-[#00000096] text-white
                         "
                 >
-                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-7xl">
-                        HI <br /> This is not working
-                    </div>
+                    <TiltBoxContent />
                 </div>
             </div>
         </div>
