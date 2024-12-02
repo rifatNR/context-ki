@@ -4,7 +4,8 @@
 }
 
 .tilt-box {
-
+    /* perspective: 1000px; */
+    /* transform-style: preserve-3d; */
 }
 
 .t_over {
