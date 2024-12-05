@@ -15,10 +15,11 @@ import {
     User as FirebaseUser,
     UserCredential,
 } from "firebase/auth";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { auth } from "@/utils/firebase";
 import { useCookies } from "react-cookie";
 import { trpc } from "@/trpc/client";
+import { getSearchParams } from "@/utils/helper";
 
 export interface User {
     uid: string;
@@ -68,7 +69,6 @@ const getRedirectPath = (_url: string | null) => {
 };
 
 export function AuthProvider({ children }: AuthProviderProps) {
-    const searchParams = useSearchParams();
     const pathname = usePathname();
     const [cookies, setCookie, removeCookie] = useCookies(["token", "user"]);
 
@@ -107,7 +107,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
             syncUser({ token });
 
-            router.push(getRedirectPath(searchParams.get("redirect")));
+            router.push(getRedirectPath(getSearchParams("redirect")));
 
             return result;
         } catch (error) {

@@ -1,3 +1,10 @@
+export const getSearchParams = (param: string) => {
+    const url = window.location.href;
+    const params = new URLSearchParams(new URL(url).search);
+    const value = params.get(param);
+    return value;
+};
+
 export const getCurrentTime = (): string => {
     const now = new Date();
     let hours = now.getHours();
