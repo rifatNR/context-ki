@@ -22,7 +22,7 @@ const TiltBoxContent = () => {
             </div>
 
             <div className="flex items-center space-x-3 text-base mt-5">
-                <LiaMedalSolid className="text-yellow-500" />
+                <LiaMedalSolid className="text-yellow-500 text-xl" />
                 <div className="text-custom-gray-25 gradient-animation">
                     31st february, 2069
                 </div>
