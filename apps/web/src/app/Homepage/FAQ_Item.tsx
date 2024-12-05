@@ -8,7 +8,7 @@ type PropType = {
     };
     isOpen: boolean;
     index: number;
-    onClick: (index: number) => void;
+    onClick: (index: number, itemEl: HTMLDivElement | null) => void;
     onHover: (index: number, itemEl: HTMLDivElement | null) => void;
 };
 const FAQ_ITEM = ({ item, isOpen, index, onClick, onHover }: PropType) => {
@@ -17,7 +17,7 @@ const FAQ_ITEM = ({ item, isOpen, index, onClick, onHover }: PropType) => {
     return (
         <div ref={itemRef} className="py-5">
             <button
-                onClick={() => onClick(index)}
+                onClick={() => onClick(index, itemRef?.current)}
                 onMouseEnter={() => {
                     onHover(index, itemRef?.current);
                 }}
@@ -32,7 +32,7 @@ const FAQ_ITEM = ({ item, isOpen, index, onClick, onHover }: PropType) => {
             </button>
             <div
                 className={`text-2xl pl-5 transition-all overflow-hidden ${
-                    isOpen ? "max-h-96 pb-10" : "max-h-0"
+                    isOpen ? "max-h-96 pt-5" : "max-h-0"
                 }`}
             >
                 {item.answer}

@@ -1,5 +1,5 @@
 import FAQ_ITEM from "@/app/Homepage/FAQ_Item";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FaChevronDown } from "react-icons/fa6";
 
 const faqs = [
@@ -67,22 +67,52 @@ const faqs = [
 
 const FAQ = () => {
     const [barPosition, setBarPosition] = useState({ x: 0, y: 0 });
-    const [barWidth, setBarWidth] = useState(0);
+    const [barSize, setBarSize] = useState({ h: 0, w: 0 });
     const [openIndex, setOpenIndex] = useState<number | null>();
 
+    const updateBar = useCallback(
+        (isThisOpen: boolean, itemEl: HTMLDivElement | null) => {
+            const BUTTON_HEIGHT = 80;
+            const BUTTON_SPACE = 10;
+
+            const offsetLeft = itemEl?.offsetLeft ?? 0;
+            const offsetTop = itemEl?.offsetTop ?? 0;
+
+            setBarPosition({
+                x: offsetLeft,
+                y: offsetTop + BUTTON_HEIGHT,
+            });
+
+            if (isThisOpen) {
+                setBarSize({
+                    h:
+                        (itemEl?.offsetHeight ?? 0) -
+                        BUTTON_HEIGHT -
+                        BUTTON_SPACE,
+                    w: 0.5,
+                });
+            } else {
+                setBarSize({
+                    h: 0.5,
+                    w: itemEl?.offsetWidth ?? 0,
+                });
+            }
+        },
+        [openIndex]
+    );
+
+    const onClick = (index: number, itemEl: HTMLDivElement | null) => {
+        const isAlreadyOpen = openIndex == index;
+
+        if (isAlreadyOpen) {
+            setOpenIndex(null);
+        } else {
+            setOpenIndex(index);
+        }
+        updateBar(!isAlreadyOpen, itemEl);
+    };
     const onHover = (index: number, itemEl: HTMLDivElement | null) => {
-        console.log(index);
-
-        const ButtonHeight = 80;
-
-        const offsetLeft = itemEl?.offsetLeft ?? 0;
-        const offsetTop = itemEl?.offsetTop ?? 0;
-
-        setBarWidth(itemEl?.offsetWidth ?? 0);
-        setBarPosition({
-            x: offsetLeft,
-            y: offsetTop + ButtonHeight,
-        });
+        updateBar(index == openIndex, itemEl);
     };
 
     return (
@@ -93,8 +123,8 @@ const FAQ = () => {
             <div
                 className="absolute transition-all ease-out bg-white rounded-full"
                 style={{
-                    width: barWidth + "px",
-                    height: 0.5 + "px",
+                    height: barSize.h + "px",
+                    width: barSize.w + "px",
                     left: barPosition.x + "px",
                     top: barPosition.y + "px",
                 }}
@@ -106,13 +136,7 @@ const FAQ = () => {
                         item={item}
                         index={index}
                         isOpen={openIndex == index}
-                        onClick={(i) => {
-                            if (openIndex == index) {
-                                setOpenIndex(null);
-                            } else {
-                                setOpenIndex(i);
-                            }
-                        }}
+                        onClick={onClick}
                         onHover={onHover}
                     />
                 ))}
