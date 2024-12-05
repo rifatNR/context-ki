@@ -15,12 +15,15 @@ const FAQ_ITEM = ({ item, isOpen, index, onClick, onHover }: PropType) => {
     const itemRef = useRef<HTMLDivElement>(null);
 
     return (
-        <div ref={itemRef} className="py-5">
+        <div
+            ref={itemRef}
+            onMouseEnter={() => {
+                onHover(index, itemRef?.current);
+            }}
+            className="py-5"
+        >
             <button
                 onClick={() => onClick(index, itemRef?.current)}
-                onMouseEnter={() => {
-                    onHover(index, itemRef?.current);
-                }}
                 className="w-full flex items-center justify-between cursor-pointer group hover:text-white"
             >
                 <h2 className="text-4xl">{item.question}</h2>

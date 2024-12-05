@@ -109,7 +109,9 @@ const FAQ = () => {
         } else {
             setOpenIndex(index);
         }
-        updateBar(!isAlreadyOpen, itemEl);
+        setTimeout(() => {
+            updateBar(true, itemEl);
+        }, 200);
     };
     const onHover = (index: number, itemEl: HTMLDivElement | null) => {
         updateBar(index == openIndex, itemEl);
