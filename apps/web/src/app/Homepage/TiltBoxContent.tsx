@@ -32,7 +32,7 @@ const TiltBoxContent = () => {
             <div className="mt-5">
                 <div className="mb-2 font-bold">Participants:</div>
                 <div className="space-y-3">
-                    <div className="flex items-center space-x-3 ml-5">
+                    <div className="flex items-center space-x-3">
                         <div className="relative h-6 w-6 aspect-square rounded-full bg-gray-500 overflow-hidden">
                             <Image
                                 src="https://avatar.iran.liara.run/public/41"
@@ -43,7 +43,7 @@ const TiltBoxContent = () => {
                         </div>
                         <div className="text-base">Rifatnoor92@gmail.com</div>
                     </div>
-                    <div className="flex items-center space-x-3 ml-5">
+                    <div className="flex items-center space-x-3">
                         <div className="relative h-6 w-6 aspect-square rounded-full bg-gray-500 overflow-hidden">
                             <Image
                                 src="https://avatar.iran.liara.run/public/42"
@@ -54,7 +54,7 @@ const TiltBoxContent = () => {
                         </div>
                         <div className="text-base">localghost@gmail.com</div>
                     </div>
-                    <div className="flex items-center space-x-3 ml-5">
+                    <div className="flex items-center space-x-3">
                         <div className="relative h-6 w-6 aspect-square rounded-full bg-gray-500 overflow-hidden">
                             <Image
                                 src="https://avatar.iran.liara.run/public/43"
