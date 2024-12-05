@@ -8,6 +8,7 @@ import NotDecided from "@/app/Homepage/NotDecided";
 import Testimonial from "@/app/Homepage/Testimonial";
 import WhyUse from "@/app/Homepage/WhyUse";
 
+// ! Take contents from here: https://chatgpt.com/c/673732bf-2e60-8012-ab7f-981d5bd5a821
 const Home = () => {
     return (
         <div className="overflow-hidden">
