@@ -66,7 +66,7 @@ const faqs = [
 ];
 
 const FAQ = () => {
-    const [openIndex, setOpenIndex] = useState<number>();
+    const [openIndex, setOpenIndex] = useState<number | null>();
 
     return (
         <section className="w-9/12 mx-auto p-6 rounded-lg">
@@ -74,14 +74,20 @@ const FAQ = () => {
                 Fa<span className="text-[100px]">Q</span>
             </h1>
 
-            <div className="space-y-10">
+            <div className="">
                 {faqs.map((item, index) => (
                     <FAQ_ITEM
                         key={item.question}
                         item={item}
                         index={index}
                         isOpen={openIndex == index}
-                        onClick={(i) => setOpenIndex(i)}
+                        onClick={(i) => {
+                            if (openIndex == index) {
+                                setOpenIndex(null);
+                            } else {
+                                setOpenIndex(i);
+                            }
+                        }}
                     />
                 ))}
             </div>

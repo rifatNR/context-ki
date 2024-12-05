@@ -14,7 +14,7 @@ const FAQ_ITEM = ({ item, isOpen, index, onClick }: PropType) => {
         <div className="">
             <button
                 onClick={() => onClick(index)}
-                className="w-full flex items-center justify-between cursor-pointer group hover:text-white "
+                className="w-full flex items-center justify-between cursor-pointer group hover:text-white pb-5 "
             >
                 <h2 className="text-4xl">{item.question}</h2>
                 <FaChevronDown
@@ -24,7 +24,7 @@ const FAQ_ITEM = ({ item, isOpen, index, onClick }: PropType) => {
                 />
             </button>
             <div
-                className={`text-2xl mt-5 transition-all overflow-hidden ${
+                className={`text-2xl mb-10 pl-5 transition-all overflow-hidden ${
                     isOpen ? "max-h-96" : "max-h-0"
                 }`}
             >
