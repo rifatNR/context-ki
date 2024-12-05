@@ -118,7 +118,12 @@ const FAQ = () => {
     };
 
     return (
-        <section className="w-9/12 mx-auto p-6 rounded-lg">
+        <section
+            onMouseLeave={() => {
+                setBarSize({ h: 0, w: 0 });
+            }}
+            className="w-9/12 mx-auto p-6 rounded-lg"
+        >
             <h1 className="text-7xl mb-10">
                 Fa<span className="text-[100px]">Q</span>
             </h1>
