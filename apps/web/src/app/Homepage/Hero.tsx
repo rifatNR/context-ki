@@ -10,7 +10,7 @@ const Hero = () => {
     return (
         <header
             ref={observableRef as any}
-            className="max-w-[1600px] mx-auto h-[100vh] text-white p-10 flex items-center justify-between"
+            className="max-w-[1600px] mx-auto h-[100vh] p-10 flex items-center justify-between"
         >
             <div className="my-auto">
                 <h1
@@ -40,7 +40,7 @@ const Hero = () => {
                     }`}
                 >
                     <Link href={"/patent"}>
-                        <button className="hover:scale-105 transition-all ease-linear gradient-button text-xl text-white rounded-lg font-bold">
+                        <button className="hover:scale-105 transition-all ease-linear gradient-button text-xl rounded-lg font-bold">
                             <div className="gradient-button-content px-5 py-3">
                                 Start Patenting Ideas
                             </div>

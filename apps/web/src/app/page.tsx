@@ -2,7 +2,9 @@
 
 import CardsSection from "@/app/Homepage/CardsSection";
 import FAQ from "@/app/Homepage/FAQ";
+import Footer from "@/app/Homepage/Footer";
 import Hero from "@/app/Homepage/Hero";
+import NotDecided from "@/app/Homepage/NotDecided";
 import Testimonial from "@/app/Homepage/Testimonial";
 import WhyUse from "@/app/Homepage/WhyUse";
 import { trpc } from "@/trpc/client";
@@ -23,12 +25,14 @@ const Home = () => {
 
                     <WhyUse />
 
+                    <NotDecided />
+
                     <Testimonial />
 
                     <FAQ />
                 </main>
 
-                {/* <Footer /> */}
+                <Footer />
             </div>
         </div>
     );

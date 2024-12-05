@@ -26,7 +26,7 @@ const TiltBox = () => {
                     className="tilt-box-inside-tilt-box
                         h-[85%] w-[82%] rounded-md
                         transition-all duration-300 ease-out
-                        bg-[#00000096] text-white
+                        bg-[#00000096]
                         "
                 >
                     <TiltBoxContent />

@@ -1,5 +1,5 @@
 const LoaderMain = () => {
-    return <div id="spinner" className="spinner text-white"></div>;
+    return <div id="spinner" className="spinner"></div>;
 };
 
 const MainSpinner = () => {

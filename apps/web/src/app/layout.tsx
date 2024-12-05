@@ -42,7 +42,7 @@ export default async function RootLayout({
                     rel="stylesheet"
                 />
             </Head>
-            <body className="bg-black text-white font-merriweather">
+            <body className="bg-black text-secondary font-merriweather">
                 <TrpcProvider>
                     <AuthProvider>{children}</AuthProvider>
                 </TrpcProvider>

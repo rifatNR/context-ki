@@ -12,6 +12,9 @@ module.exports = {
                 xxs: "0.7rem",
             },
             colors: {
+                primary: "#15ca76",
+                "primary-lite": "#c8ffe6",
+                secondary: "#FEFBE1",
                 custom: {
                     orange: {
                         50: "#FFE5B0",

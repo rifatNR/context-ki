@@ -31,7 +31,7 @@ const PrevNextButton = ({
                 {prevPath && (
                     <button
                         onClick={onPrevClick}
-                        className="h-14 flex items-center justify-center space-x-3 text-white text-3xl"
+                        className="h-14 flex items-center justify-center space-x-3 text-3xl"
                     >
                         <FaArrowLeftLong />
                         <span>Back</span>

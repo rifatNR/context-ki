@@ -48,7 +48,7 @@ const Date = () => {
                                     <VscTriangleDown className="text-xl" />
                                 </span>
                             </SelectTrigger>
-                            <SelectContent className="rounded-none bg-black text-white mt-1 border-2 mt-1 border-2">
+                            <SelectContent className="rounded-none bg-black mt-1 border-2 mt-1 border-2">
                                 {[...Array(31)].map((item, index) => (
                                     <SelectItem
                                         key={index}
@@ -70,7 +70,7 @@ const Date = () => {
                                     <VscTriangleDown className="text-xl" />
                                 </span>
                             </SelectTrigger>
-                            <SelectContent className="rounded-none bg-black text-white mt-1 border-2">
+                            <SelectContent className="rounded-none bg-black mt-1 border-2">
                                 {months.map((month) => (
                                     <SelectItem
                                         key={month}
@@ -92,7 +92,7 @@ const Date = () => {
                                     <VscTriangleDown className="text-xl" />
                                 </span>
                             </SelectTrigger>
-                            <SelectContent className="rounded-none bg-black text-white mt-1 border-2">
+                            <SelectContent className="rounded-none bg-black mt-1 border-2">
                                 {years.map((year) => (
                                     <SelectItem
                                         key={year}

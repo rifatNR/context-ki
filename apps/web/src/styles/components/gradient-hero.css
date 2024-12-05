@@ -10,13 +10,12 @@
     /* background-color: blue; */
 }
 
-
 .testimonial-gradient-l {
-    background: linear-gradient(-55deg, #1A1A1B 0%, #252525 90%, #1A1A1B 100%);
+    background: linear-gradient(-55deg, #1a1a1b 0%, #252525 90%, #1a1a1b 100%);
 }
 .testimonial-gradient-m {
-    background: linear-gradient(-55deg, #1A1A1B 0%, #242424 50%, #1A1A1B 100%);
+    background: linear-gradient(-55deg, #1a1a1b 0%, #242424 50%, #1a1a1b 100%);
 }
 .testimonial-gradient-r {
-    background: linear-gradient(-55deg, #1A1A1B 0%, #252525 10%, #1A1A1B 100%);
+    background: linear-gradient(-55deg, #1a1a1b 0%, #252525 10%, #1a1a1b 100%);
 }
