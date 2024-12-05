@@ -73,7 +73,7 @@ const FAQ = () => {
     const updateBar = useCallback(
         (isThisOpen: boolean, itemEl: HTMLDivElement | null) => {
             const BUTTON_HEIGHT = 80;
-            const BUTTON_SPACE = 10;
+            const BUTTON_SPACE = 20;
 
             const offsetLeft = itemEl?.offsetLeft ?? 0;
             const offsetTop = itemEl?.offsetTop ?? 0;
