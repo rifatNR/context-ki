@@ -19,8 +19,16 @@ const WhyUse = () => {
                     <span className="text-primary-lite">
                         thought of it first
                     </span>
-                    <span className="absolute -left-2 top-1/2 -translate-y-1/2 h-16 w-[calc(100%+20px)] bg-gradient-to-r from-primary/50 to-transparent motion-preset-blur-right"></span>
-                    <span className="absolute -left-2 top-1/2 -translate-y-1/2 h-16 w-1.5 bg-primary motion-preset-blur-right"></span>
+                    <span
+                        className={`absolute -left-2 top-1/2 -translate-y-1/2 h-16 w-[calc(100%+20px)] bg-gradient-to-r from-primary/50 to-transparent ${
+                            isVisible ? "motion-preset-blur-right" : "invisible"
+                        }`}
+                    ></span>
+                    <span
+                        className={`absolute -left-2 top-1/2 -translate-y-1/2 h-16 w-1.5 bg-primary ${
+                            isVisible ? "motion-preset-blur-right" : "invisible"
+                        }`}
+                    ></span>
                 </span>
                 . 🌟
             </p>
