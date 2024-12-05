@@ -1,5 +1,5 @@
 import FAQ_ITEM from "@/app/Homepage/FAQ_Item";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaChevronDown } from "react-icons/fa6";
 
 const faqs = [
@@ -66,14 +66,39 @@ const faqs = [
 ];
 
 const FAQ = () => {
+    const [barPosition, setBarPosition] = useState({ x: 0, y: 0 });
+    const [barWidth, setBarWidth] = useState(0);
     const [openIndex, setOpenIndex] = useState<number | null>();
+
+    const onHover = (index: number, itemEl: HTMLDivElement | null) => {
+        console.log(index);
+
+        const ButtonHeight = 80;
+
+        const offsetLeft = itemEl?.offsetLeft ?? 0;
+        const offsetTop = itemEl?.offsetTop ?? 0;
+
+        setBarWidth(itemEl?.offsetWidth ?? 0);
+        setBarPosition({
+            x: offsetLeft,
+            y: offsetTop + ButtonHeight,
+        });
+    };
 
     return (
         <section className="w-9/12 mx-auto p-6 rounded-lg">
             <h1 className="text-7xl mb-10">
                 Fa<span className="text-[100px]">Q</span>
             </h1>
-
+            <div
+                className="absolute transition-all ease-out bg-white rounded-full"
+                style={{
+                    width: barWidth + "px",
+                    height: 0.5 + "px",
+                    left: barPosition.x + "px",
+                    top: barPosition.y + "px",
+                }}
+            ></div>
             <div className="">
                 {faqs.map((item, index) => (
                     <FAQ_ITEM
@@ -88,6 +113,7 @@ const FAQ = () => {
                                 setOpenIndex(i);
                             }
                         }}
+                        onHover={onHover}
                     />
                 ))}
             </div>

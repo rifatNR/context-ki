@@ -7,12 +7,8 @@ import Hero from "@/app/Homepage/Hero";
 import NotDecided from "@/app/Homepage/NotDecided";
 import Testimonial from "@/app/Homepage/Testimonial";
 import WhyUse from "@/app/Homepage/WhyUse";
-import { trpc } from "@/trpc/client";
 
 const Home = () => {
-    const user = trpc.users.getUser.useQuery({ username: "SPAWN" });
-    console.log(user.data?.message);
-
     return (
         <div className="overflow-hidden">
             <div className="fixed -left-96 top-0 h-[30rem] w-[30rem] rounded-full bg-gray-600 blur-[200px] z-decoration"></div>
