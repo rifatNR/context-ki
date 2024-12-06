@@ -15,6 +15,7 @@ module.exports = {
                 primary: "#15ca76",
                 "primary-lite": "#c8ffe6",
                 secondary: "#FEFBE1",
+                tertiary: "#6BCCB1",
                 custom: {
                     orange: {
                         50: "#FFE5B0",
